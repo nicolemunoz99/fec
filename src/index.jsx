@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import QA from './components/QA.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,7 +12,7 @@ class App extends React.Component {
       <div>
         {/* <Overview /> */}
         {/* <Reviews /> */}
-        {/* <QandA /> */}
+        <QA />
       </div>
     )
   }
