@@ -14,13 +14,19 @@ class Overview extends React.Component {
       productId: 5, // ?? remove and send productID to QA from productInfo
       productInfo: productInfo,
       styles: styles.results,
-      selectedStyleInd: 0 // default is first style
+      selectedStyle: styles.results[0] // default is first style
     }
     this.clickStyleHandler = this.clickStyleHandler.bind(this)
   }
 
-  clickStyleHandler (clickedStyleIndex) {
-    this.setState({ selectedStyleInd: clickedStyleIndex })
+  clickStyleHandler (clickedStyleId) {
+    let selectedStyle;
+    this.state.styles.forEach(style => {
+      if (style.style_id == clickedStyleId) {
+        selectedStyle = style
+      }
+    })
+    this.setState({ selectedStyle: selectedStyle })
   }
 
 
@@ -30,7 +36,7 @@ class Overview extends React.Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-7">
-              <ImageGallery />
+              <ImageGallery selectedStyle={this.state.selectedStyle}  />
             </div>
             <div className="col-sm-5">
               <div className="row">
@@ -38,7 +44,7 @@ class Overview extends React.Component {
                   <ProductBasics productInfo={this.state.productInfo} />
                 </div>
                 <div className="col-sm-12">
-                  <StyleSelector selectedStyleInd={this.state.selectedStyleInd} clickStyleHandler={this.clickStyleHandler} styles={this.state.styles} />
+                  <StyleSelector selectedStyle={this.state.selectedStyle} clickStyleHandler={this.clickStyleHandler} styles={this.state.styles} />
                 </div>
               </div>
             </div>

@@ -9,9 +9,9 @@ const ProductBasics = props => {
       <div className="row overview-component">
         <div className="col-sm-12">
           (PRODUCT BASICS)
-          <p><div className="col-sm-12 overview-component">
+          <div className="col-sm-12 overview-component">
             **** Reviews
-          </div></p>
+          </div>
           <p>Category: {props.productInfo.category}</p>
           <h2>{props.productInfo.name}</h2>
           <p>{props.productInfo.description ?
