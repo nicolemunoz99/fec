@@ -7,7 +7,7 @@ class QA extends Component {
         super(props);
         this.state = {
             searchTerm: '',
-            productID: 3, //placeholder for now, need to inherit this from props
+            productId: this.props.productId, //placeholder for now, need to inherit this from props
             questions: [],
             currentPage: 0,
             moreToLoad: true
@@ -18,7 +18,7 @@ class QA extends Component {
 
     fetchQuestions() {
         const nextPage = this.state.currentPage + 1;
-        fetch(`${api}/${this.state.productID}?count=4&page=${nextPage}`)
+        fetch(`${api}/${this.state.productId}?count=4&page=${nextPage}`)
             .then((res) => {
                 res.json().then((data) => {
                     this.setState({

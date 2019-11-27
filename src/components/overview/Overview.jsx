@@ -3,6 +3,8 @@ import StyleSelector from './StyleSelector.jsx'
 import styles from './sampleData/productStyles.js'
 import ImageGallery from './imageGallery/ImageGallery.jsx'
 import ProductBasics from './ProductBasics.jsx'
+import QA from '../QAComponents/Qa.jsx'
+import Reviews from '../ReviewsComponents/Reviews.jsx'
 
 class Overview extends React.Component {
   constructor(props) {
@@ -22,21 +24,29 @@ class Overview extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-sm-7">
-            <ImageGallery />
-          </div>
-          <div className="col-sm-5">
-            <div className="row">
-              <div className="col-sm-12">
-                <ProductBasics />
-              </div>
-              <div className="col-sm-12">
-                <StyleSelector selectedStyleInd={this.state.selectedStyleInd} clickStyleHandler={this.clickStyleHandler} styles={this.state.styles} />
+      <div>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-sm-7">
+              <ImageGallery />
+            </div>
+            <div className="col-sm-5">
+              <div className="row">
+                <div className="col-sm-12">
+                  <ProductBasics />
+                </div>
+                <div className="col-sm-12">
+                  <StyleSelector selectedStyleInd={this.state.selectedStyleInd} clickStyleHandler={this.clickStyleHandler} styles={this.state.styles} />
+                </div>
               </div>
             </div>
           </div>
+        </div>
+        <div>
+          <QA productId={this.state.productId}/>
+        </div>
+        <div>
+          <Reviews />
         </div>
       </div>
     )
