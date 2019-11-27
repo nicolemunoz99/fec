@@ -1,6 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Overview from './components/overview/Overview.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import QA from './components/QAComponents/QA.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,8 +10,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Overview />
-        <Reviews />
+        {/* <Overview /> */}
+        {/* <Reviews /> */}
         <QA />
       </div>
     )
