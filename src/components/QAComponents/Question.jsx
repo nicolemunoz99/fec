@@ -13,6 +13,7 @@ class Question extends Component {
         this.showMoreOrLess = this.showMoreOrLess.bind(this);
     }
 
+
     renderAnswers() {
         if (this.state.displayOne === true) {
             return <h2>A: {this.state.answers[0].body}</h2>
@@ -32,13 +33,14 @@ class Question extends Component {
         return (
             <div>
                 <h2>Q: {question.question_body}</h2>
-                {this.state.answers === null ? null :
+                {this.state.answers.length > 0 &&
                     <div>
                         {this.renderAnswers()}
                         {this.state.multipleAnswers === false ? null :
-                            <button onClick={this.showMoreOrLess}>{
-                                this.state.displayOne === true ? 'Show More' : 'Show Less'
-                            }</button>
+                            <button onClick={this.showMoreOrLess}>
+                                {this.state.displayOne && 'Show More'}
+                                {!this.state.displayOne && 'Show Less'}
+                            </button>
                         }
                     </div>
                 }
