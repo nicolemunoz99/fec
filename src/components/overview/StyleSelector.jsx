@@ -7,7 +7,7 @@ const StyleSelector = props => {
   }
 
   return(
-      <div className="row module">
+      <div className="row overview-component">
         <div className="col-sm-12">STYLE SELECTOR</div>
         <div className="col-sm-12"> {selectedStyle.name}</div>
       {

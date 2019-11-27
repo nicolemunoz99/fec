@@ -6,7 +6,7 @@ import React from 'react';
 
 const ProductBasics = props => {
   return (
-      <div className="row module">
+      <div className="row overview-component">
         <div className="col-sm-12">
           PRODUCT BASICS
         </div>
