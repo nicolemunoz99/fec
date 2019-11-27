@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import QA from './components/QA.jsx';
+import QA from './components/QAComponents/QA.jsx';
 
 class App extends React.Component {
   constructor(props) {
