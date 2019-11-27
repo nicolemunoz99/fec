@@ -52,7 +52,13 @@ class QA extends Component {
 
     applyFilter() {
         const searchTerm = this.state.searchTerm.length > 3 ? this.state.searchTerm : '';
-        const filteredQs = [...this.state.questions].filter(question => question.question_body.includes(searchTerm));
+        const filteredQs = [...this.state.questions].filter(question => {
+            if (question.question_body.includes(searchTerm)) {
+                return true;
+            } else {
+                return Object.values(question.answers).some(answer => answer.body.includes(searchTerm));
+            }
+        });
         this.setState({activeQuestions: filteredQs});
     }
 
