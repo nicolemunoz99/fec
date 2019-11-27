@@ -1,4 +1,6 @@
 import React from 'react'
+import ReviewList from './ReviewList.jsx'
+import Ratings from './Ratings.jsx';
 
 class Reviews extends React.Component {
   constructor(props) {
@@ -8,7 +10,9 @@ class Reviews extends React.Component {
   render() {
     return (
       <div id='reviews'>
-        <h1>make this look like jeff bezos did it</h1>
+        RATINGS & REVIEWS
+        <Ratings />
+        <ReviewList />
       </div>
     )
   }
