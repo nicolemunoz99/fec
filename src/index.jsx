@@ -1,4 +1,6 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
+import Overview from './components/overview/Overview.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -8,7 +10,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* <Overview /> */}
+        <Overview />
         {/* <Reviews /> */}
         {/* <QandA /> */}
       </div>
