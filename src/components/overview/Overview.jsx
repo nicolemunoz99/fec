@@ -2,6 +2,7 @@ import React from 'react'
 import StyleSelector from './StyleSelector.jsx'
 import styles from './sampleData/productStyles.js'
 import ImageGallery from './imageGallery/ImageGallery.jsx'
+import ProductBasics from './ProductBasics.jsx'
 
 class Overview extends React.Component {
   constructor(props) {
@@ -23,11 +24,18 @@ class Overview extends React.Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-7">
+          <div className="col-sm-7">
             <ImageGallery />
           </div>
-          <div className="col-5">
-            <StyleSelector selectedStyleInd={this.state.selectedStyleInd} clickStyleHandler={this.clickStyleHandler} styles={this.state.styles}/>
+          <div className="col-sm-5">
+            <div className="row">
+              <div className="col-sm-12">
+                <ProductBasics />
+              </div>
+              <div className="col-sm-12">
+                <StyleSelector selectedStyleInd={this.state.selectedStyleInd} clickStyleHandler={this.clickStyleHandler} styles={this.state.styles} />
+              </div>
+            </div>
           </div>
         </div>
       </div>

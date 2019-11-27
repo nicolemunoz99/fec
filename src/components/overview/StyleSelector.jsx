@@ -7,9 +7,8 @@ const StyleSelector = props => {
   }
 
   return(
-    
-      <div className="row justify-content-end">
-        <div className="col-sm-12">StyleSelector</div>
+      <div className="row module">
+        <div className="col-sm-12">STYLE SELECTOR</div>
         <div className="col-sm-12"> {selectedStyle.name}</div>
       {
       props.styles.map((style, i) => {
@@ -21,8 +20,10 @@ const StyleSelector = props => {
             <img id={i} onClick={onClick} src={style.photos[0].thumbnail_url} className="img-fluid"></img>
           </div>)
       })
+      
       }
       </div>
+
   )
 }
 
