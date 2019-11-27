@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Overview from './components/overview/Overview.jsx';
 import QA from './components/QAComponents/QA.jsx';
+import Reviews from './components/ReviewsComponents/Reviews.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -10,9 +13,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        {/* <Overview /> */}
-        {/* <Reviews /> */}
+        <Overview />
         <QA />
+        <Reviews />
       </div>
     )
   }
