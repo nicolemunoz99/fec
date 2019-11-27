@@ -7,7 +7,7 @@ class QA extends Component {
         super(props);
         this.state = {
             searchTerm: '',
-            productId: this.props.productId, //placeholder for now, need to inherit this from props
+            productId: this.props.productId,
             questions: [],
             currentPage: 0,
             moreToLoad: true
