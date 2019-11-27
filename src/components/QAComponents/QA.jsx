@@ -6,7 +6,7 @@ class QA extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            newQuestion: '',
+            searchTerm: '',
             productID: 3, //placeholder for now, need to inherit this from props
             questions: [],
             currentPage: 0,
@@ -35,12 +35,16 @@ class QA extends Component {
     }
 
     handleChange(e) {
-        this.setState({ newQuestion: e.target.value });
+        this.setState({ searchTerm: e.target.value });
     }
 
     searchQuestions(e) {
         e.preventDefault();
-        console.log(`Searching for ${this.state.newQuestion}`);
+        const {searchTerm} = this.state;
+        console.log(`Searching for ${searchTerm}`);
+        // this.state.questions.forEach(question => {
+
+        // });
     }
 
     render() {
@@ -50,7 +54,7 @@ class QA extends Component {
                 <form className="searchQuestions" onSubmit={this.searchQuestions}>
                     <input type="text"
                         placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS."
-                        value={this.state.newQuestion}
+                        value={this.state.searchTerm}
                         onChange={this.handleChange}
                     />
                     <button type="submit">Go!</button>
