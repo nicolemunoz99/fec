@@ -7,7 +7,7 @@ class QA extends Component {
         super(props);
         this.state = {
             newQuestion: '',
-            productID: 5, //placeholder for now, need to inherit this from props
+            productID: 8, //placeholder for now, need to inherit this from props
             questions: []
         }
         this.handleChange = this.handleChange.bind(this);
@@ -18,7 +18,6 @@ class QA extends Component {
         fetch(`${api}qa/${this.state.productID}`)
             .then((res) => {
                 res.json().then((data) => {
-                    console.log(data);
                     this.setState({questions: data.results});
                 })
             });
