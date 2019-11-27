@@ -7,16 +7,17 @@ class Question extends Component {
         this.state = {
             question: this.props.question,
             answers: answers,
-            displayOne: true,
-            multipleAnswers: answers.length > 1
+            showAllAnswers: false,
         }
         this.showMoreOrLess = this.showMoreOrLess.bind(this);
     }
 
 
     renderAnswers() {
-        if (this.state.displayOne === true) {
-            return <h2>A: {this.state.answers[0].body}</h2>
+        if (this.state.showAllAnswers === false) {
+            return (
+                this.state.answers.slice(0,2).map(answer => <h2 key={answer.id}>A: {answer.body}</h2>)
+            )
         } else {
             return (
                 this.state.answers.map((answer) => <h2 key={answer.id}>A: {answer.body}</h2>)
@@ -25,7 +26,7 @@ class Question extends Component {
     }
 
     showMoreOrLess() {
-        this.setState({ displayOne: !this.state.displayOne });
+        this.setState({ showAllAnswers: !this.state.showAllAnswers });
     }
 
     render() {
@@ -36,10 +37,10 @@ class Question extends Component {
                 {this.state.answers.length > 0 &&
                     <div>
                         {this.renderAnswers()}
-                        {this.state.multipleAnswers === false ? null :
+                        {this.state.answers.length <= 2 ? null :
                             <button onClick={this.showMoreOrLess}>
-                                {this.state.displayOne && 'Show More'}
-                                {!this.state.displayOne && 'Show Less'}
+                                {!this.state.showAllAnswers && 'Show More'}
+                                {this.state.showAllAnswers && 'Show Less'}
                             </button>
                         }
                     </div>
