@@ -3,3 +3,9 @@
   border-width: 2px;
   border-color: black;
 }
+
+.checkmark {
+  position: absolute;
+  /* margin-bottom: 50px; */
+  top: -1.35rem
+}

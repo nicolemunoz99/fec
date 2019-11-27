@@ -1,6 +1,7 @@
 import React from 'react'
 import StyleSelector from './StyleSelector.jsx'
 import styles from './sampleData/productStyles.js'
+import productInfo from './sampleData/productInfo.js'
 import ImageGallery from './imageGallery/ImageGallery.jsx'
 import ProductBasics from './ProductBasics.jsx'
 import QA from '../QAComponents/Qa.jsx'
@@ -10,7 +11,8 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 5,
+      productId: 5, // ?? remove and send productID to QA from productInfo
+      productInfo: productInfo,
       styles: styles.results,
       selectedStyleInd: 0 // default is first style
     }
@@ -33,7 +35,7 @@ class Overview extends React.Component {
             <div className="col-sm-5">
               <div className="row">
                 <div className="col-sm-12">
-                  <ProductBasics />
+                  <ProductBasics productInfo={this.state.productInfo} />
                 </div>
                 <div className="col-sm-12">
                   <StyleSelector selectedStyleInd={this.state.selectedStyleInd} clickStyleHandler={this.clickStyleHandler} styles={this.state.styles} />
