@@ -36,7 +36,7 @@ class Overview extends React.Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-7">
-              <ImageGallery selectedStyle={this.state.selectedStyle}  />
+              <ImageGallery photos={this.state.selectedStyle.photos}  />
             </div>
             <div className="col-sm-5">
               <div className="row">

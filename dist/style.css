@@ -6,6 +6,21 @@
 
 .checkmark {
   position: absolute;
-  /* margin-bottom: 50px; */
   top: -1.35rem
+}
+
+.photo-nav-left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+}
+
+.photo-nav-right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
+.photo {
+  max-height: 30rem
 }
