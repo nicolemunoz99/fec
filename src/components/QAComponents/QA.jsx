@@ -17,14 +17,13 @@ class QA extends Component {
         this.applyFilter = this.applyFilter.bind(this);
     }
 
-    fetchQuestions(cb = ()=>{}) { //TODO: should pass in page as parameter so it can be reset to 0 when props.productId chagnes
-        const nextPage = this.state.currentPage + 1;
-        fetch(`${api}/${this.props.productId}?count=4&page=${nextPage}`)
+    fetchQuestions(page, cb = () => { }) { 
+        fetch(`${api}/${this.props.productId}?count=4&page=${page + 1}`)
             .then((res) => {
                 res.json().then((data) => {
                     this.setState({
                         questions: this.state.questions.concat(data.results),
-                        currentPage: nextPage,
+                        currentPage: page + 1,
                         moreToLoad: data.results.length > 0
                     }, () => {
                         cb()
@@ -34,14 +33,24 @@ class QA extends Component {
     }
 
     componentDidMount() {
-        this.fetchQuestions(() => {
-            this.setState({activeQuestions: this.state.questions}); //initialize active questions to all questions
+        this.fetchQuestions(this.state.currentPage, () => {
+            this.setState({ activeQuestions: this.state.questions }); //initialize active questions to all questions
         });
     }
 
-    //TODO: need to re-fetch questions when props.productId changes
-    // componentDidUpdate(newProps) {
-
+    // TODO: need to re-fetch questions when props.productId changes
+    // getSnapshotBeforeUpdate() {
+    //     if(window.scrollY) {
+    //         return window.scrollY;
+    //     } else {
+    //         return null;
+    //     }
+    // }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if(snapshot !== null) {
+    //         console.log(`scrolling to ${snapshot}`);
+    //         window.scrollTo(0, snapshot);
+    //     }
     // }
 
     handleChange(e) {
@@ -49,7 +58,7 @@ class QA extends Component {
             if (this.state.searchTerm.length > 2) {
                 this.applyFilter()
             } else if (this.state.searchTerm.length === 0) {
-                this.setState({activeQuestions: this.state.questions});
+                this.setState({ activeQuestions: this.state.questions });
             }
         });
     }
@@ -63,7 +72,23 @@ class QA extends Component {
                 return Object.values(question.answers).some(answer => answer.body.includes(searchTerm));
             }
         });
-        this.setState({activeQuestions: filteredQs});
+        this.setState({ activeQuestions: filteredQs });
+    }
+
+    refresh() {
+        // console.log('setting state')
+        this.setState({
+            questions: [],
+            activeQuestions: []
+        }, () => {
+            // console.log('rerendering...')
+            const { currentPage } = this.state;
+            let tempPage = 0;
+            while (tempPage < currentPage) {
+                this.fetchQuestions(tempPage, this.applyFilter); //using Promise.all here might be more performant...
+                tempPage++;
+            }
+        });
     }
 
     render() {
@@ -78,8 +103,11 @@ class QA extends Component {
                         onChange={this.handleChange}
                     />
                 </form>
-                {this.state.activeQuestions.map((question) => <Question question={question} key={question.question_id} />)}
-                {this.state.moreToLoad && <button onClick={() => this.fetchQuestions(this.applyFilter)}>MORE ANSWERERD QUESTIONS</button>}
+                {this.state.activeQuestions.map((question) => <Question
+                    question={question}
+                    key={question.question_id}
+                    updateParent={this.refresh.bind(this)} />)}
+                {this.state.moreToLoad && <button onClick={() => this.fetchQuestions(this.state.currentPage, this.applyFilter)}>MORE ANSWERERD QUESTIONS</button>}
                 <button>ASK A QUESTION +</button>
             </div>
         )

@@ -19,9 +19,9 @@ class Question extends Component {
 
     renderAnswers() {
         if (this.state.showAllAnswers === false) {
-            return this.state.answers.slice(0, 2).map(answer => <Answer key={answer.id} answer={answer} />);
+            return this.state.answers.slice(0, 2).map(answer => <Answer key={answer.id} answer={answer} updateParent={this.props.updateParent}/>);
         } else {
-            return this.state.answers.map((answer) => <Answer key={answer.id} answer={answer} />);
+            return this.state.answers.map((answer) => <Answer key={answer.id} answer={answer}  updateParent={this.props.updateParent}/>);
         }
     }
 
@@ -31,8 +31,12 @@ class Question extends Component {
 
     isHelpful() {
         const { question_id } = this.state.question;
-        axios.put(`${api}/question/${question_id}/helpful`);
-            //TODO: .then tell QA component to refresh questions list
+        // console.log('sending req')
+        axios.put(`${api}/question/${question_id}/helpful`)
+            .then(() => {
+                // console.log('updating parent')
+                this.props.updateParent(); //tell parent to re-fetch questions
+            });
     }
 
     render() {
