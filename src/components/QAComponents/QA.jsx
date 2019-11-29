@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Question from './Question.jsx';
-const api = 'http://3.134.102.30/qa'
+const api = 'http://3.134.102.30/qa';
 
 class QA extends Component {
     constructor(props) {

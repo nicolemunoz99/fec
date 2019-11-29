@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Answer from './Answer.jsx';
+import axios from 'axios';
+const api = 'http://3.134.102.30/qa';
 
 class Question extends Component {
     constructor(props) {
@@ -11,19 +13,26 @@ class Question extends Component {
             showAllAnswers: false,
         }
         this.showMoreOrLess = this.showMoreOrLess.bind(this);
+        this.isHelpful = this.isHelpful.bind(this);
     }
 
 
     renderAnswers() {
         if (this.state.showAllAnswers === false) {
-            return this.state.answers.slice(0,2).map(answer => <Answer key={answer.id} answer={answer}/>);
+            return this.state.answers.slice(0, 2).map(answer => <Answer key={answer.id} answer={answer} />);
         } else {
-            return this.state.answers.map((answer) => <Answer key={answer.id} answer={answer}/>);
+            return this.state.answers.map((answer) => <Answer key={answer.id} answer={answer} />);
         }
     }
 
     showMoreOrLess() {
         this.setState({ showAllAnswers: !this.state.showAllAnswers });
+    }
+
+    isHelpful() {
+        const { question_id } = this.state.question;
+        axios.put(`${api}/question/${question_id}/helpful`);
+            //TODO: .then tell QA component to refresh questions list
     }
 
     render() {
@@ -33,7 +42,7 @@ class Question extends Component {
                 <div className="q-main">
                     <h4>Q: {question.question_body}</h4>
                     <div className="q-subtext">
-                        <span>Helpful? <span className="clickable">Yes</span> ({question.question_helpfulness})</span>
+                        <span>Helpful? <span className="clickable" onClick={this.isHelpful}>Yes</span> ({question.question_helpfulness})</span>
                         <span className="divider-bar">|</span>
                         <span className="clickable">Add Answer</span>
                     </div>
