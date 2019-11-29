@@ -50,7 +50,7 @@ class Overview extends React.Component {
             </div>
           </div>
         </div>
-        <div>
+        <div className="container-fluid QA">
           <QA productId={this.state.productId}/>
         </div>
         <div>

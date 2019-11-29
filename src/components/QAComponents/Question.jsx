@@ -16,9 +16,9 @@ class Question extends Component {
 
     renderAnswers() {
         if (this.state.showAllAnswers === false) {
-            return this.state.answers.slice(0,2).map(answer => <Answer answer={answer}/>);
+            return this.state.answers.slice(0,2).map(answer => <Answer key={answer.id} answer={answer}/>);
         } else {
-            return this.state.answers.map((answer) => <Answer answer={answer}/>);
+            return this.state.answers.map((answer) => <Answer key={answer.id} answer={answer}/>);
         }
     }
 
@@ -29,10 +29,15 @@ class Question extends Component {
     render() {
         const question = this.state.question;
         return (
-            <div>
-                <h2>Q: {question.question_body}</h2>
-                <span>Helpful? <a>Yes</a> ({question.question_helpfulness}) | </span>
-                <span><a>Add Answer</a></span>
+            <div className="question">
+                <div className="q-main">
+                    <h4>Q: {question.question_body}</h4>
+                    <div className="q-subtext">
+                        <span>Helpful? <span className="clickable">Yes</span> ({question.question_helpfulness})</span>
+                        <span className="divider-bar">|</span>
+                        <span className="clickable">Add Answer</span>
+                    </div>
+                </div>
                 {this.state.answers.length > 0 &&
                     <div>
                         {this.renderAnswers()}

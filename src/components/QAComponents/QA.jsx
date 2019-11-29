@@ -69,9 +69,10 @@ class QA extends Component {
     render() {
         return (
             <div>
-                <h2>Questions and Answers</h2>
+                <h3>Questions and Answers</h3>
                 <form className="searchQuestions">
                     <input type="text"
+                        className="q-search"
                         placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS."
                         value={this.state.searchTerm}
                         onChange={this.handleChange}
