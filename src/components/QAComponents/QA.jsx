@@ -7,7 +7,6 @@ class QA extends Component {
         super(props);
         this.state = {
             searchTerm: '',
-            productId: this.props.productId,
             questions: [],
             activeQuestions: [],
             currentPage: 0,
@@ -18,9 +17,9 @@ class QA extends Component {
         this.applyFilter = this.applyFilter.bind(this);
     }
 
-    fetchQuestions(cb = ()=>{}) {
+    fetchQuestions(cb = ()=>{}) { //TODO: should pass in page as parameter so it can be reset to 0 when props.productId chagnes
         const nextPage = this.state.currentPage + 1;
-        fetch(`${api}/${this.state.productId}?count=4&page=${nextPage}`)
+        fetch(`${api}/${this.props.productId}?count=4&page=${nextPage}`)
             .then((res) => {
                 res.json().then((data) => {
                     this.setState({
@@ -40,9 +39,14 @@ class QA extends Component {
         });
     }
 
+    //TODO: need to re-fetch questions when props.productId changes
+    // componentDidUpdate(newProps) {
+
+    // }
+
     handleChange(e) {
         this.setState({ searchTerm: e.target.value }, () => {
-            if (this.state.searchTerm.length > 3) {
+            if (this.state.searchTerm.length > 2) {
                 this.applyFilter()
             } else if (this.state.searchTerm.length === 0) {
                 this.setState({activeQuestions: this.state.questions});
@@ -51,7 +55,7 @@ class QA extends Component {
     }
 
     applyFilter() {
-        const searchTerm = this.state.searchTerm.length > 3 ? this.state.searchTerm : '';
+        const searchTerm = this.state.searchTerm.length > 2 ? this.state.searchTerm : '';
         const filteredQs = [...this.state.questions].filter(question => {
             if (question.question_body.includes(searchTerm)) {
                 return true;

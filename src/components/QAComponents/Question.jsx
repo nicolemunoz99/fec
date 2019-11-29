@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Answer from './Answer.jsx';
 
 class Question extends Component {
     constructor(props) {
@@ -15,13 +16,9 @@ class Question extends Component {
 
     renderAnswers() {
         if (this.state.showAllAnswers === false) {
-            return (
-                this.state.answers.slice(0,2).map(answer => <h2 key={answer.id}>A: {answer.body}</h2>)
-            )
+            return this.state.answers.slice(0,2).map(answer => <Answer answer={answer}/>);
         } else {
-            return (
-                this.state.answers.map((answer) => <h2 key={answer.id}>A: {answer.body}</h2>)
-            )
+            return this.state.answers.map((answer) => <Answer answer={answer}/>);
         }
     }
 
@@ -34,6 +31,8 @@ class Question extends Component {
         return (
             <div>
                 <h2>Q: {question.question_body}</h2>
+                <span>Helpful? <a>Yes</a> ({question.question_helpfulness}) | </span>
+                <span><a>Add Answer</a></span>
                 {this.state.answers.length > 0 &&
                     <div>
                         {this.renderAnswers()}
