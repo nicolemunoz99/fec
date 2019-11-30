@@ -17,7 +17,6 @@
   top: -1.35rem
 }
 
-<<<<<<< HEAD
 .photo-nav-left {
   position: absolute;
   left: 0;
@@ -48,9 +47,10 @@
   max-width: 8vw;
   margin-bottom: 0.6rem;
 }
-=======
+
 .QA {
   width: 80%;
+  margin-left: 10%;   
 }
 
 .question {
@@ -106,4 +106,3 @@
   text-decoration: underline;
 }
 
->>>>>>> d24a08af87031a9ddbad7ba5ab931bcf397808ae
