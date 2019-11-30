@@ -9,3 +9,8 @@
   /* margin-bottom: 50px; */
   top: -1.35rem
 }
+
+.text-button {
+  cursor: pointer;
+  text-decoration: underline;
+}
