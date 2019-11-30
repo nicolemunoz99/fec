@@ -91,6 +91,10 @@ class QA extends Component {
         });
     }
 
+    sortByHelpfulness(questionArr) {
+        return questionArr.sort((a,b) => b.question_helpfulness - a.question_helpfulness);
+    }
+
     render() {
         return (
             <div>
@@ -103,7 +107,7 @@ class QA extends Component {
                         onChange={this.handleChange}
                     />
                 </form>
-                {this.state.activeQuestions.map((question) => <Question
+                {this.sortByHelpfulness(this.state.activeQuestions).map((question) => <Question
                     question={question}
                     key={question.question_id}
                     updateParent={this.refresh.bind(this)} />)}

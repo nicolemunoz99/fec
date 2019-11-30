@@ -18,11 +18,13 @@ class Question extends Component {
 
 
     renderAnswers() {
+        let activeAnswers;
         if (this.state.showAllAnswers === false) {
-            return this.state.answers.slice(0, 2).map(answer => <Answer key={answer.id} answer={answer} updateParent={this.props.updateParent}/>);
+            activeAnswers = this.sortAnswers(this.state.answers).slice(0, 2);
         } else {
-            return this.state.answers.map((answer) => <Answer key={answer.id} answer={answer}  updateParent={this.props.updateParent}/>);
+            activeAnswers = this.sortAnswers(this.state.answers);
         }
+        return activeAnswers.map(answer => <Answer key={answer.id} answer={answer} updateParent={this.props.updateParent}/>);
     }
 
     showMoreOrLess() {
@@ -35,6 +37,14 @@ class Question extends Component {
             .then(() => {
                 this.props.updateParent(); //tell parent to re-fetch questions
             });
+    }
+
+    sortAnswers(answers) { //There is probably a better way to do this...
+        const sellerQs = answers.filter(answer => answer.answerer_name === 'Seller')
+            .sort((a,b) => b.helpfulness - a.helpfulness);
+        const nonSellerQs = answers.filter(answer => answer.answerer_name !== 'Seller')
+            .sort((a,b) => b.helpfulness - a.helpfulness);
+        return sellerQs.concat(nonSellerQs);
     }
 
     render() {
