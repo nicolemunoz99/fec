@@ -1,3 +1,11 @@
+:root {
+  --default-view-max-height: 50vw
+}
+
+.hidden {
+  display: none;
+}
+
 .overview-component {
   border-style: solid;
   border-width: 2px;
@@ -6,10 +14,41 @@
 
 .checkmark {
   position: absolute;
-  /* margin-bottom: 50px; */
   top: -1.35rem
 }
 
+<<<<<<< HEAD
+.photo-nav-left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+}
+
+.photo-nav-right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
+.default-view {
+  max-height: var(--default-view-max-height);
+  overflow: hidden; /* for thumbnail overflow */
+}
+
+.default-view-photo {
+  max-height: var(--default-view-max-height);
+  margin: 0 auto;
+}
+
+.photo-container {
+  min-height: var(--default-view-max-height);
+}
+
+.default-view-tb {
+  max-width: 8vw;
+  margin-bottom: 0.6rem;
+}
+=======
 .QA {
   width: 80%;
 }
@@ -67,3 +106,4 @@
   text-decoration: underline;
 }
 
+>>>>>>> d24a08af87031a9ddbad7ba5ab931bcf397808ae
