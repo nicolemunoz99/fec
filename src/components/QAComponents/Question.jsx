@@ -29,12 +29,10 @@ class Question extends Component {
         this.setState({ showAllAnswers: !this.state.showAllAnswers });
     }
 
-    isHelpful() {
+    isHelpful() {  //Mostly working but there is a weird bug like 10% of the time where the put req doesn't send 
         const { question_id } = this.state.question;
-        // console.log('sending req')
         axios.put(`${api}/question/${question_id}/helpful`)
             .then(() => {
-                // console.log('updating parent')
                 this.props.updateParent(); //tell parent to re-fetch questions
             });
     }
