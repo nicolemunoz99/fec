@@ -10,7 +10,7 @@ class ImageGallery extends React.Component {
     this.rightClick = this.rightClick.bind(this);
     this.leftClick = this.leftClick.bind(this);
   }
-
+// default view: main image navigation
   rightClick(e) {
     let newPhotoIndex = this.state.currentPhotoIndex + 1;
     this.photoNavHandler(newPhotoIndex);
@@ -39,6 +39,8 @@ class ImageGallery extends React.Component {
       document.getElementsByClassName("photo-nav-right").item(0).classList.remove("hidden")
     }
   }
+
+//default view: main image navigation
 
 
   render() {
