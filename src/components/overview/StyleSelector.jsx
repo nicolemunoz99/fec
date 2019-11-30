@@ -15,11 +15,10 @@ const StyleSelector = props => {
 
       {
       props.styles.map((style, i) => {
+        let checkmarkClass = style.style_id===props.selectedStyle.style_id ? "checkmark fa fa-check-circle fa-2x" : "hidden"
         return (
           <div className="col-sm-3">
-            <i className="checkmark fa fa-check-circle fa-2x"
-                  hidden={style.style_id===props.selectedStyle.style_id ? false: true}>
-            </i>
+            <i className={checkmarkClass}></i>
             <img id={style.style_id} onClick={onClick} src={style.photos[0].thumbnail_url} className="img-fluid"></img>
           </div>)
       })

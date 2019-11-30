@@ -29,15 +29,14 @@ class ImageGallery extends React.Component {
 
   photoNavHandler(index) {
     if (index === 0) {
-      document.getElementsByClassName("photo-nav-left").item(0).hidden = true
+      document.getElementsByClassName("photo-nav-left").item(0).classList.add("hidden")
     }
     else if (index === this.props.photos.length - 1) { 
-      console.log('last photo')
-      document.getElementsByClassName("photo-nav-right").item(0).hidden = true
+      document.getElementsByClassName("photo-nav-right").item(0).classList.add("hidden")
     }
     else {
-      document.getElementsByClassName("photo-nav-left").item(0).hidden = false
-      document.getElementsByClassName("photo-nav-right").item(0).hidden = false
+      document.getElementsByClassName("photo-nav-left").item(0).classList.remove("hidden")
+      document.getElementsByClassName("photo-nav-right").item(0).classList.remove("hidden")
     }
   }
 
@@ -51,7 +50,6 @@ class ImageGallery extends React.Component {
                 photos={this.props.photos}
                 rightClick={this.rightClick}
                 leftClick={this.leftClick} />
-        
       </div>
     )
   }

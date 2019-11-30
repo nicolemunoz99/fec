@@ -11,7 +11,6 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 5, // ?? remove and send productID to QA from productInfo
       productInfo: productInfo,
       styles: styles.results,
       selectedStyle: styles.results[0] // default is first style
@@ -51,10 +50,10 @@ class Overview extends React.Component {
           </div>
         </div>
         <div>
-          <QA productId={this.state.productId}/>
+          <QA productId={this.state.productInfo.id}/>
         </div>
         <div>
-          <Reviews />
+          <Reviews productId={this.state.productInfo.id} />
         </div>
       </div>
     )

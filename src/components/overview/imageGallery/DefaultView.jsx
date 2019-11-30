@@ -7,24 +7,25 @@ class DefaultView extends React.Component {
 
   componentDidMount() {
     if (this.props.currentPhotoIndex === 0) {
-      document.getElementsByClassName("photo-nav-left").item(0).hidden = true;
+      document.getElementsByClassName("photo-nav-left").item(0).classList.add("hidden");
     }
   }
   
   render() {
     return (
       <div className="container">
+        (Default View)
       <div className="row">
-      <div className="col-2">
         {/* thumbnails */}
+      <div className="col-2">
         {
         this.props.photos.map((photo, i) => {
           return (<div key={i}><img className="default-view-tb" src={photo.thumbnail_url}></img></div>)
         })
         }
       </div>
+      {/* main image */}
       <div className="col-10">
-        (Default View)
         {
           this.props.photos.map((photo, i) => {
             let photoClass = i === this.props.currentPhotoIndex ? "d-flex text-center" : "hidden"
