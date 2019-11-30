@@ -31,7 +31,7 @@
 
 .default-view {
   max-height: var(--default-view-max-height);
-  overflow: hidden; for thumbnail overflow
+  /* overflow: hidden; for thumbnail overflow */
 }
 
 .default-view-photo {
@@ -45,13 +45,20 @@
 
 .default-view-tb {
   max-width: 8vw;
-  margin-bottom: 0.6rem;
+  /* margin-bottom: 0.6rem; */
 }
 
 .tb-selected {
   border-style: solid;
   border-width: 6px;
   border-color: rgb(122, 226, 90);
+}
+
+.tb-div {
+  max-width: 6vw;
+  max-height: 6vw;
+  overflow: hidden;
+  margin-bottom: 0.6rem;
 }
 
 .QA {
