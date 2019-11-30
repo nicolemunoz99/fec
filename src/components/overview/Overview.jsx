@@ -4,7 +4,7 @@ import styles from './sampleData/productStyles.js'
 import productInfo from './sampleData/productInfo.js'
 import ImageGallery from './imageGallery/ImageGallery.jsx'
 import ProductBasics from './ProductBasics.jsx'
-import QA from '../QAComponents/Qa.jsx'
+import QA from '../QAComponents/QA.jsx'
 import Reviews from '../ReviewsComponents/Reviews.jsx'
 
 class Overview extends React.Component {
@@ -50,7 +50,7 @@ class Overview extends React.Component {
             </div>
           </div>
         </div>
-        <div>
+        <div className="container-fluid QA">
           <QA productId={this.state.productId}/>
         </div>
         <div>
