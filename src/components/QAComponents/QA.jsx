@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Question from './Question.jsx';
+import NewQuestion from './NewQuestion.jsx';
+import axios from 'axios';
 const api = 'http://3.134.102.30/qa';
 
 class QA extends Component {
@@ -10,11 +12,14 @@ class QA extends Component {
             questions: [],
             activeQuestions: [],
             currentPage: 0,
-            moreToLoad: true
+            moreToLoad: true,
+            showPopup: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.fetchQuestions = this.fetchQuestions.bind(this);
         this.applyFilter = this.applyFilter.bind(this);
+        this.togglePopup = this.togglePopup.bind(this);
+        this.refresh = this.refresh.bind(this);
     }
 
     fetchQuestions(page, cb = () => { }) { 
@@ -76,12 +81,10 @@ class QA extends Component {
     }
 
     refresh() {
-        // console.log('setting state')
         this.setState({
             questions: [],
             activeQuestions: []
         }, () => {
-            // console.log('rerendering...')
             const { currentPage } = this.state;
             let tempPage = 0;
             while (tempPage < currentPage) {
@@ -93,6 +96,18 @@ class QA extends Component {
 
     sortByHelpfulness(questionArr) {
         return questionArr.sort((a,b) => b.question_helpfulness - a.question_helpfulness);
+    }
+
+    togglePopup(e, data) {
+        this.setState({showPopup: !this.state.showPopup});
+        if(data) {
+            axios.post(`${api}/${this.props.productId}`, data)
+                .then((res) => {
+                    console.log(res);
+                    this.refresh();
+                    alert('Thank you for your question!');
+                })
+        }
     }
 
     render() {
@@ -112,7 +127,8 @@ class QA extends Component {
                     key={question.question_id}
                     updateParent={this.refresh.bind(this)} />)}
                 {this.state.moreToLoad && <button onClick={() => this.fetchQuestions(this.state.currentPage, this.applyFilter)}>MORE ANSWERERD QUESTIONS</button>}
-                <button>ASK A QUESTION +</button>
+                <button onClick={this.togglePopup}>ASK A QUESTION +</button>
+                {this.state.showPopup && <NewQuestion togglePopup={this.togglePopup}/>}
             </div>
         )
     }
