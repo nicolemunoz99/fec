@@ -43,6 +43,59 @@ class QA extends Component {
         });
     }
 
+    
+    handleChange(e) {
+        this.setState({ searchTerm: e.target.value }, () => {
+            if (this.state.searchTerm.length > 2) {
+                this.applyFilter()
+            } else if (this.state.searchTerm.length === 0) {
+                this.setState({ activeQuestions: this.state.questions });
+            }
+        });
+    }
+    
+    applyFilter() {
+        const searchTerm = this.state.searchTerm.length > 2 ? this.state.searchTerm : '';
+        const filteredQs = [...this.state.questions].filter(question => {
+            if (question.question_body.includes(searchTerm)) {
+                return true;
+            } else {
+                return Object.values(question.answers).some(answer => answer.body.includes(searchTerm));
+            }
+        });
+        this.setState({ activeQuestions: filteredQs });
+    }
+    
+    refresh() {
+        this.setState({
+            questions: [],
+            activeQuestions: []
+        }, () => {
+            const { currentPage } = this.state;
+            let tempPage = 0;
+            while (tempPage < currentPage) {
+                this.fetchQuestions(tempPage, this.applyFilter); //using Promise.all here might be more performant...
+                tempPage++;
+            }
+        });
+    }
+    
+    sortByHelpfulness(questionArr) {
+        return questionArr.sort((a,b) => b.question_helpfulness - a.question_helpfulness);
+    }
+    
+    //TODO: change this so that new questions get pushed to the top of the active questions 
+    togglePopup(e, data) {
+        this.setState({showPopup: !this.state.showPopup});
+        if(data) {
+            axios.post(`${api}/${this.props.productId}`, data)
+            .then((res) => {
+                this.refresh();
+                alert('Thanks for your question!');
+            })
+        }
+    }
+    
     // TODO: need to re-fetch questions when props.productId changes
     // getSnapshotBeforeUpdate() {
     //     if(window.scrollY) {
@@ -57,59 +110,7 @@ class QA extends Component {
     //         window.scrollTo(0, snapshot);
     //     }
     // }
-
-    handleChange(e) {
-        this.setState({ searchTerm: e.target.value }, () => {
-            if (this.state.searchTerm.length > 2) {
-                this.applyFilter()
-            } else if (this.state.searchTerm.length === 0) {
-                this.setState({ activeQuestions: this.state.questions });
-            }
-        });
-    }
-
-    applyFilter() {
-        const searchTerm = this.state.searchTerm.length > 2 ? this.state.searchTerm : '';
-        const filteredQs = [...this.state.questions].filter(question => {
-            if (question.question_body.includes(searchTerm)) {
-                return true;
-            } else {
-                return Object.values(question.answers).some(answer => answer.body.includes(searchTerm));
-            }
-        });
-        this.setState({ activeQuestions: filteredQs });
-    }
-
-    refresh() {
-        this.setState({
-            questions: [],
-            activeQuestions: []
-        }, () => {
-            const { currentPage } = this.state;
-            let tempPage = 0;
-            while (tempPage < currentPage) {
-                this.fetchQuestions(tempPage, this.applyFilter); //using Promise.all here might be more performant...
-                tempPage++;
-            }
-        });
-    }
-
-    sortByHelpfulness(questionArr) {
-        return questionArr.sort((a,b) => b.question_helpfulness - a.question_helpfulness);
-    }
-
-    togglePopup(e, data) {
-        this.setState({showPopup: !this.state.showPopup});
-        if(data) {
-            axios.post(`${api}/${this.props.productId}`, data)
-                .then((res) => {
-                    console.log(res);
-                    this.refresh();
-                    alert('Thank you for your question!');
-                })
-        }
-    }
-
+    
     render() {
         return (
             <div>
