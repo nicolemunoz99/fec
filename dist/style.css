@@ -118,7 +118,7 @@
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.new-question {
+.popup-body {
   height: 50%;
   width: 40%;
   margin-top: 12.5%;
@@ -128,15 +128,15 @@
   padding: 0.5em;
 }
 
-.new-question textarea {
+.popup-body textarea {
   width: 100%;
 }
 
-.new-question input {
+.popup-body input {
   width: 50%;
 }
 
-.new-question span {
+.popup-body span {
   font-size: 0.4em;
   text-decoration: underline;
   color: #979595;

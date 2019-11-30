@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-class NewQuestion extends Component {
+export default class NewAnswer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            question: '',
+            answer: '',
             nickname: '',
             email: ''
         }
@@ -21,7 +21,7 @@ class NewQuestion extends Component {
         e.preventDefault();
         if (this.formIsValid()) {
             const data = {
-                body: this.state.question,
+                body: this.state.answer,
                 name: this.state.nickname,
                 email: this.state.email
             }
@@ -32,8 +32,8 @@ class NewQuestion extends Component {
     }
 
     formIsValid() { //need additional form validation for emails
-        const {question, nickname, email} = this.state;
-        if (question !== '' && nickname !== '' && email !=='' && email.split('@').length === 2) {
+        const {answer, nickname, email} = this.state;
+        if (answer !== '' && nickname !== '' && email !=='' && email.split('@').length === 2) {
             return true;
         } else return false;
     }
@@ -43,12 +43,12 @@ class NewQuestion extends Component {
             <div className="popup">
                 <div className="popup-body">
                     <span onClick={this.props.togglePopup}>close</span>
-                    <h3>Ask A Question:</h3>
+                    <h3>Answer This Question:</h3>
                     <form onSubmit={this.handleSubmit}>
                         <p>Your Question (required)</p>
                         <textarea 
-                            name="question" 
-                            value={this.state.question}
+                            name="answer" 
+                            value={this.state.answer}
                             maxLength="1000" 
                             placeholder="What's on your mind?"
                             onChange={this.handleChange}>
@@ -78,5 +78,3 @@ class NewQuestion extends Component {
         )
     }
 }
-
-export default NewQuestion;
