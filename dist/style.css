@@ -21,6 +21,18 @@
   top: 50%;
 }
 
-.photo {
-  max-height: 30rem
+.default-photo {
+  max-height: 50vw;
+  margin: 0 auto
+}
+
+.hidden {
+  display: none;
+}
+
+.default-view-tb {
+  max-width: 8vw;
+  /* max-height: 8vw; */
+  object-fit:cover;
+  margin-bottom: 0.6rem;
 }

@@ -9,17 +9,11 @@ class ImageGallery extends React.Component {
     }
     this.rightClick = this.rightClick.bind(this);
     this.leftClick = this.leftClick.bind(this);
-    console.log('did mount')
   }
 
   rightClick(e) {
     let newPhotoIndex = this.state.currentPhotoIndex + 1;
     this.photoNavHandler(newPhotoIndex);
-    // if (newPhotoIndex === this.props.photos.length - 1) { 
-    //   document.getElementsByClassName("photo-nav-right").item(0).hidden = true
-    // } else {
-    //   document.getElementsByClassName("photo-nav-right").item(0).hidden = false
-    // }
     this.setState({
       currentPhotoIndex: newPhotoIndex
     })
@@ -28,11 +22,6 @@ class ImageGallery extends React.Component {
   leftClick(e) {
     let newPhotoIndex = this.state.currentPhotoIndex - 1;
     this.photoNavHandler(newPhotoIndex);
-    // if (newPhotoIndex === 0) {
-    //   document.getElementsByClassName("photo-nav-left").item(0).hidden = true
-    // } else {
-    //   document.getElementsByClassName("photo-nav-left").item(0).hidden = false
-    // }
     this.setState({
       currentPhotoIndex: newPhotoIndex
     })
@@ -43,6 +32,7 @@ class ImageGallery extends React.Component {
       document.getElementsByClassName("photo-nav-left").item(0).hidden = true
     }
     else if (index === this.props.photos.length - 1) { 
+      console.log('last photo')
       document.getElementsByClassName("photo-nav-right").item(0).hidden = true
     }
     else {
@@ -56,12 +46,12 @@ class ImageGallery extends React.Component {
     return (
       <div className="row overview-component">
         <div className="col-sm-12">(IMAGE GALLERY)</div>
-        <div ><DefaultView 
+        <DefaultView 
                 currentPhotoIndex={this.state.currentPhotoIndex}
                 photos={this.props.photos}
                 rightClick={this.rightClick}
                 leftClick={this.leftClick} />
-        </div>
+        
       </div>
     )
   }

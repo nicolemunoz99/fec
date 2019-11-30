@@ -5,38 +5,39 @@ class DefaultView extends React.Component {
     super(props);
   }
 
-  forwardClick(e) {
-
-  }
-
   componentDidMount() {
-    console.log('mounty mount')
     if (this.props.currentPhotoIndex === 0) {
-      document.getElementsByClassName("photo-nav-left").item(0).hidden = true
-    }
-    if (this.props.currentPhotoIndex === this.props.photos.length - 1) {
-      document.getElementsByClassName("photo-nav-right").item(0).hidden = true
+      document.getElementsByClassName("photo-nav-left").item(0).hidden = true;
     }
   }
-
-  // forwardClick() {
-  //   let newIndex = this.props.
-  // }
   
   render() {
     return (
-      <div className="col-sm-12">
-        <div className="slideshow">
+      <div className="container">
+      <div className="row">
+      <div className="col-2">
+        {/* thumbnails */}
+        {
+        this.props.photos.map((photo, i) => {
+          return (<div key={i}><img className="default-view-tb" src={photo.thumbnail_url}></img></div>)
+        })
+        }
+      </div>
+      <div className="col-10">
         (Default View)
         {
           this.props.photos.map((photo, i) => {
-            let hidden = i === this.props.currentPhotoIndex ? false : true;
-            return <div hidden={hidden}>{<img id={i} className="img-fluid photo" src={photo.url}></img>}</div>
+            let photoClass = i === this.props.currentPhotoIndex ? "d-flex text-center" : "hidden"
+            return (<div key={i} className={photoClass}>
+              <img className="default-photo img-fluid" src={photo.url}></img>
+              
+            </div>)
           })
         }
         <div onClick={this.props.leftClick} className="photo-nav-left">Left</div>
         <div onClick={this.props.rightClick} className="photo-nav-right">Right</div>
-        </div>
+      </div>
+      </div>
       </div>
     )
   }
