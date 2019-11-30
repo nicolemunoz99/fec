@@ -15,7 +15,7 @@ class DefaultView extends React.Component {
     return (
       <div className="container">
         (Default View)
-      <div className="row">
+      <div className="row default-view">
         {/* thumbnails */}
       <div className="col-2">
         {
@@ -28,9 +28,9 @@ class DefaultView extends React.Component {
       <div className="col-10">
         {
           this.props.photos.map((photo, i) => {
-            let photoClass = i === this.props.currentPhotoIndex ? "d-flex text-center" : "hidden"
+            let photoClass = i === this.props.currentPhotoIndex ? "d-flex photo-container align-items-center justify-content-center" : "hidden"
             return (<div key={i} className={photoClass}>
-              <img className="default-photo img-fluid" src={photo.url}></img>
+              <img className="default-view-photo img-fluid" src={photo.url}></img>
               
             </div>)
           })

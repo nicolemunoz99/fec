@@ -1,3 +1,11 @@
+:root {
+  --default-view-max-height: 50vw
+}
+
+.hidden {
+  display: none;
+}
+
 .overview-component {
   border-style: solid;
   border-width: 2px;
@@ -21,18 +29,21 @@
   top: 50%;
 }
 
-.default-photo {
-  max-height: 50vw;
-  margin: 0 auto
+.default-view {
+  max-height: var(--default-view-max-height);
+  overflow: hidden; /* for thumbnail overflow */
 }
 
-.hidden {
-  display: none;
+.default-view-photo {
+  max-height: var(--default-view-max-height);
+  margin: 0 auto;
+}
+
+.photo-container {
+  min-height: var(--default-view-max-height);
 }
 
 .default-view-tb {
   max-width: 8vw;
-  /* max-height: 8vw; */
-  object-fit:cover;
   margin-bottom: 0.6rem;
 }
