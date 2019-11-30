@@ -4,6 +4,7 @@ class DefaultView extends React.Component {
   constructor(props) {
     super(props);
     this.tbClick = this.tbClick.bind(this)
+    console.log(this.props.photos.length>5)
   }
 
   componentDidMount() {
@@ -25,11 +26,12 @@ class DefaultView extends React.Component {
       <div className="row default-view">
         
         {/* thumbnails */}
+        
           <div className="col-2 d-flex align-items-center justify-content-center">
             <div>
               <div className="row">
                 <div className="col-12 d-flex align-items-center justify-content-center">
-                  UP
+                <div onClick={this.props.tbNavHandler} className={this.props.photos.length>5 ? "tb-nav-up" : "hidden"}> UP</div>
                 </div>
               </div>
               <div className="row">
@@ -46,7 +48,7 @@ class DefaultView extends React.Component {
               </div>
               <div className="row">
                 <div className="col-12 d-flex align-items-center justify-content-center">
-                  DOWN
+                  <div onClick={this.props.tbNavHandler} className={this.props.photos.length>5 ? "tb-nav-down" : "hidden"}>DOWN</div>
                 </div>
               </div>
             </div>
@@ -73,6 +75,7 @@ class DefaultView extends React.Component {
       </div>
       </div>
     )
+  
   }
 }
 
