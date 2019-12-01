@@ -4,9 +4,7 @@ class DefaultView extends React.Component {
   constructor(props) {
     super(props);
     this.tbClick = this.tbClick.bind(this)
-    console.log(this.props.photos.length>5)
   }
-
   componentDidMount() {
     // hide left arrow upon load (first image is default)
     if (this.props.currentPhotoIndex === 0) {
@@ -31,7 +29,7 @@ class DefaultView extends React.Component {
             <div>
               <div className="row">
                 <div className="col-12 d-flex align-items-center justify-content-center">
-                <div onClick={this.props.tbNavHandler} className={this.props.photos.length>5 ? "tb-nav-up" : "hidden"}> UP</div>
+                <div onClick={this.props.tbNavHandler} className={this.props.photos.length>5 ? "tb-nav-up" : "hidden"}>UP</div>
                 </div>
               </div>
               <div className="row">

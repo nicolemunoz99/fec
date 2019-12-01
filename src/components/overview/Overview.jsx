@@ -13,8 +13,7 @@ class Overview extends React.Component {
     this.state = {
       productInfo: productInfo,
       styles: styles.results,
-      selectedStyle: styles.results[0], // default is first style
-      numThumbnails: 5 // number of thumnails to display at a time
+      selectedStyle: styles.results[0] // default is first style
     }
     this.clickStyleHandler = this.clickStyleHandler.bind(this)
   }
@@ -26,7 +25,9 @@ class Overview extends React.Component {
         selectedStyle = style
       }
     })
-    this.setState({ selectedStyle: selectedStyle })
+    this.setState({ selectedStyle: selectedStyle }, () => {
+      console.log(this.state.selectedStyle)
+    })
   }
 
 
@@ -36,7 +37,8 @@ class Overview extends React.Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-7">
-              <ImageGallery numThumbnails={this.state.numThumbnails} photos={this.state.selectedStyle.photos.map((photo, i) => {
+              <ImageGallery  style={this.state.selectedStyle} photos={this.state.selectedStyle.photos.map((photo, i) => {
+                  // console.log('in heeeere', photo)
                   return {originalIndex: i, thumbnail_url: photo.thumbnail_url, url: photo.url}
                 }               
                   )}  />

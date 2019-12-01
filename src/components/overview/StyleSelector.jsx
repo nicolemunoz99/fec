@@ -1,4 +1,5 @@
 import React from 'react';
+import Checkout from './Checkout.jsx';
 
 const StyleSelector = props => {
   const onClick = (e) => {
@@ -22,8 +23,8 @@ const StyleSelector = props => {
             <img id={style.style_id} onClick={onClick} src={style.photos[0].thumbnail_url} className="img-fluid"></img>
           </div>)
       })
-      
       }
+      <Checkout />
       </div>
 
   )
