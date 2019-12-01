@@ -34,9 +34,10 @@ class Overview extends React.Component {
   render() {
     return (
       <div>
+        <div className="overview-main">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-sm-7">
+            <div className="col-sm-7 vertical-center overview-component">
               <ImageGallery  style={this.state.selectedStyle} photos={this.state.selectedStyle.photos.map((photo, i) => {
                   // console.log('in heeeere', photo)
                   return {originalIndex: i, thumbnail_url: photo.thumbnail_url, url: photo.url}
@@ -54,6 +55,7 @@ class Overview extends React.Component {
               </div>
             </div>
           </div>
+        </div>
         </div>
         <div className="container-fluid QA">
           <QA productId={this.state.productInfo.id}/>

@@ -1,12 +1,11 @@
 import React from 'react';
-import DefaultView from './DefaultView.jsx'
 
 class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentPhotoIndex: 0, // default is first image
-      tbIndices: [0,1,2,3,4] // default first 4 thumbnails
+      tbIndices: [0,1,2,3,4] // default first 5 thumbnails
     }
     this.photoNavHandler = this.photoNavHandler.bind(this);
     this.tbNavHandler = this.tbNavHandler.bind(this);
@@ -19,7 +18,6 @@ class ImageGallery extends React.Component {
       document.getElementsByClassName("photo-nav-left").item(0).classList.add("hidden");
     }
   }
-
 
   tbNavHandler(e) {
     let clickedNav = e.target.className
@@ -53,7 +51,6 @@ class ImageGallery extends React.Component {
     this.setState({
       currentPhotoIndex: newPhotoIndex
     }, () => {
-      console.log('current photo index updated')
       // hide/show nav button on main image when appropriate
       if (newPhotoIndex === 0) {
         document.getElementsByClassName("photo-nav-left").item(0).classList.add("hidden")
@@ -104,21 +101,9 @@ tbClick(e) {
 
 
   render() {
-    // return (    
-    //   <div className="row overview-component">
-    //   {console.log('render Image Gallery', this.props.photos[0])}
-    //     <div className="col-sm-12">(IMAGE GALLERY)</div>
-    //     <DefaultView 
-    //             currentPhotoIndex={this.state.currentPhotoIndex}
-    //             photos={this.props.photos}
-    //             photoNavHandler={this.photoNavHandler}
-    //             tbNavHandler={this.tbNavHandler}
-    //             thumbnails={this.state.tbDisplayed} />
-    //   </div>
-    // )
-    
 
     return (
+      <div>
       <div className="container">
         (Default View)
       <div className="row default-view">
@@ -137,7 +122,9 @@ tbClick(e) {
                     {
                       this.state.tbIndices.map((i, index) => {
                         let tbSelected = i === this.state.currentPhotoIndex ? " tb-selected " : null;
-                        return (<div className={"tb-div " + tbSelected} key={index}><img id={i} onClick={this.tbClick} className={"default-view-tb"} src={this.props.photos[i].thumbnail_url}></img></div>)
+                        return (<div className={"tb-div " + tbSelected} key={index}>
+                                    <img id={i} onClick={this.tbClick} className={"default-view-tb"} src={this.props.photos[i].thumbnail_url}></img>
+                                </div>)
                       })
                     }
                   </div>
@@ -171,11 +158,8 @@ tbClick(e) {
 
       </div>
       </div>
+      </div>
     )
-
-
-
-
   }
 }
 
