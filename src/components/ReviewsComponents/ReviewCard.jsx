@@ -25,10 +25,14 @@ const ReviewCard = (props) => {
       <div className='r-info'>{props.review.reviewer_name}, {date}</div>
       <div className='r-summary'>{props.review.summary}</div>
       <div className='r-body'>{props.review.body}</div>
-      <div className='r-bottom'>Helpful? <div className='text-button' onClick={(e) => {
+      <div className='r-bottom'>Helpful? <div className='text-button' id='helpful' onClick={(e) => {
         props.helpful(props.review.review_id);
         props.review.helpfulness++;
-      }}>Yes</div> ({props.review.helpfulness}) | <div className='text-button'>Report</div></div>
+        e.target.style.display = 'none';
+      }}>Yes</div> ({props.review.helpfulness}) | <div className='text-button' onClick={(e) => {
+        // props.report(props.review.review_id);
+        e.target.parentNode.parentNode.innerHTML = '<em>Thank you for your report. This review is now being examined by a moderator</em>';
+      }}>Report</div></div>
     </div>
   );
 }
