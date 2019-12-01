@@ -1,3 +1,11 @@
+:root {
+  --default-view-max-height: 50vw
+}
+
+.hidden {
+  display: none;
+}
+
 .overview-component {
   border-style: solid;
   border-width: 2px;
@@ -6,7 +14,6 @@
 
 .checkmark {
   position: absolute;
-  /* margin-bottom: 50px; */
   top: -1.35rem
 }
 
@@ -53,7 +60,94 @@
 #rbody {
   width: 100%;
 }
-
+/* 
 textarea {
   height: auto;
+} */
+
+.photo-nav-left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+}
+
+.photo-nav-right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
+.default-view {
+  max-height: var(--default-view-max-height);
+  overflow: hidden; /* for thumbnail overflow */
+}
+
+.default-view-photo {
+  max-height: var(--default-view-max-height);
+  margin: 0 auto;
+}
+
+.photo-container {
+  min-height: var(--default-view-max-height);
+}
+
+.default-view-tb {
+  max-width: 8vw;
+  margin-bottom: 0.6rem;
+}
+.QA {
+  width: 80%;
+}
+
+.question {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.q-main {
+  padding-bottom: 0.75em;
+}
+
+.q-main h4 {
+  margin-bottom: 0em;
+  display: inline-block;
+}
+
+.q-main .q-subtext {
+  float: right;
+  margin-top: 0.5em;
+}
+
+.q-search {
+  width: 50%;
+}
+
+.q-subtext {
+  font-size: 0.75em;
+}
+
+.answer p {
+  margin-bottom: 0em;
+}
+
+.answer {
+  margin-bottom: 0.5em;
+}
+
+.answer-head {
+  font-weight: bold;
+}
+
+.divider-bar {
+  margin-left: 0.75em;
+  margin-right: 0.75em;  
+}
+
+.question a {
+  text-decoration: underline;
+}
+
+.question .clickable {
+  cursor: pointer;
+  text-decoration: underline;
 }
