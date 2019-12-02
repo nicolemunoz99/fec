@@ -50,9 +50,8 @@ class StyleSelector extends React.Component {
   
   render() {
     return(
-      <div className="style-selector">
+      <div className="row overview-component">
         {/* // Style Selector */}
-        <div className="row overview-component">
           <div className="col-sm-12">
             <p>${this.props.selectedStyle.original_price}</p>
             <p>STYLE > {this.props.selectedStyle.name}</p>
@@ -70,14 +69,11 @@ class StyleSelector extends React.Component {
             }
             </div>
           </div>
-        </div>
-          
-        <div className="row overview-component">
+
           {/* Add To Cart */}
           <div className="col-sm-12 checkout d-flex align-items-center justify-content-center">
-            <div className="row checkout-container">
+            
               <div className="checkout-item">
-                {/* <div> */}
                 <select onChange={this.selectSize} id="size-selector">
                     {/* set default value based on whether or not style is in stock */}
                     {Object.keys(this.props.selectedStyle.skus).length === 0 ?
@@ -91,10 +87,8 @@ class StyleSelector extends React.Component {
                       })
                     }
                 </select>
-                {/* </div> */}
               </div>
               <div className="checkout-item">
-                {/* <div> */}
                 Quantity: <select onChange={this.selectQty} id="quantity-selector" >
                 {/* if qtyOptions is undefined (i.e., before size is selected), then only show diabled option */}
                   { this.state.qtyOptions ? 
@@ -103,16 +97,11 @@ class StyleSelector extends React.Component {
                     }) : <option disabled selected value="">-</option>
                   }
                 </select>
-                {/* </div> */}
               </div>
             </div>
-          </div>
-        </div>
-        <div className="row ">
-          <div className="col-sm-12 d-flex align-items-center justify-content-center">
+            <div className="col-sm-12 d-flex align-items-center justify-content-center">
             <div><button>Add to cart</button></div>
           </div>
-        </div>
       </div>
     )
   }
