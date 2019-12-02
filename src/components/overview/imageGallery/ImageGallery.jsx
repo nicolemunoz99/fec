@@ -44,8 +44,10 @@ class ImageGallery extends React.Component {
       let clickedNav = e.target.className
       if (clickedNav === 'photo-nav-right') { // right nav button was clicked
         var newPhotoIndex = this.state.currentPhotoIndex + 1;
+        if (newPhotoIndex >= this.props.photos.length) { newPhotoIndex = 0 }
       } else { // left nav button was clicked
         var newPhotoIndex = this.state.currentPhotoIndex - 1;
+        if (newPhotoIndex < 0 ) { newPhotoIndex = this.props.photos.length - 1}
       }
     } else { // photoNavHandler called upon thumbnail being clicked
       var newPhotoIndex = index
@@ -96,7 +98,6 @@ calcTbDisplayed (index) {
 
 tbClick(e) {
   let clickedTbIndex = Number(e.target.id);
-  console.log(clickedTbIndex);
   this.photoNavHandler(null, clickedTbIndex);
 }
 
@@ -167,7 +168,10 @@ expandedClick(e) {
       </div>
       <div id="gallery-overlay">
         <div className="close-expanded-view" onClick={this.expandedClick}>X</div>
-        <ExpandedView tbClick={this.tbClick} photos={this.props.photos} currentPhotoIndex={this.state.currentPhotoIndex} />
+        <ExpandedView tbClick={this.tbClick} 
+                      photos={this.props.photos} 
+                      currentPhotoIndex={this.state.currentPhotoIndex} 
+                      photoNavHandler={this.photoNavHandler}/>
       </div>
       </div>
     )

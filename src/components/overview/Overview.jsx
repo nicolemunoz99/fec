@@ -25,9 +25,7 @@ class Overview extends React.Component {
         selectedStyle = style
       }
     })
-    this.setState({ selectedStyle: selectedStyle }, () => {
-      console.log(this.state.selectedStyle)
-    })
+    this.setState({ selectedStyle: selectedStyle })
   }
 
 
