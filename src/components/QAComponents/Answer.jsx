@@ -23,7 +23,7 @@ const Answer = ({ answer, updateParent }) => {
         <div className="answer">
             <p><span className="answer-head">A:</span> {answer.body}</p>
             <div className="q-subtext">
-                <span>by {answer.answerer_name} on {moment(answer.date).format('MMMM Do YYYY')}</span>
+                <span>by {answer.answerer_name} on {moment(answer.date).utc().format('MMMM Do YYYY')}</span>
                 <span className="divider-bar">|</span>
                 <span>Helpful? <span className="clickable" onClick={() => isHelpful(updateParent)}>Yes</span> ({answer.helpfulness})</span>
                 <span className="divider-bar">|</span>
