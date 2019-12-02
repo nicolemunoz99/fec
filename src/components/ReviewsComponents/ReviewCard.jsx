@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ReviewCard = (props) => {
-  console.log(props.review)
+  // console.log(props.review)
   let date = new Date(props.review.date);
   let monthNames = ["January", "February", "March", "April", "May", "June",
    "July", "August", "September", "October", "November", "December"];
