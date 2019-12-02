@@ -26,16 +26,21 @@ export default class NewAnswer extends Component {
                 email: this.state.email
             }
             this.props.togglePopup(e, data);
-        } else {
-            alert('Invalid Entry');
-        }
+        } 
     }
 
-    formIsValid() { //need additional form validation for emails
-        const {answer, nickname, email} = this.state;
-        if (answer !== '' && nickname !== '' && email !=='' && email.split('@').length === 2) {
-            return true;
-        } else return false;
+    formIsValid() { 
+        const { question, nickname, email } = this.state;
+        if (question === '') {
+            alert('Please enter a question');
+            return false;
+        } else if (nickname === '') {
+            alert('Please enter a nickname');
+            return false;
+        } else if (/\S+@\S+\.\S+/.test(email) === false) {
+            alert('Please enter a valid email address');
+            return false;
+        } else return true;
     }
 
     render() {

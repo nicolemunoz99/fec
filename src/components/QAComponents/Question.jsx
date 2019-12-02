@@ -26,7 +26,7 @@ class Question extends Component {
         } else {
             activeAnswers = this.sortAnswers(this.state.answers);
         }
-        return activeAnswers.map(answer => <Answer key={answer.id} answer={answer} updateParent={this.props.updateParent}/>);
+        return activeAnswers.map(answer => <Answer key={answer.id} answer={answer} updateParent={this.props.updateParent} />);
     }
 
     showMoreOrLess() {
@@ -43,14 +43,22 @@ class Question extends Component {
 
     sortAnswers(answers) { //There is probably a better way to do this...
         const sellerQs = answers.filter(answer => answer.answerer_name === 'Seller')
-            .sort((a,b) => b.helpfulness - a.helpfulness);
+            .sort((a, b) => b.helpfulness - a.helpfulness);
         const nonSellerQs = answers.filter(answer => answer.answerer_name !== 'Seller')
-            .sort((a,b) => b.helpfulness - a.helpfulness);
+            .sort((a, b) => b.helpfulness - a.helpfulness);
         return sellerQs.concat(nonSellerQs);
     }
-    
+
     togglePopup(e, data) {
-        this.setState({showPopup: !this.state.showPopup});
+        this.setState({ showPopup: !this.state.showPopup });
+        if (data) {
+            const { question_id } = this.state.question;
+            axios.post(`${api}/${question_id}/answers`, data)
+                .then((res) => {
+                    this.props.updateParent();
+                    alert('Thanks for your answer!');
+                })
+        }
     }
 
     render() {
@@ -65,7 +73,7 @@ class Question extends Component {
                         <span className="clickable" onClick={this.togglePopup.bind(this)}>Add Answer</span>
                     </div>
                 </div>
-                {this.state.showPopup && <NewAnswer togglePopup={this.togglePopup.bind(this)}/>}
+                {this.state.showPopup && <NewAnswer togglePopup={this.togglePopup.bind(this)} />}
                 {this.state.answers.length > 0 &&
                     <div>
                         {this.renderAnswers()}
