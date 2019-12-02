@@ -62,7 +62,7 @@ class StyleSelector extends React.Component {
             this.props.styles.map((style, i) => {
               let checkmarkClass = style.style_id===this.props.selectedStyle.style_id ? "checkmark fa fa-check-circle fa-2x" : "hidden"
               return (
-                <div className="col-sm-3">
+                <div key={i} className="col-sm-3">
                   <i className={checkmarkClass}></i>
                   <img id={style.style_id} onClick={this.onClick} src={style.photos[0].thumbnail_url} className="img-fluid"></img>
                 </div>)
@@ -70,46 +70,50 @@ class StyleSelector extends React.Component {
             }
             </div>
           </div>
-          </div>
+        </div>
           
-          <div className="row overview-component">
-            {/* Add To Cart */}
-          <div className="col-sm-12 checkout d-flex text-center">
+        <div className="row overview-component">
+          {/* Add To Cart */}
+          <div className="col-sm-12 checkout d-flex align-items-center justify-content-center">
             <div className="row checkout-container">
-            <div className="checkout-item">
-              {/* <div> */}
-              <select onChange={this.selectSize} id="size-selector">
-                  {/* set default value based on whether or not style is in stock */}
-                  {Object.keys(this.props.selectedStyle.skus).length === 0 ?
-                     <option disabled selected value="">Out of Stock</option> :
-                    <option disabled selected value="">Select size</option>
+              <div className="checkout-item">
+                {/* <div> */}
+                <select onChange={this.selectSize} id="size-selector">
+                    {/* set default value based on whether or not style is in stock */}
+                    {Object.keys(this.props.selectedStyle.skus).length === 0 ?
+                      <option disabled selected value="">Out of Stock</option> :
+                      <option disabled selected value="">Select size</option>
+                    }
+                    
+                    {
+                      Object.keys(this.props.selectedStyle.skus).map((sku, i) => {
+                        return <option key={i}>{sku}</option>
+                      })
+                    }
+                </select>
+                {/* </div> */}
+              </div>
+              <div className="checkout-item">
+                {/* <div> */}
+                Quantity: <select onChange={this.selectQty} id="quantity-selector" >
+                {/* if qtyOptions is undefined (i.e., before size is selected), then only show diabled option */}
+                  { this.state.qtyOptions ? 
+                    this.state.qtyOptions.map(qty => {
+                        return <option key={qty} >{qty}</option>
+                    }) : <option disabled selected value="">-</option>
                   }
-                  
-                  {
-                    Object.keys(this.props.selectedStyle.skus).map((sku, i) => {
-                      return <option key={i}>{sku}</option>
-                    })
-                  }
-              </select>
-              {/* </div> */}
-            </div>
-            <div className="checkout-item">
-              {/* <div> */}
-              Quantity: <select onChange={this.selectQty} id="quantity-selector" >
-              {/* if qtyOptions is undefined (i.e., before size is selected), then only show diabled option */}
-                { this.state.qtyOptions ? 
-                  this.state.qtyOptions.map(qty => {
-                      return <option key={qty} >{qty}</option>
-                  }) : <option disabled selected value="">-</option>
-                }
-              </select>
-              {/* </div> */}
-            </div>
-            <div className="checkout-item"><button>Add to cart</button></div>
+                </select>
+                {/* </div> */}
+              </div>
             </div>
           </div>
+        </div>
+        <div className="row ">
+          <div className="col-sm-12 d-flex align-items-center justify-content-center">
+            <div><button>Add to cart</button></div>
           </div>
-          </div>
+        </div>
+      </div>
     )
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import ExpandedView from './ExpandedView.jsx'
 
 class ImageGallery extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class ImageGallery extends React.Component {
     this.photoNavHandler = this.photoNavHandler.bind(this);
     this.tbNavHandler = this.tbNavHandler.bind(this);
     this.tbClick = this.tbClick.bind(this)
+    this.mainPhotoClick = this.mainPhotoClick.bind(this);
     this.numThumbnails = 5;
   }
   componentDidMount() {
@@ -89,14 +91,21 @@ calcTbDisplayed (index) {
       wrapIndex++
     }
   }
-  this.setState({ tbIndices: tbIndices }, () => {
-    console.log('state updated')
-  })
+  this.setState({ tbIndices: tbIndices })
 }
 
 tbClick(e) {
-  let clickedTbIndex = Number(e.target.id)
+  let clickedTbIndex = Number(e.target.id);
+  console.log(clickedTbIndex);
   this.photoNavHandler(null, clickedTbIndex);
+}
+
+mainPhotoClick(e) {
+  document.getElementById('gallery-overlay').style.display = 'block';
+}
+
+expandedClick(e) {
+  document.getElementById('gallery-overlay').style.display='none';
 }
 
 
@@ -105,7 +114,6 @@ tbClick(e) {
     return (
       <div>
       <div className="container">
-        (Default View)
       <div className="row default-view">
         
         {/* thumbnails */}
@@ -138,7 +146,6 @@ tbClick(e) {
             </div>
           </div>
 
-
         {/* main image */}
         <div className="col-10">
           {
@@ -147,7 +154,7 @@ tbClick(e) {
                 "d-flex default-view-photo-container align-items-center justify-content-center" : "hidden";
               return (
                 <div key={i} className={photoClass}>
-                  <img className="default-view-photo img-fluid" src={photo.url}></img>
+                  <img onClick={this.mainPhotoClick} className="default-view-photo img-fluid" src={photo.url}></img>
                 </div>
               )
             })
@@ -157,6 +164,10 @@ tbClick(e) {
         </div>
 
       </div>
+      </div>
+      <div id="gallery-overlay">
+        <div className="close-expanded-view" onClick={this.expandedClick}>X</div>
+        <ExpandedView tbClick={this.tbClick} photos={this.props.photos} currentPhotoIndex={this.state.currentPhotoIndex} />
       </div>
       </div>
     )
