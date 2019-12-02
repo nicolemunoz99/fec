@@ -11,26 +11,30 @@ class ExpandedView extends React.Component {
     this.getCoords = this.getCoords.bind(this);
   }
   expandedMainPhotoClick(e) {
+    // show zoom overlay
     let zoomOverlay = document.getElementById('zoom-overlay');
     zoomOverlay.style.display='block'
-    // set backgroun-image to current image
-    console.log(zoomOverlay.style)
+    // show zoomed imaged by setting current photo as background
     let bgUrl = this.props.photos[this.props.currentPhotoIndex].url
-    // show zoomed imaged
-    zoomOverlay.style.backgroundImage = `url(${bgUrl})`
-    console.log('hi', zoomOverlay.style.backgroundImage)
-    // update state with mouse coordinates
-    // center image on the scaled coordinates
+    zoomOverlay.style.backgroundImage = `url(${bgUrl})`;
   }
 
   hideZoom(e) {
-    console.log('hi')
+    // hide zoom-overlay
     e.target.style.display='none'
   }
 
-  getCoords(e) {
-    // console.log('x: ', e.clientX)
-    this.setState({ mouseX: e.clientX, mouseY: e.clientY })
+  getCoords(e) {   
+    // update state with mouse coordinates
+    this.setState({ mouseX: e.clientX, mouseY: e.clientY }, () => {
+      // center image on the scaled coordinates
+      let xPos = 100 * this.state.mouseX/window.innerWidth // percentage of window width
+      let yPos = 100 * this.state.mouseY/window.innerHeight
+      let zoomOverlay = document.getElementById('zoom-overlay');
+      zoomOverlay.style.backgroundPosition = `${yPos}% ${xPos}%`
+      // zoomOverlay.style.backgroundPosition = "100% 100%"
+    })
+    
   }
 
   render() {
