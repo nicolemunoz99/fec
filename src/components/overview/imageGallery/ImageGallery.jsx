@@ -166,6 +166,7 @@ expandedClick(e) {
 
       </div>
       </div>
+      {/* expanded view overlay */}
       <div id="gallery-overlay">
         <div className="close-expanded-view" onClick={this.expandedClick}>X</div>
         <ExpandedView tbClick={this.tbClick} 

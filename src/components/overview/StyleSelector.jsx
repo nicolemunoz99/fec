@@ -63,7 +63,7 @@ class StyleSelector extends React.Component {
               return (
                 <div key={i} className="col-sm-3">
                   <i className={checkmarkClass}></i>
-                  <img id={style.style_id} onClick={this.onClick} src={style.photos[0].thumbnail_url} className="img-fluid"></img>
+                  <img id={style.style_id} onClick={this.onClick} src={style.photos[0].thumbnail_url} className="style-tb img-fluid"></img>
                 </div>)
             })
             }

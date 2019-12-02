@@ -9,7 +9,7 @@
 
 #gallery-overlay {
   position: fixed;
-  display: none;
+  display: block;
   width: 100%;
   height: 100%;
   top: 0;
@@ -18,6 +18,22 @@
   bottom: 0;
   background-color: rgb(253, 251, 251, 0.95);
   z-index: 2;
+}
+
+#zoom-overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(230, 151, 251, 0.95);
+  z-index: 3;
+  cursor: zoom-out;
+  background-repeat: no-repeat;
+  background-position: 50%, 50%
 }
 
 .overview-main {
@@ -39,6 +55,11 @@
 
 .style-thumbnails-container {
   margin: 0.8rem 0rem;
+
+}
+
+.style-tb {
+  cursor: pointer;
 }
 
 .checkmark {
