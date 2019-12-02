@@ -26,7 +26,14 @@ class Question extends Component {
         } else {
             activeAnswers = this.sortAnswers(this.state.answers);
         }
-        return activeAnswers.map(answer => <Answer key={answer.id} answer={answer} updateParent={this.props.updateParent} />);
+        return activeAnswers.map(answer => {
+            return (
+                <Answer
+                    key={answer.id}
+                    answer={answer}
+                    updateParent={this.props.updateParent} />
+            )
+        });
     }
 
     showMoreOrLess() {
