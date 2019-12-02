@@ -146,11 +146,23 @@ textarea {
   height: auto;
 } */
 
+.nav-bg {
+  background-color: rgba(255, 255, 255);
+  /* border-color: white; */
+  /* border-style: solid; */
+  border-radius: 1.5rem;
+  /* width: 1rem; */
+}
+
 .photo-nav-left {
   position: absolute;
-  left: 20%;
+  left: 5%;
   top: 50%;
   cursor: pointer;
+}
+
+.nav-offset {
+  left: 20%
 }
 
 .photo-nav-right {
@@ -191,7 +203,8 @@ textarea {
 .default-thumbnails {
   position: absolute;
   z-index: 20;
-  height: 100%
+  height: 100%;
+  margin-left: 1rem;
 }
 
 .tb-div {
@@ -223,7 +236,9 @@ textarea {
 .tb-selected {
   outline-style: solid;
   outline-width: 4px;
-  outline-color: rgb(122, 226, 90);
+  outline-color: black;
+  border-color: white;
+  border-style: solid
 }
 
 .expanded-view-container {
