@@ -118,37 +118,37 @@ expandedClick(e) {
       <div className="row default-view">
         
         {/* thumbnails */}
-          <div className="col-2 d-flex align-items-center justify-content-center">
-            <div>
-              <div className="row">
-                <div className="col-12 d-flex align-items-center justify-content-center">
+        <div className="col-2 d-flex align-items-center justify-content-center default-thumbnails">
+          <div>
+            <div className="row">
+              <div className="col-12 d-flex align-items-center justify-content-center">
                 <div onClick={this.tbNavHandler} className={this.props.photos.length>5 ? "tb-nav-up" : "hidden"}>UP</div>
-                </div>
               </div>
-              <div className="row">
-                <div className="col-12 d-flex align-items-center justify-content-center">
-                  <div>
-                    {
-                      this.state.tbIndices.map((i, index) => {
-                        let tbSelected = i === this.state.currentPhotoIndex ? " tb-selected " : null;
-                        return (<div className={"tb-div " + tbSelected} key={index}>
-                                    <img id={i} onClick={this.tbClick} className={"default-view-tb"} src={this.props.photos[i].thumbnail_url}></img>
-                                </div>)
-                      })
-                    }
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-12 d-flex align-items-center justify-content-center">
-                  <div onClick={this.tbNavHandler} className={this.props.photos.length>5 ? "tb-nav-down" : "hidden"}>DOWN</div>
+            </div>
+            <div className="row">
+              <div className="col-12 d-flex align-items-center justify-content-center">
+                <div>
+                  {
+                    this.state.tbIndices.map((i, index) => {
+                      let tbSelected = i === this.state.currentPhotoIndex ? " tb-selected " : null;
+                      return (<div className={"tb-div " + tbSelected} key={index}>
+                                  <img id={i} onClick={this.tbClick} className={"default-view-tb"} src={this.props.photos[i].thumbnail_url}></img>
+                              </div>)
+                    })
+                  }
                 </div>
               </div>
             </div>
+            <div className="row">
+              <div className="col-12 d-flex align-items-center justify-content-center">
+                <div onClick={this.tbNavHandler} className={this.props.photos.length>5 ? "tb-nav-down" : "hidden"}>DOWN</div>
+              </div>
+            </div>
           </div>
+        </div>
 
         {/* main image */}
-        <div className="col-10">
+        {/* <div className="col-12"> */}
           {
             this.props.photos.map((photo, i) => {
               let photoClass = i === this.state.currentPhotoIndex ?
@@ -162,7 +162,7 @@ expandedClick(e) {
           }
           <div onClick={this.photoNavHandler} className="photo-nav-left">Left</div>
           <div onClick={this.photoNavHandler} className="photo-nav-right">Right</div>
-        </div>
+        {/* </div> */}
 
       </div>
       </div>
