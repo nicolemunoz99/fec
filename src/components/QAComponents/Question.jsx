@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Answer from './Answer.jsx';
 import axios from 'axios';
+import NewAnswer from './NewAnswer.jsx';
 const api = 'http://3.134.102.30/qa';
 
 class Question extends Component {
@@ -11,6 +12,7 @@ class Question extends Component {
             question: this.props.question,
             answers: answers,
             showAllAnswers: false,
+            showPopup: false
         }
         this.showMoreOrLess = this.showMoreOrLess.bind(this);
         this.isHelpful = this.isHelpful.bind(this);
@@ -46,6 +48,10 @@ class Question extends Component {
             .sort((a,b) => b.helpfulness - a.helpfulness);
         return sellerQs.concat(nonSellerQs);
     }
+    
+    togglePopup(e, data) {
+        this.setState({showPopup: !this.state.showPopup});
+    }
 
     render() {
         const question = this.state.question;
@@ -56,9 +62,10 @@ class Question extends Component {
                     <div className="q-subtext">
                         <span>Helpful? <span className="clickable" onClick={this.isHelpful}>Yes</span> ({question.question_helpfulness})</span>
                         <span className="divider-bar">|</span>
-                        <span className="clickable">Add Answer</span>
+                        <span className="clickable" onClick={this.togglePopup.bind(this)}>Add Answer</span>
                     </div>
                 </div>
+                {this.state.showPopup && <NewAnswer togglePopup={this.togglePopup.bind(this)}/>}
                 {this.state.answers.length > 0 &&
                     <div>
                         {this.renderAnswers()}
