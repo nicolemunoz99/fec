@@ -33,7 +33,14 @@
   z-index: 3;
   cursor: zoom-out;
   background-repeat: no-repeat;
-  background-position: 50%, 50%
+}
+
+.zoom-photo {
+  object-fit: none;
+  position: absolute;
+  top: 30px !important;
+  left: 0px !important;
+
 }
 
 .overview-main {
