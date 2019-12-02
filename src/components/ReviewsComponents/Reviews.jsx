@@ -8,7 +8,8 @@ class Reviews extends React.Component {
     super(props)
     this.state = {
       more: false,
-      reviews: []
+      reviews: [],
+      meta: {}
     }
 
     this.updateState = this.updateState.bind(this);
@@ -16,7 +17,7 @@ class Reviews extends React.Component {
   }
 
   getReviews() {
-    fetch(url + this.props.productId + `/list`)
+    fetch(url + this.props.productInfo.id + `/list`)
       .then((response) => {
         return response.json();
       })
@@ -24,7 +25,24 @@ class Reviews extends React.Component {
         this.setState({
           reviews: result.results
         }, () => {
-          // console.log('Reviews retrieved and state updated successfully!');
+          console.log('Reviews retrieved and state updated successfully!');
+        })
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+  }
+
+  getMeta() {
+    fetch(url + this.props.productInfo.id + `/meta`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        this.setState({
+          meta: result
+        }, () => {
+          console.log('Meta retrieved and state updated successfully!', this.state.meta);
         })
       })
       .catch((err) => {
@@ -63,14 +81,25 @@ class Reviews extends React.Component {
 
   componentDidMount() {
     this.getReviews();
+    this.getMeta();
+  }
+
+  componentDidUpdate() {
+    this.render();
   }
 
   render() {
+    return (this.state.meta.hasOwnProperty('characteristics') ? this.renderReviews() : (
+      <div>Loading Ratings & Reviews...</div>
+    ));
+  }
+
+  renderReviews() {
     return (
       <div id='reviews'>
         RATINGS & REVIEWS
         <Ratings />
-        <ReviewList reviews={this.state.reviews} more={this.state.more} update={this.updateState} helpful={this.markHelpful} report={this.reportReview}/>
+        <ReviewList reviews={this.state.reviews} more={this.state.more} update={this.updateState} helpful={this.markHelpful} report={this.reportReview} pname={this.props.productInfo.name} christics={this.state.meta.characteristics} />
       </div>
     )
   }

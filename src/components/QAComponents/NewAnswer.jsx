@@ -26,16 +26,21 @@ export default class NewAnswer extends Component {
                 email: this.state.email
             }
             this.props.togglePopup(e, data);
-        } else {
-            alert('Invalid Entry');
-        }
+        } 
     }
 
-    formIsValid() { //need additional form validation for emails
-        const {answer, nickname, email} = this.state;
-        if (answer !== '' && nickname !== '' && email !=='' && email.split('@').length === 2) {
-            return true;
-        } else return false;
+    formIsValid() { 
+        const { question, nickname, email } = this.state;
+        if (question === '') {
+            alert('Please enter a question');
+            return false;
+        } else if (nickname === '') {
+            alert('Please enter a nickname');
+            return false;
+        } else if (/\S+@\S+\.\S+/.test(email) === false) {
+            alert('Please enter a valid email address');
+            return false;
+        } else return true;
     }
 
     render() {
@@ -45,12 +50,12 @@ export default class NewAnswer extends Component {
                     <span onClick={this.props.togglePopup}>close</span>
                     <h3>Answer This Question:</h3>
                     <form onSubmit={this.handleSubmit}>
-                        <p>Your Question (required)</p>
+                        <p>Your Answer (required)</p>
                         <textarea 
                             name="answer" 
                             value={this.state.answer}
                             maxLength="1000" 
-                            placeholder="What's on your mind?"
+                            placeholder="Enter your Answer Here"
                             onChange={this.handleChange}>
                         </textarea>
                         <p>Your Nickname (required)</p>
