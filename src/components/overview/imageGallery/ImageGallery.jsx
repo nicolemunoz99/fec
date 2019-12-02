@@ -161,7 +161,7 @@ expandedClick(e) {
                 "d-flex default-view-photo-container align-items-center justify-content-center" : "hidden";
               return (
                 <div key={i} className={photoClass}>
-                  <img onClick={this.mainPhotoClick} className="default-view-photo img-fluid" src={photo.url}></img>
+                  <img id="test" onClick={this.mainPhotoClick} className="default-view-photo img-fluid" src={photo.url}></img>
                 </div>
               )
             })

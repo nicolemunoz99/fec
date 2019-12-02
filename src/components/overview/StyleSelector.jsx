@@ -8,13 +8,13 @@ class StyleSelector extends React.Component {
       qtyOptions: null,
       selectedQty: null
     }
-    this.onClick = this.onClick.bind(this);
+    this.styleClick = this.styleClick.bind(this);
     this.selectSize = this.selectSize.bind(this);
     this.selectQty = this.selectQty.bind(this);
   }
   
   // update selected style when clicking on thumnail
-  onClick(e) {
+  styleClick(e) {
     this.props.clickStyleHandler(Number(e.target.id))
    
     // if no stock available
@@ -46,6 +46,19 @@ class StyleSelector extends React.Component {
     });
   }
 
+  addToCart(e) {
+    let sizeSelector = document.getElementById('size-selector')
+    if (sizeSelector.value === 'none') {
+      console.log('hi', sizeSelector.value)
+      // expand size selector
+      document.getElementById('test').click()
+      // display prompt to select size
+    }
+  }
+
+  clickSelect(e) {
+    console.log(e)
+  }
 
   
   render() {
@@ -63,7 +76,7 @@ class StyleSelector extends React.Component {
               return (
                 <div key={i} className="col-sm-3">
                   <i className={checkmarkClass}></i>
-                  <img id={style.style_id} onClick={this.onClick} src={style.photos[0].thumbnail_url} className="style-tb img-fluid"></img>
+                  <img id={style.style_id} onClick={this.styleClick} src={style.photos[0].thumbnail_url} className="style-tb img-fluid"></img>
                 </div>)
             })
             }
@@ -74,11 +87,11 @@ class StyleSelector extends React.Component {
           <div className="col-sm-12 checkout d-flex align-items-center justify-content-center">
             
               <div className="checkout-item">
-                <select onChange={this.selectSize} id="size-selector">
+                <select autofocus onClick={this.clickSelect} onChange={this.selectSize} id="size-selector">
                     {/* set default value based on whether or not style is in stock */}
                     {Object.keys(this.props.selectedStyle.skus).length === 0 ?
-                      <option disabled selected value="">Out of Stock</option> :
-                      <option disabled selected value="">Select size</option>
+                      <option disabled selected value="outOfStock">Out of Stock</option> :
+                      <option disabled selected value="none">Select size</option>
                     }
                     
                     {
@@ -100,7 +113,7 @@ class StyleSelector extends React.Component {
               </div>
             </div>
             <div className="col-sm-12 d-flex align-items-center justify-content-center">
-            <div><button>Add to cart</button></div>
+            <div><button onClick={this.addToCart}>Add to cart</button></div>
           </div>
       </div>
     )
