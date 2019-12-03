@@ -16,6 +16,7 @@ class Question extends Component {
         }
         this.showMoreOrLess = this.showMoreOrLess.bind(this);
         this.isHelpful = this.isHelpful.bind(this);
+        this.refreshAnswers = this.refreshAnswers.bind(this);
     }
 
 
@@ -29,9 +30,9 @@ class Question extends Component {
         return activeAnswers.map(answer => {
             return (
                 <Answer
-                    key={answer.id}
+                    key={answer.id || answer.answer_id} //jank af but it works lmao
                     answer={answer}
-                    updateParent={this.props.updateParent} />
+                    refreshAnswers={this.refreshAnswers} />
             )
         });
     }
@@ -62,10 +63,27 @@ class Question extends Component {
             const { question_id } = this.state.question;
             axios.post(`${api}/${question_id}/answers`, data)
                 .then((res) => {
-                    this.props.updateParent();
+                    this.refreshAnswers(this.state.answers.length + 1);
                     alert('Thanks for your answer!');
                 })
         }
+    }
+
+    refreshAnswers(answerCount = this.state.answers.length) {
+        const { question_id } = this.state.question;
+        const pages = Math.ceil(answerCount / 5);
+        let currentPage = 0;
+        let promises = [];
+        while (currentPage < pages) {
+            currentPage++;
+            promises.push(fetch(`${api}/${question_id}/answers?page=${currentPage}`)
+                .then(res => res.json())
+            );
+        }
+        Promise.all(promises)
+            .then((newAnswers) => {
+                this.setState({ answers: newAnswers.reduce((acc, val) => acc.concat(val.results), []) });
+            });
     }
 
     render() {
