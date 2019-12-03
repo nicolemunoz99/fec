@@ -8,6 +8,8 @@ class Question extends Component {
     constructor(props) {
         super(props);
         const answers = Object.values(this.props.question.answers);
+        //add an answer_id property to be consistent with subsequent calls to the answers endpoint
+        answers.forEach(answer => answer.answer_id = answer.id); 
         this.state = {
             question: this.props.question,
             answers: answers,
@@ -19,7 +21,6 @@ class Question extends Component {
         this.refreshAnswers = this.refreshAnswers.bind(this);
     }
 
-
     renderAnswers() {
         let activeAnswers;
         if (this.state.showAllAnswers === false) {
@@ -30,7 +31,7 @@ class Question extends Component {
         return activeAnswers.map(answer => {
             return (
                 <Answer
-                    key={answer.id || answer.answer_id} //jank af but it works lmao
+                    key={answer.answer_id} 
                     answer={answer}
                     refreshAnswers={this.refreshAnswers} />
             )

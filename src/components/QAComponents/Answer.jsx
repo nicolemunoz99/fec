@@ -3,18 +3,17 @@ import moment from 'moment';
 import axios from 'axios';
 const api = 'http://3.134.102.30/qa';
 
-//TODO this is rendering dates a day early for some reason 
 const Answer = ({ answer, refreshAnswers }) => {
+    
     const [isReported, setIsReported] = useState(false);
-
     const isHelpful = (cb) => {
-        const id = answer.id || answer.answer_id; //this property name depends on whether fetching from answers endpoint directly vs pulling from the question obj. 
+        const id = answer.answer_id;  
         axios.put(`${api}/answer/${id}/helpful`)
             .then(() => cb());
     }
 
     const reportAnswer = () => {
-        const id = answer.id || answer.answer_id;
+        const id = answer.answer_id;
         axios.put(`${api}/answer/${id}/report`)
             .then(()=> setIsReported(true));
     }
