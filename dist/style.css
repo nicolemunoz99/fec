@@ -6,6 +6,38 @@
   display: none;
 }
 
+/* ignore click events for all children */
+#selectorMain-size > * { 
+  pointer-events: none;
+}
+
+#selectorMain-qty > * { 
+  pointer-events: none;
+}
+
+
+.selector-container {
+  cursor: pointer;
+}
+
+.selector {
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.selector-options {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  width: 80%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.disabled {
+  color: rgb(182, 179, 179);
+}
 
 #gallery-overlay {
   position: fixed;
