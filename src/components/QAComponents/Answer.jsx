@@ -14,7 +14,7 @@ const Answer = ({ answer, refreshAnswers }) => {
     }
 
     const reportAnswer = () => {
-        const { id } = answer;
+        const id = answer.id || answer.answer_id;
         axios.put(`${api}/answer/${id}/report`)
             .then(()=> setIsReported(true));
     }
