@@ -7,13 +7,13 @@
 }
 
 /* ignore click events for all children */
-#selectorMain-size > * { 
+#selectorMain > * { 
   pointer-events: none;
 }
 
-#selectorMain-qty > * { 
+/* #selectorMain-qty > * { 
   pointer-events: none;
-}
+} */
 
 
 .selector-container {
@@ -28,7 +28,7 @@
 }
 
 .selector-options {
-  display: none;
+  display: block;
   position: absolute;
   z-index: 10;
   width: 80%;
@@ -106,18 +106,13 @@
   top: -1.35rem
 }
 
-.checkout {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
 .checkout-container {
   display: table;
 }
 
 .checkout-item {
   display: table-cell;
-  vertical-align: bottom;
+  margin-top: auto;
   padding: 0 1rem;
 }
 
