@@ -6,15 +6,14 @@
   display: none;
 }
 
-/* ignore click events for all children */
+/* disable click events for all children */
 #selectorMain > * { 
   pointer-events: none;
 }
 
-/* #selectorMain-qty > * { 
+.photo-nav > * {
   pointer-events: none;
-} */
-
+}
 
 .selector-container {
   cursor: pointer;
@@ -182,7 +181,7 @@ textarea {
   /* width: 1rem; */
 }
 
-.photo-nav-left {
+#photo-nav-left {
   position: absolute;
   left: 5%;
   top: 50%;
@@ -190,10 +189,10 @@ textarea {
 }
 
 .nav-offset {
-  left: 20%
+  left: 20% !important;
 }
 
-.photo-nav-right {
+#photo-nav-right {
   position: absolute;
   right: 5%;
   top: 50%;

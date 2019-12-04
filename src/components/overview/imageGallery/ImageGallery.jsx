@@ -17,12 +17,13 @@ class ImageGallery extends React.Component {
   componentDidMount() {
     // hide left arrow upon load (first image is default)
     if (this.state.currentPhotoIndex === 0) {
-      document.getElementsByClassName("photo-nav-left").item(0).classList.add("hidden");
+      document.getElementById("photo-nav-left").classList.add("hidden");
     }
   }
 
   tbNavHandler(e) {
-    let clickedNav = e.target.parentElement.className
+    let clickedNav = e.target.id;
+    console.log('clickedNav', clickedNav)
     let newTopIndex
     // when thumnail nav-down clicked
     if (clickedNav === 'tb-nav-down') {
@@ -39,15 +40,15 @@ class ImageGallery extends React.Component {
   }
 
   photoNavHandler(e, index) {
-
     if (e) { // when photoNavHandler called upon photo nav button clicked
       // update state.currentPhotoIndex
-      var clickedNav = e.target.parentElement
-      if (clickedNav.classList.contains('photo-nav-right')) { // right nav button was clicked
+      var clickedNav = e.target.id
+      console.log('clickedNav: ', clickedNav)
+      if (clickedNav === 'photo-nav-right') { // right nav button was clicked
         var newPhotoIndex = this.state.currentPhotoIndex + 1;
         if (newPhotoIndex >= this.props.photos.length) { newPhotoIndex = 0 }
       }
-      if (clickedNav.classList.contains('photo-nav-left')) { // left nav button was clicked
+      if (clickedNav === 'photo-nav-left' ) { // left nav button was clicked
         var newPhotoIndex = this.state.currentPhotoIndex - 1;
         if (newPhotoIndex < 0 ) { newPhotoIndex = this.props.photos.length - 1}
       }
@@ -59,14 +60,14 @@ class ImageGallery extends React.Component {
     }, () => {
       // hide/show nav button on main image when appropriate
       if (newPhotoIndex === 0) {
-        document.getElementsByClassName("photo-nav-left").item(0).classList.add("hidden")
+        document.getElementById("photo-nav-left").classList.add("hidden")
       }
       else if (newPhotoIndex === this.props.photos.length - 1) {
-        document.getElementsByClassName("photo-nav-right").item(0).classList.add("hidden")
+        document.getElementById("photo-nav-right").classList.add("hidden")
       }
       else {
-        document.getElementsByClassName("photo-nav-left").item(0).classList.remove("hidden")
-        document.getElementsByClassName("photo-nav-right").item(0).classList.remove("hidden")
+        document.getElementById("photo-nav-left").classList.remove("hidden")
+        document.getElementById("photo-nav-right").classList.remove("hidden")
       }
       // update displayed thumbnails when currentPhotoInd > bottomOriginalInd OR currentPhotoInd < topOriginalInd
       let topOriginalInd = this.state.tbIndices[0]; // original index of thumb at TOP
@@ -78,6 +79,7 @@ class ImageGallery extends React.Component {
   }
 
 // default view: thumbnail navigation
+// calculates array of thumbnail indices to display; input: top tb index (see tbNavHandler)
 calcTbDisplayed (index) {
   let minIndex = index;
   let maxIndex = minIndex + this.numThumbnails - 1;
@@ -124,8 +126,8 @@ expandedClick(e) {
           <div>
             <div className="row">
               <div className="col-12 d-flex align-items-center justify-content-center">
-                <div onClick={this.tbNavHandler} className={this.props.photos.length>5 ? "tb-nav-up" : "hidden"}>
-                  <i class="fas fa-chevron-circle-up nav-bg"></i>
+                <div id="tb-nav-up" onClick={this.tbNavHandler} className={this.props.photos.length>5 ? "photo-nav" : "hidden"}>
+                  <i className="fas fa-chevron-circle-up nav-bg"></i>
                 </div>
               </div>
             </div>
@@ -145,8 +147,9 @@ expandedClick(e) {
             </div>
             <div className="row">
               <div className="col-12 d-flex align-items-center justify-content-center">
-                <div onClick={this.tbNavHandler} className={this.props.photos.length>5 ? "tb-nav-down" : "hidden"}>
-                  <i class="fas fa-chevron-circle-down nav-bg"></i>
+                {/* only show thumbnail navigation if there are more tha this.numThumnails photos */}
+                <div id="tb-nav-down" onClick={this.tbNavHandler} className={this.props.photos.length > this.numThumbnails ? "photo-nav" : "hidden"}>
+                  <i className="fas fa-chevron-circle-down nav-bg"></i>
                 </div>
               </div>
             </div>
@@ -166,11 +169,11 @@ expandedClick(e) {
               )
             })
           }
-          <div onClick={this.photoNavHandler} className="photo-nav-left nav-offset">
-            <i class="fas fa-chevron-circle-left nav-bg"></i>
+          <div id="photo-nav-left" onClick={this.photoNavHandler} className="photo-nav nav-offset">
+            <i className="fas fa-chevron-circle-left nav-bg"></i>
           </div>
-          <div onClick={this.photoNavHandler} className="photo-nav-right">
-            <i class="fas fa-chevron-circle-right nav-bg"></i>
+          <div id="photo-nav-right" onClick={this.photoNavHandler} className="photo-nav">
+            <i className="fas fa-chevron-circle-right nav-bg"></i>
           </div>
         </div>
 
@@ -179,7 +182,7 @@ expandedClick(e) {
       {/* expanded view overlay */}
       <div id="gallery-overlay">
         <div className="close-expanded-view nav-bg" onClick={this.expandedClick}>
-          <i class="fas fa-times-circle fa-2x"></i>
+          <i className="fas fa-times-circle fa-2x"></i>
         </div>
         <ExpandedView tbClick={this.tbClick} 
                       photos={this.props.photos} 

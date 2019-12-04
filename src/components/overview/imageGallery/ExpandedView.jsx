@@ -58,10 +58,10 @@ class ExpandedView extends React.Component {
               </img>
             </div>
             <div onClick={this.props.photoNavHandler} className="photo-nav-left">
-              <i class="far fa-arrow-alt-circle-left fa-2x nav-bg"></i>
+              <i className="far fa-arrow-alt-circle-left fa-2x nav-bg"></i>
             </div>
             <div onClick={this.props.photoNavHandler} className="photo-nav-right">
-              <i class="far fa-arrow-alt-circle-right fa-2x nav-bg"></i>
+              <i className="far fa-arrow-alt-circle-right fa-2x nav-bg"></i>
             </div>
           </div>
         </div>

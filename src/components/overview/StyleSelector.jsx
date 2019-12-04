@@ -36,9 +36,9 @@ class StyleSelector extends React.Component {
      }
      // if state.activeDropdown isn't set
      else {
-      // set state.activeSelector to the target dropdownName
+      // set state.activeSelector to the target dropdownname
       this.setState({
-        activeDropdown: e.target.attributes.dropdownName.value
+        activeDropdown: e.target.attributes.dropdownname.value
       })
       // add an event Listener to document
       document.addEventListener('click', this.handleOutsideDropdown)
@@ -106,7 +106,7 @@ class StyleSelector extends React.Component {
             {/* size selector */}      
             <div className="col-sm-6 selector-container checkout-item ">
               <div className="col-sm-12">
-                <div id="selectorMain" dropdownName="sku" onClick={this.toggleSelector} className="selector justify-content-center">
+                <div id="selectorMain" dropdownname="sku" onClick={this.toggleSelector} className="selector justify-content-center">
                   {/* set default value based on whether or not style is in stock */}
                   {Object.keys(this.props.selectedStyle.skus).length === 0 ?
                   <span className="disabled ml-2 mr-2">Out of Stock</span> :
@@ -114,6 +114,7 @@ class StyleSelector extends React.Component {
                   }
                 </div>
                 <div className="selector-options">
+                  {/* show dropdown when user clicks on it, selects a size, or clicks off of it */}
                   { this.state.activeDropdown === 'sku' ? 
                     <div ref={node => {this.node = node}}>
                         {Object.keys(this.props.selectedStyle.skus).map((sku, i) => {
@@ -132,11 +133,12 @@ class StyleSelector extends React.Component {
             {/* quantity selector */}
             <div className="col-sm-3 selector-container checkout-item">
               <div className="col-sm-12"><span className="pr-2">Quantity:</span> 
-                <div id="selectorMain" dropdownName="qty" onClick={this.toggleSelector} className="selector d-flex align-items-center justify-content-center">
+                <div id="selectorMain" dropdownname="qty" onClick={this.toggleSelector} className="selector d-flex align-items-center justify-content-center">
                   {/* set default value based on whether or not size has been selected */}
                   <span className="ml-2 mr-2">{ this.state.selectedQty ? this.state.selectedQty : '-' }</span> 
                 </div>
                 <div id="qtySelector" className="selector-options" >
+                {/* show dropdown when user clicks on it, selects a quantity, or clicks off of it*/}
                 { this.state.activeDropdown === 'qty' ?
                     <div ref={node => {this.node = node}}>
                       {this.state.qtyOptions.map((qty, i) => {
