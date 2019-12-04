@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Question from './Question.jsx';
 import NewQuestion from './NewQuestion.jsx';
 import axios from 'axios';
+import $ from 'jquery';
 const api = 'http://3.134.102.30/qa';
 
 class QA extends Component {
@@ -13,16 +14,17 @@ class QA extends Component {
             activeQuestions: [],
             currentPage: 0,
             moreToLoad: true,
-            showPopup: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.fetchQuestions = this.fetchQuestions.bind(this);
         this.applyFilter = this.applyFilter.bind(this);
         this.togglePopup = this.togglePopup.bind(this);
         this.refresh = this.refresh.bind(this);
+        this.scrollHandler = this.scrollHandler.bind(this);
+        this.loadMore = this.loadMore.bind(this);
     }
 
-    fetchQuestions(page, cb = () => { }) { 
+    fetchQuestions(page, cb = () => { }) {
         fetch(`${api}/${this.props.productId}?count=4&page=${page + 1}`)
             .then((res) => {
                 res.json().then((data) => {
@@ -38,12 +40,20 @@ class QA extends Component {
     }
 
     componentDidMount() {
+        this.scrollHandler();
         this.fetchQuestions(this.state.currentPage, () => {
             this.setState({ activeQuestions: this.state.questions }); //initialize active questions to all questions
         });
     }
 
-    
+    //clear scroll listener when all questions loaded
+    componentDidUpdate() {
+        if (this.state.moreToLoad === false) {
+            $('.questions-container').off('scroll');
+        }
+    }
+
+
     handleChange(e) {
         this.setState({ searchTerm: e.target.value }, () => {
             if (this.state.searchTerm.length > 2) {
@@ -53,7 +63,7 @@ class QA extends Component {
             }
         });
     }
-    
+
     applyFilter() {
         const searchTerm = this.state.searchTerm.length > 2 ? this.state.searchTerm : '';
         const filteredQs = [...this.state.questions].filter(question => {
@@ -63,9 +73,9 @@ class QA extends Component {
                 return Object.values(question.answers).some(answer => answer.body.includes(searchTerm));
             }
         });
-        this.setState({ activeQuestions: filteredQs });
+        this.setState({ activeQuestions: this.sortByHelpfulness(filteredQs) });
     }
-    
+
     refresh() {
         this.setState({
             questions: [],
@@ -79,38 +89,37 @@ class QA extends Component {
             }
         });
     }
-    
+
     sortByHelpfulness(questionArr) {
-        return questionArr.sort((a,b) => b.question_helpfulness - a.question_helpfulness);
+        return questionArr.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
     }
-    
-    //TODO: change this so that new questions get pushed to the top of the active questions 
+
     togglePopup(e, data) {
-        this.setState({showPopup: !this.state.showPopup});
-        if(data) {
+        this.setState({ showPopup: !this.state.showPopup });
+        if (data) {
             axios.post(`${api}/${this.props.productId}`, data)
-            .then((res) => {
-                this.refresh();
-                alert('Thanks for your question!');
-            })
+                .then((res) => {
+                    this.setState({
+                        showUserQuestion: true,
+                        userQuestion: data.body
+                    }, this.refresh)
+                })
         }
     }
-    
-    // TODO: need to re-fetch questions when props.productId changes
-    // getSnapshotBeforeUpdate() {
-    //     if(window.scrollY) {
-    //         return window.scrollY;
-    //     } else {
-    //         return null;
-    //     }
-    // }
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if(snapshot !== null) {
-    //         console.log(`scrolling to ${snapshot}`);
-    //         window.scrollTo(0, snapshot);
-    //     }
-    // }
-    
+
+    scrollHandler() {
+        const { loadMore } = this;
+        $('.questions-container').on('scroll', function(e) {
+            if($(this).scrollTop() + $(this).innerHeight() > $(this)[0].scrollHeight - 1) {
+                loadMore();
+            }
+        });
+    }
+
+    loadMore() {
+        this.fetchQuestions(this.state.currentPage, this.applyFilter);
+    }
+
     render() {
         return (
             <div>
@@ -123,13 +132,19 @@ class QA extends Component {
                         onChange={this.handleChange}
                     />
                 </form>
-                {this.sortByHelpfulness(this.state.activeQuestions).map((question) => <Question
-                    question={question}
-                    key={question.question_id}
-                    updateParent={this.refresh.bind(this)} />)}
-                {this.state.moreToLoad && <button onClick={() => this.fetchQuestions(this.state.currentPage, this.applyFilter)}>MORE ANSWERERD QUESTIONS</button>}
-                <button onClick={this.togglePopup}>ASK A QUESTION +</button>
-                {this.state.showPopup && <NewQuestion togglePopup={this.togglePopup}/>}
+                {this.state.showUserQuestion &&
+                    <div>
+                        <h4>Thanks for adding a question!</h4>
+                        <p>You asked: "{this.state.userQuestion}"</p>
+                    </div>}
+                <div className="questions-container">
+                    {this.state.activeQuestions.map((question) => <Question
+                        question={question}
+                        key={question.question_id}
+                        updateParent={this.refresh.bind(this)} />)}
+                </div>
+                <button onClick={this.togglePopup}>Ask A Question +</button>
+                {this.state.showPopup && <NewQuestion togglePopup={this.togglePopup} />}
             </div>
         )
     }

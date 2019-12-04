@@ -14,6 +14,8 @@ class Reviews extends React.Component {
 
     this.updateState = this.updateState.bind(this);
     this.markHelpful = this.markHelpful.bind(this);
+    this.force = this.force.bind(this);
+    this.submitReview = this.submitReview.bind(this);
   }
 
   getReviews() {
@@ -25,7 +27,7 @@ class Reviews extends React.Component {
         this.setState({
           reviews: result.results
         }, () => {
-          console.log('Reviews retrieved and state updated successfully!');
+          // console.log('Reviews retrieved and state updated successfully!');
         })
       })
       .catch((err) => {
@@ -42,7 +44,7 @@ class Reviews extends React.Component {
         this.setState({
           meta: result
         }, () => {
-          console.log('Meta retrieved and state updated successfully!', this.state.meta);
+          // console.log('Meta retrieved and state updated successfully!', this.state.meta);
         })
       })
       .catch((err) => {
@@ -75,6 +77,28 @@ class Reviews extends React.Component {
     })
   }
 
+  submitReview(review) {
+    fetch(url + this.props.productInfo.id, {
+      method: 'POST',
+      body: JSON.stringify(review),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(() => {
+      this.getReviews();
+      this.getMeta();
+      // console.log('New review added')
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+  }
+
+  force() {
+    this.forceUpdate();
+  }
+
   updateState(obj) {
     this.setState(obj);
   }
@@ -99,7 +123,7 @@ class Reviews extends React.Component {
       <div id='reviews'>
         RATINGS & REVIEWS
         <Ratings />
-        <ReviewList reviews={this.state.reviews} more={this.state.more} update={this.updateState} helpful={this.markHelpful} report={this.reportReview} pname={this.props.productInfo.name} christics={this.state.meta.characteristics} />
+        <ReviewList reviews={this.state.reviews} more={this.state.more} update={this.updateState} helpful={this.markHelpful} report={this.reportReview} pname={this.props.productInfo.name} christics={this.state.meta.characteristics} force={this.force} submit={this.submitReview}/>
       </div>
     )
   }

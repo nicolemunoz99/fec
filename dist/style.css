@@ -301,6 +301,12 @@ textarea {
   padding-bottom: 1em;
 }
 
+.questions-container {
+  overflow-y: auto;
+  height: 70vh;
+  margin-bottom: 1em; 
+}
+
 .q-main {
   padding-bottom: 0.75em;
 }
