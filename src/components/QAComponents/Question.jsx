@@ -9,7 +9,7 @@ class Question extends Component {
         super(props);
         const answers = Object.values(this.props.question.answers);
         //add an answer_id property to be consistent with subsequent calls to the answers endpoint
-        answers.forEach(answer => answer.answer_id = answer.id); 
+        answers.forEach(answer => answer.answer_id = answer.id);
         this.state = {
             question: this.props.question,
             answers: answers,
@@ -31,9 +31,8 @@ class Question extends Component {
         return activeAnswers.map(answer => {
             return (
                 <Answer
-                    key={answer.answer_id} 
-                    answer={answer}
-                    refreshAnswers={this.refreshAnswers} />
+                    key={answer.answer_id}
+                    answer={answer}/>
             )
         });
     }
@@ -42,12 +41,17 @@ class Question extends Component {
         this.setState({ showAllAnswers: !this.state.showAllAnswers });
     }
 
-    isHelpful() {  //Mostly working but there is a weird bug like 10% of the time where the put req doesn't send 
+    isHelpful(e) {  //Mostly working but there is a weird bug like 10% of the time where the put req doesn't send 
         const { question_id } = this.state.question;
         axios.put(`${api}/question/${question_id}/helpful`)
             .then(() => {
-                this.props.updateParent(); //tell parent to re-fetch questions
+                const updatedQuestion = {...this.state.question};
+                updatedQuestion.question_helpfulness = this.state.question.question_helpfulness + 1;
+                this.setState({question: updatedQuestion});
             });
+        //clear onClick listener
+        e.target.classList.remove('clickable');
+        this.isHelpful = () => {};
     }
 
     sortAnswers(answers) { //There is probably a better way to do this...
