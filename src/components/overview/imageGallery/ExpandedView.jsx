@@ -5,11 +5,18 @@ class ExpandedView extends React.Component {
     super(props);
     this.state = {
       mouseX: 0,
-      mouseY: 0
+      mouseY: 0,
+      zoomWidth: 0,
+      zoomHeight: 0
     }
     this.expandedMainPhotoClick = this.expandedMainPhotoClick.bind(this);
     this.getCoords = this.getCoords.bind(this);
   }
+  // hide zoom-overlay when clicking on zoomed photo
+  hideZoom(e) {
+    e.target.style.display='none'
+  }
+
   expandedMainPhotoClick(e) {
     // show zoom overlay
     let zoomOverlay = document.getElementById('zoom-overlay');
@@ -19,22 +26,17 @@ class ExpandedView extends React.Component {
     zoomOverlay.style.backgroundImage = `url(${bgUrl})`;
   }
 
-  hideZoom(e) {
-    // hide zoom-overlay
-    e.target.style.display='none'
-  }
+
 
   getCoords(e) {   
     // update state with mouse coordinates
     this.setState({ mouseX: e.clientX, mouseY: e.clientY }, () => {
-      // center image on the scaled coordinates
+      // center background image on the scaled coordinates
       let xPos = 100 * this.state.mouseX/window.innerWidth // percentage of window width
       let yPos = 100 * this.state.mouseY/window.innerHeight
       let zoomOverlay = document.getElementById('zoom-overlay');
-      zoomOverlay.style.backgroundPosition = `${yPos}% ${xPos}%`
-      // zoomOverlay.style.backgroundPosition = "100% 100%"
-    })
-    
+      zoomOverlay.style.backgroundPosition = `${xPos}% ${yPos}% `
+    })    
   }
 
   render() {
@@ -42,8 +44,8 @@ class ExpandedView extends React.Component {
       <div>
       {/* zoomed image overlay */}
       <div id="zoom-overlay" onMouseMove={this.getCoords} onClick={this.hideZoom}>
-
       </div>
+
       {/* expanded view */}
       <div id="expanded-view" className="overview-component">
       <div className="container expanded-view-container">
@@ -55,8 +57,12 @@ class ExpandedView extends React.Component {
                     className="expanded-view-photo" src={this.props.photos[this.props.currentPhotoIndex].url}>
               </img>
             </div>
-            <div onClick={this.props.photoNavHandler} className="photo-nav-left">Left</div>
-            <div onClick={this.props.photoNavHandler} className="photo-nav-right">Right</div>
+            <div onClick={this.props.photoNavHandler} className="photo-nav-left">
+              <i class="far fa-arrow-alt-circle-left fa-2x nav-bg"></i>
+            </div>
+            <div onClick={this.props.photoNavHandler} className="photo-nav-right">
+              <i class="far fa-arrow-alt-circle-right fa-2x nav-bg"></i>
+            </div>
           </div>
         </div>
         {/* thumbnails */}

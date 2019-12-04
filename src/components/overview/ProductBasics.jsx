@@ -18,9 +18,9 @@ const ProductBasics = props => {
               props.productInfo.description : null}
           </p>
           <p>
-          <a target="NONE" href="http://facebook.com" className="fa fa-facebook"></a>
-          <a target="NONE" href="http://twitter.com" className="fa fa-twitter"></a>
-          <a target="NONE" href="http://pinterest.com" className="fa fa-pinterest"></a>
+          <a target="NONE" href="http://facebook.com" className="fab fa-facebook fa-2x px-2"></a>
+          <a target="NONE" href="http://twitter.com" className="fab fa-twitter fa-2x px-2"></a>
+          <a target="NONE" href="http://pinterest.com" className="fab fa-pinterest fa-2x px-2"></a>
           </p> 
         </div>
       </div>
