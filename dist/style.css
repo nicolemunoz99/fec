@@ -7,12 +7,18 @@
 }
 
 /* disable click events for all children */
-#selectorMain > * { 
+.selectorMain > * { 
   pointer-events: none;
 }
 
 .photo-nav > * {
   pointer-events: none;
+}
+/* ------------------------------ */
+
+.overview-popup {
+  z-index: 10 !important;
+  font-size: 1.5rem;
 }
 
 .selector-container {
@@ -199,10 +205,10 @@ textarea {
   cursor: pointer;
 }
 
-.vertical-bottom {
+/* .vertical-bottom {
   display: table-cell;
   vertical-align: bottom !important;
-}
+} */
 
 .default-view {
   max-height: var(--default-view-max-height);

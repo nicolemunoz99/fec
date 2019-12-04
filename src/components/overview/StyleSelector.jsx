@@ -1,9 +1,11 @@
 import React from 'react';
+import axios from 'axios';
 
 class StyleSelector extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      addedToCart: null,
       selectedSku: null, // size
       qtyOptions: null,
       selectedQty: null,
@@ -15,6 +17,7 @@ class StyleSelector extends React.Component {
     this.addToCart = this.addToCart.bind(this);
     this.toggleSelector = this.toggleSelector.bind(this);
     this.handleOutsideDropdown = this.handleOutsideDropdown.bind(this);
+    this.closePopup = this.closePopup.bind(this);
   }
   
   // update selected style when clicking on thumnail
@@ -22,21 +25,22 @@ class StyleSelector extends React.Component {
     this.props.clickStyleHandler(Number(e.target.id))
   }
   
-  handleOutsideDropdown(e) {
+  handleOutsideDropdown(e) { 
+    if (this.popupNode && this.popupNode.contains(e.target)) {
+      return; // ignore clicks on popups
+    }
     this.toggleSelector();
   }
 
   toggleSelector(e) {
     // if state.activeDropdown is defined
     if (this.state.activeDropdown) {
-      // set state.activeSelector to null
+      // set state.activeSelector to null and remove eventListener
       this.setState({ activeDropdown: null })
-      // remove eventListener
       document.removeEventListener('click', this.handleOutsideDropdown)
      }
      // if state.activeDropdown isn't set
      else {
-      // set state.activeSelector to the target dropdownname
       this.setState({
         activeDropdown: e.target.attributes.dropdownname.value
       })
@@ -69,12 +73,47 @@ class StyleSelector extends React.Component {
     document.getElementById('qtySelector').style.display='none';
   }
 
+  closePopup(e) {
+    console.log('hi')
+    this.setState({ addedToCart: null })
+    document.removeEventListener('click', this.closePopup)
+  }
+
   addToCart(e) {
     // if no size selected
     if (!this.state.selectedSku) {
-      // expand size selector and prompt user to select size
-      document.getElementById('selectorMain-size').click()
+      //pop-up prompting user to select size
+      this.setState({ addedToCart: 'Please select a size' }, () => {
+        console.log('this.popupNode: ', this.popupNode)
+        // expand size selector
+        document.getElementById('sku').click()
+        document.addEventListener('click', this.closePopup)
+      })
+      return;
     }
+    // post to cart
+    axios.post('http://3.134.102.30/cart', {
+      user_token: this.props.sessionId,
+      sku_id: this.state.selectedSku
+    })
+    .then(response => {
+      // pop-up 'added to cart'
+      this.setState({ addedToCart: 'Successfully added item to cart' }, () => {
+        document.addEventListener('click', this.closePopup)
+      })
+    })
+    .catch( error => {
+      // pop-up 'error adding to cart'
+      this.setState({ addedToCart: 'Error adding item to cart' }, () => {
+        document.addEventListener('click', this.closePopup)
+      })
+    })
+
+    // reset dropdown menus
+    this.setState({
+      selectedSku: null,
+      selectedQty: null
+    })
   }
 
   
@@ -82,7 +121,6 @@ class StyleSelector extends React.Component {
     return(
       <div className="row overview-component">
         {/* // Style Selector */}
-        
           <div className="col-sm-12">
             <p>${this.props.selectedStyle.original_price}</p>
             <p>STYLE > {this.props.selectedStyle.name}</p>
@@ -106,7 +144,7 @@ class StyleSelector extends React.Component {
             {/* size selector */}      
             <div className="col-sm-6 selector-container checkout-item ">
               <div className="col-sm-12">
-                <div id="selectorMain" dropdownname="sku" onClick={this.toggleSelector} className="selector justify-content-center">
+                <div id="sku" dropdownname="sku" onClick={this.toggleSelector} className="selectorMain selector justify-content-center">
                   {/* set default value based on whether or not style is in stock */}
                   {Object.keys(this.props.selectedStyle.skus).length === 0 ?
                   <span className="disabled ml-2 mr-2">Out of Stock</span> :
@@ -133,13 +171,13 @@ class StyleSelector extends React.Component {
             {/* quantity selector */}
             <div className="col-sm-3 selector-container checkout-item">
               <div className="col-sm-12"><span className="pr-2">Quantity:</span> 
-                <div id="selectorMain" dropdownname="qty" onClick={this.toggleSelector} className="selector d-flex align-items-center justify-content-center">
+                <div id="qty" dropdownname="qty" onClick={this.toggleSelector} className="selectorMain selector d-flex align-items-center justify-content-center">
                   {/* set default value based on whether or not size has been selected */}
                   <span className="ml-2 mr-2">{ this.state.selectedQty ? this.state.selectedQty : '-' }</span> 
                 </div>
                 <div id="qtySelector" className="selector-options" >
-                {/* show dropdown when user clicks on it, selects a quantity, or clicks off of it*/}
-                { this.state.activeDropdown === 'qty' ?
+                {/* show dropdown when user clicks on it, selects a quantity, or clicks off of it */}
+                { this.state.selectedSku && this.state.activeDropdown === 'qty' ?
                     <div ref={node => {this.node = node}}>
                       {this.state.qtyOptions.map((qty, i) => {
                         return (
@@ -157,6 +195,15 @@ class StyleSelector extends React.Component {
           <div className="col-sm-12 mb-3 d-flex align-items-center justify-content-center">
             <div><button onClick={this.addToCart}>Add to cart</button></div>
           </div>
+          { !this.state.addedToCart ? null :
+            <div ref={node => {this.popupNode = node}} >
+            <div className="overview-popup popup">
+                  <div className="popup-body d-flex align-items-center justify-content-center">
+                    {this.state.addedToCart}
+                  </div>
+            </div>
+            </div>
+          }
       </div>
     )
   }
