@@ -6,7 +6,8 @@ export default class NewAnswer extends Component {
         this.state = {
             answer: '',
             nickname: '',
-            email: ''
+            email: '',
+            photos: '',
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,14 +24,16 @@ export default class NewAnswer extends Component {
             const data = {
                 body: this.state.answer,
                 name: this.state.nickname,
-                email: this.state.email
+                email: this.state.email,
+                photos: this.state.photos.split(',').map(str => str.trim())
             }
             this.props.togglePopup(e, data);
         } 
     }
 
+    //TODO: Add additional validation for photos
     formIsValid() { 
-        const { question, nickname, email } = this.state;
+        const { question, nickname, email, photos } = this.state;
         if (question === '') {
             alert('Please enter a question');
             return false;
@@ -76,6 +79,14 @@ export default class NewAnswer extends Component {
                             placeholder="Example: Bob@website.com"
                             onChange={this.handleChange}
                         />
+                        <p>Photos (Optional)</p>
+                        <textarea 
+                            value={this.state.photos}
+                            name="photos"
+                            maxLength="1000"
+                            placeholder="Enter image URL's seperated by commas"
+                            onChange={this.handleChange}>
+                        </textarea>
                         <button type="submit">Submit</button>
                     </form>
                 </div>
