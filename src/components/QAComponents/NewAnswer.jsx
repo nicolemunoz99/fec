@@ -6,7 +6,8 @@ export default class NewAnswer extends Component {
         this.state = {
             answer: '',
             nickname: '',
-            email: ''
+            email: '',
+            images: '',
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +24,8 @@ export default class NewAnswer extends Component {
             const data = {
                 body: this.state.answer,
                 name: this.state.nickname,
-                email: this.state.email
+                email: this.state.email,
+                photos: this.state.images.split(',')
             }
             this.props.togglePopup(e, data);
         } 
@@ -76,6 +78,14 @@ export default class NewAnswer extends Component {
                             placeholder="Example: Bob@website.com"
                             onChange={this.handleChange}
                         />
+                        <p>Images (Optional)</p>
+                        <textarea 
+                            value={this.state.images}
+                            name="images"
+                            maxLength="1000"
+                            placeholder="Enter image URL's seperated by commas"
+                            onChange={this.handleChange}>
+                        </textarea>
                         <button type="submit">Submit</button>
                     </form>
                 </div>

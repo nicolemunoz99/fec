@@ -13,10 +13,9 @@ const AnswerPhotos = ({ answer }) => {
     return (
         <div className="answer-photos">
             {answer.photos.map((photo, i) => {
-                return(<div className="answer-photo-div">
+                return(<div className="answer-photo-div" key={i}>
                     <img 
                         src={photo.url || photo} 
-                        key={i} 
                         className="answer-photo"
                         onClick={togglePic}>
                     </img>
