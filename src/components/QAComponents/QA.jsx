@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Question from './Question.jsx';
 import NewQuestion from './NewQuestion.jsx';
 import axios from 'axios';
+import $ from 'jquery';
 const api = 'http://3.134.102.30/qa';
 
 class QA extends Component {
@@ -19,6 +20,8 @@ class QA extends Component {
         this.applyFilter = this.applyFilter.bind(this);
         this.togglePopup = this.togglePopup.bind(this);
         this.refresh = this.refresh.bind(this);
+        this.scrollHandler = this.scrollHandler.bind(this);
+        this.loadMore = this.loadMore.bind(this);
     }
 
     fetchQuestions(page, cb = () => { }) {
@@ -37,9 +40,17 @@ class QA extends Component {
     }
 
     componentDidMount() {
+        this.scrollHandler();
         this.fetchQuestions(this.state.currentPage, () => {
             this.setState({ activeQuestions: this.state.questions }); //initialize active questions to all questions
         });
+    }
+
+    //clear scroll listener when all questions loaded
+    componentDidUpdate() {
+        if (this.state.moreToLoad === false) {
+            $('.questions-container').off('scroll');
+        }
     }
 
 
@@ -96,6 +107,19 @@ class QA extends Component {
         }
     }
 
+    scrollHandler() {
+        const { loadMore } = this;
+        $('.questions-container').on('scroll', function(e) {
+            if($(this).scrollTop() + $(this).innerHeight() > $(this)[0].scrollHeight - 1) {
+                loadMore();
+            }
+        });
+    }
+
+    loadMore() {
+        this.fetchQuestions(this.state.currentPage, this.applyFilter);
+    }
+
     render() {
         return (
             <div>
@@ -108,22 +132,18 @@ class QA extends Component {
                         onChange={this.handleChange}
                     />
                 </form>
-                {this.state.showUserQuestion && 
+                {this.state.showUserQuestion &&
                     <div>
                         <h4>Thanks for adding a question!</h4>
                         <p>You asked: "{this.state.userQuestion}"</p>
                     </div>}
-                {this.state.activeQuestions.map((question) => <Question
-                    question={question}
-                    key={question.question_id}
-                    updateParent={this.refresh.bind(this)} />)}
-                {this.state.moreToLoad === true ?
-                    <button
-                        onClick={() => this.fetchQuestions(this.state.currentPage, this.applyFilter)}>
-                        MORE ANSWERERD QUESTIONS
-                    </button>
-                    : <p>All Questions Loaded</p>}
-                <button onClick={this.togglePopup}>ASK A QUESTION +</button>
+                <div className="questions-container">
+                    {this.state.activeQuestions.map((question) => <Question
+                        question={question}
+                        key={question.question_id}
+                        updateParent={this.refresh.bind(this)} />)}
+                </div>
+                <button onClick={this.togglePopup}>Ask A Question +</button>
                 {this.state.showPopup && <NewQuestion togglePopup={this.togglePopup} />}
             </div>
         )
