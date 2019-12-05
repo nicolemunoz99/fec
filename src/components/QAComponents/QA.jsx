@@ -14,6 +14,7 @@ class QA extends Component {
             activeQuestions: [],
             currentPage: 0,
             moreToLoad: true,
+            loadingQuestions: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.fetchQuestions = this.fetchQuestions.bind(this);
@@ -109,15 +110,21 @@ class QA extends Component {
 
     scrollHandler() {
         const { loadMore } = this;
+        const boundSetState = this.setState.bind(this);
         $('.questions-container').on('scroll', function(e) {
             if($(this).scrollTop() + $(this).innerHeight() > $(this)[0].scrollHeight - 1) {
                 loadMore();
+                boundSetState({loadingQuestions: true});
+                //force a 100ms delay between fetches so that the same data isn't rendered twice
+                setTimeout(() => boundSetState({loadingQuestions: false}), 100);
             }
         });
     }
 
     loadMore() {
-        this.fetchQuestions(this.state.currentPage, this.applyFilter);
+        if(this.state.loadingQuestions === false){
+            this.fetchQuestions(this.state.currentPage, this.applyFilter);
+        }
     }
 
     render() {

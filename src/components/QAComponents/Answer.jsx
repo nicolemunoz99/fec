@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
+import AnswerPhotos from './AnswerPhotos.jsx';
 import moment from 'moment';
 import axios from 'axios';
 const api = 'http://3.134.102.30/qa';
 
-const Answer = ({ answer, refreshAnswers }) => {
+const Answer = ({ answer }) => {
     
     const [isReported, setIsReported] = useState(false);
-    const isHelpful = (cb) => {
-        const id = answer.answer_id;  
-        axios.put(`${api}/answer/${id}/helpful`)
-            .then(() => cb());
+    const [ helpfulness, setHelpfulness ] = useState(answer.helpfulness);
+    const [ helpfulnessSubmitted, setHelpfulnessSubmitted ] = useState(false);
+
+    let isHelpful = (e) => {
+        if(helpfulnessSubmitted === false) {
+            const id = answer.answer_id;  
+            axios.put(`${api}/answer/${id}/helpful`)
+                .then(() => {
+                    setHelpfulness(helpfulness + 1);
+                    setHelpfulnessSubmitted(true);
+                })
+                e.target.classList.remove('clickable');
+        }
     }
 
     const reportAnswer = () => {
@@ -21,10 +31,11 @@ const Answer = ({ answer, refreshAnswers }) => {
     return (
         <div className="answer">
             <p><span className="answer-head">A:</span> {answer.body}</p>
+            {answer.photos.length > 0 && <AnswerPhotos answer={answer}/>}
             <div className="q-subtext">
                 <span>by {answer.answerer_name} on {moment(answer.date).utc().format('MMMM Do YYYY')}</span>
                 <span className="divider-bar">|</span>
-                <span>Helpful? <span className="clickable" onClick={() => isHelpful(refreshAnswers)}>Yes</span> ({answer.helpfulness})</span>
+                <span>Helpful? <span className="clickable" onClick={isHelpful}>Yes</span> ({helpfulness})</span>
                 <span className="divider-bar">|</span>
                 {isReported === false ?
                     <span className="clickable" onClick={reportAnswer}>Report</span>

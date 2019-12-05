@@ -379,7 +379,7 @@
 }
 
 .popup-body {
-  height: 50%;
+  height: auto;
   width: 40%;
   margin-top: 12.5%;
   margin-left: 30%;
@@ -404,5 +404,36 @@
   cursor: pointer;
 }
 
+.answer-photo {
+  object-fit: cover;
+  height: 8vw;
+  cursor: pointer;
+}
 
+.answer-photo-div {
+  width: 6vw;
+  height: 6vw;
+  overflow: hidden;
+  margin: 0.4rem;
+  display: inline-block;
+}
+
+.answer-photo-container {
+  position: relative;
+
+}
+
+.answer-photo-container img {
+  max-width:80%;
+  max-height:80%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.answer-photo-container span {
+  float: right;
+  color: black;
+}
 
