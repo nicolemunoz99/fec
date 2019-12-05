@@ -2,7 +2,7 @@ import React from 'react';
 import ReviewCard from './ReviewCard.jsx';
 
 const ReviewList = (props) => {
-  console.log(props);
+  // console.log(props);
   let moreButton = '';
   if (props.state.reviews.length > 2) {
     moreButton = (<button onClick={(e) => props.update({ more: !props.state.more })}>{props.state.more ? 'LESS REVIEWS' : 'MORE REVIEWS'}</button>);

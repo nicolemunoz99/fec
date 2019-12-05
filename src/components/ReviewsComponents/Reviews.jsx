@@ -24,7 +24,7 @@ class Reviews extends React.Component {
   getReviews() {
     fetch(url + this.props.productInfo.id + `/list?page=${this.state.page}&sort=${this.state.sort}`)
       .then((response) => {
-        console.log(this.state);
+        // console.log(this.state);
         return response.json();
       })
       .then((result) => {
