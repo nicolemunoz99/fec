@@ -124,7 +124,14 @@ class QA extends Component {
     }
 
     togglePopup(e, data) {
-        this.setState({ showPopup: !this.state.showPopup });
+        this.setState({ showPopup: !this.state.showPopup }, () => {
+            if (this.state.showPopup) {
+                $(document).on('keydown', () => {
+                    $(document).off('keydown');
+                    this.togglePopup();
+                })
+            }
+        });
         if (data) {
             axios.post(`${api}/${this.props.productId}`, data)
                 .then((res) => {

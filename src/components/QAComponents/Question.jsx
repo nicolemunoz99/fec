@@ -3,6 +3,7 @@ import Answer from './Answer.jsx';
 import axios from 'axios';
 import NewAnswer from './NewAnswer.jsx';
 import _ from 'lodash';
+import $ from 'jquery';
 const api = 'http://3.134.102.30/qa';
 
 class Question extends Component {
@@ -71,7 +72,14 @@ class Question extends Component {
     }
 
     togglePopup(e, data) {
-        this.setState({ showPopup: !this.state.showPopup });
+        this.setState({ showPopup: !this.state.showPopup }, () => {
+            if (this.state.showPopup) {
+                $(document).on('keydown', () => {
+                    $(document).off('keydown');
+                    this.togglePopup();
+                })
+            }
+        });
         if (data) {
             const { question_id } = this.props.question;
             axios.post(`${api}/${question_id}/answers`, data)
