@@ -125,6 +125,11 @@
   margin-bottom: auto;
 }
 
+.reviews {
+  width: 80%;
+  margin-left: 10%;
+}
+
 .text-button {
   cursor: pointer;
   text-decoration: underline;
@@ -169,10 +174,16 @@
   width: 100%;
 }
 
-/* 
-textarea {
-  height: auto;
-} */
+#sortSelect {
+  border: 0;
+  outline: 0;
+  text-decoration: underline;
+}
+
+.r-body {
+  /* good name, I know */
+  word-wrap: break-word;
+}
 
 .nav-bg {
   background-color: rgba(255, 255, 255);
