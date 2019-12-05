@@ -3,6 +3,7 @@ import Question from './Question.jsx';
 import NewQuestion from './NewQuestion.jsx';
 import axios from 'axios';
 import $ from 'jquery';
+import _ from 'lodash';
 const api = 'http://3.134.102.30/qa';
 
 class QA extends Component {
@@ -23,6 +24,7 @@ class QA extends Component {
         this.refresh = this.refresh.bind(this);
         this.scrollHandler = this.scrollHandler.bind(this);
         this.loadMore = this.loadMore.bind(this);
+        this.highlightText = this.highlightText.bind(this);
     }
 
     fetchQuestions(page, cb = () => { }) {
@@ -48,10 +50,10 @@ class QA extends Component {
     }
 
     //clear scroll listener when all questions loaded
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         if (this.state.moreToLoad === false) {
             $('.questions-container').off('scroll');
-        }
+        } 
     }
 
 
@@ -60,6 +62,7 @@ class QA extends Component {
             if (this.state.searchTerm.length > 2) {
                 this.applyFilter()
             } else if (this.state.searchTerm.length === 0) {
+                console.log('resetting questions..')
                 this.setState({ activeQuestions: this.state.questions });
             }
         });
@@ -67,14 +70,30 @@ class QA extends Component {
 
     applyFilter() {
         const searchTerm = this.state.searchTerm.length > 2 ? this.state.searchTerm : '';
-        const filteredQs = [...this.state.questions].filter(question => {
+        let filteredQs = [...this.state.questions].filter(question => {
             if (question.question_body.includes(searchTerm)) {
                 return true;
             } else {
                 return Object.values(question.answers).some(answer => answer.body.includes(searchTerm));
             }
+        })
+        let highlightedQs = filteredQs.map(question => {
+            let newQ = _.cloneDeep(question);
+            if (newQ.question_body.includes(searchTerm)) {
+                newQ.question_body = this.highlightText(newQ.question_body);
+            } 
+            for (let answer in newQ.answers) {
+                if (newQ.answers[answer].body.includes(searchTerm)) {
+                    newQ.answers[answer].body = this.highlightText(newQ.answers[answer].body);
+                }
+            }
+            return newQ;
         });
-        this.setState({ activeQuestions: this.sortByHelpfulness(filteredQs) });
+        this.setState({ activeQuestions: this.sortByHelpfulness(highlightedQs) });
+    }
+
+    highlightText(item) {
+        return  ('U WOT M8');
     }
 
     refresh() {
