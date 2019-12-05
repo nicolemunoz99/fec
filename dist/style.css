@@ -1,9 +1,13 @@
 :root {
-  --default-view-max-height: 40vw
+  --default-view-max-height: 50vw
 }
 
 .hidden {
   display: none;
+}
+
+.social-icon {
+  color: black
 }
 
 /* disable click events for all children */
@@ -97,9 +101,10 @@
   margin: 0.5rem
 }
 
-.style-thumbnails-container {
-  margin: 0.8rem 0rem;
-
+.style-tb-div {
+  width: 5vw;
+  height: 5vw;
+  overflow: hidden;
 }
 
 .style-tb {
@@ -122,10 +127,7 @@
 }
 
 .vertical-center {
-  /* min-height: 100%;
-  min-height: 100vh; */
   display: inline-block;
-  /* vertical-align: middle; */
   margin-top: auto;
   margin-bottom: auto;
 }
@@ -179,41 +181,26 @@ textarea {
   height: auto;
 } */
 
-.nav-bg {
-  background-color: rgba(255, 255, 255);
-  /* border-color: white; */
-  /* border-style: solid; */
-  border-radius: 1.5rem;
-  /* width: 1rem; */
-}
-
 #photo-nav-left {
   position: absolute;
-  left: 5%;
+  left: -6%;
   top: 50%;
   cursor: pointer;
 }
 
+.material-icons.md-34 { font-size: 34px; }
+
 .nav-offset {
-  left: 20% !important;
+  /* left: 20% !important; */
 }
 
 #photo-nav-right {
   position: absolute;
-  right: 5%;
+  right: -6%;
   top: 50%;
   cursor: pointer;
 }
 
-/* .vertical-bottom {
-  display: table-cell;
-  vertical-align: bottom !important;
-} */
-
-.default-view {
-  max-height: var(--default-view-max-height);
-  /* overflow: hidden; for thumbnail overflow */
-}
 
 .default-view-photo {
   max-height: var(--default-view-max-height);
@@ -229,20 +216,19 @@ textarea {
 }
 
 .default-view-tb  {
-  max-width: 8vw;
+  max-width: 12vw;
   cursor: pointer;
 }
 
 .default-thumbnails {
   position: absolute;
-  z-index: 20;
-  height: 100%;
-  margin-left: 1rem;
+  z-index: 2;
+  max-height: var(--default-view-max-height);
 }
 
 .tb-div {
-  max-width: 6vw;
-  max-height: 6vw;
+  max-width: 8vw;
+  max-height: 8vw;
   overflow: hidden;
   margin-bottom: 0.4rem;
 }

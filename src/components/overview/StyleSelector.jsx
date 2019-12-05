@@ -23,6 +23,11 @@ class StyleSelector extends React.Component {
   // update selected style when clicking on thumnail
   styleClick(e) {
     this.props.clickStyleHandler(Number(e.target.id))
+    // reset size and qty dropdowns
+    this.setState({
+      selectedSku: null,
+      selectedQty: null
+    })
   }
   
   handleOutsideDropdown(e) { 
@@ -119,20 +124,21 @@ class StyleSelector extends React.Component {
   
   render() {
     return(
-      <div className="row overview-component">
+      <div className="row">
         {/* // Style Selector */}
           <div className="col-sm-12">
             <p>${this.props.selectedStyle.original_price}</p>
-            <p>STYLE > {this.props.selectedStyle.name}</p>
+            <p>{this.props.selectedStyle.name}</p>
           
-            <div className="row style-thumbnails-container">
+            <div className="row no-gutters mt-4 mb-1">
             {
             this.props.styles.map((style, i) => {
-              let checkmarkClass = style.style_id===this.props.selectedStyle.style_id ? "checkmark fa fa-check-circle fa-2x" : "hidden"
               return (
-                <div key={i} className="col-sm-3">
-                  <i className={checkmarkClass}></i>
+                <div key={i} className="col-sm-3 pr-2">
+                  {/* <div className="style-tb-div"> */}
+                  {style.style_id===this.props.selectedStyle.style_id ? <i className="material-icons checkmark"> check_circle </i> : null}
                   <img id={style.style_id} onClick={this.styleClick} src={style.photos[0].thumbnail_url} className="style-tb img-fluid"></img>
+                  {/* </div> */}
                 </div>)
             })
             }

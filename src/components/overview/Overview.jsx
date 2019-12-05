@@ -71,9 +71,8 @@ class Overview extends React.Component {
         <div className="overview-main">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-sm-7 vertical-center overview-component">
+            <div className="col-sm-7 vertical-center">
               <ImageGallery  style={this.state.selectedStyle} photos={this.state.selectedStyle.photos.map((photo, i) => {
-                  // console.log('in heeeere', photo)
                   return {originalIndex: i, thumbnail_url: photo.thumbnail_url, url: photo.url}
                 }               
                   )}  />
