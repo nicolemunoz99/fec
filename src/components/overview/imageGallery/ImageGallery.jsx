@@ -126,9 +126,9 @@ expandedClick(e) {
           <div>
             <div className="row">
               <div className="col-12 d-flex align-items-center justify-content-center">
-                <div id="tb-nav-up" onClick={this.tbNavHandler} className={this.props.photos.length>5 ? "photo-nav" : "hidden"}>
+                {this.props.photos.length > this.numThumbnails ? <div id="tb-nav-up" onClick={this.tbNavHandler} className={"photo-nav"}>
                   <i class="material-icons md-34">arrow_drop_up</i>
-                </div>
+                </div> : null}
               </div>
             </div>
             <div className="row no-gutters">
@@ -136,7 +136,7 @@ expandedClick(e) {
                 <div>
                   {
                     this.state.tbIndices.map((i, index) => {
-                      let tbSelected = i === this.state.currentPhotoIndex ? "tb-div tb-selected " : "tb-div";
+                      let tbSelected = i === this.state.currentPhotoIndex ? "tb-div d-flex justify-content-center align-items-center tb-selected" : "tb-div d-flex justify-content-center align-items-center";
                       return (<div className={tbSelected} key={index}>
                                   <img id={i} onClick={this.tbClick} className={"default-view-tb"} src={this.props.photos[i].thumbnail_url}></img>
                               </div>)
@@ -148,9 +148,9 @@ expandedClick(e) {
             <div className="row">
               <div className="col-12 d-flex align-items-center justify-content-center">
                 {/* only show thumbnail navigation if there are more than this.numThumnails */}
-                <div id="tb-nav-down" onClick={this.tbNavHandler} className={this.props.photos.length > this.numThumbnails ? "photo-nav" : "hidden"}>
+                {this.props.photos.length > this.numThumbnails ? <div id="tb-nav-down" onClick={this.tbNavHandler} className={"photo-nav"}>
                   <i class="material-icons md-34">arrow_drop_down</i>
-                </div>
+                </div> : null}
               </div>
             </div>
           </div>
@@ -182,7 +182,7 @@ expandedClick(e) {
       {/* expanded view overlay */}
       <div id="gallery-overlay">
         <div className="close-expanded-view nav-bg" onClick={this.expandedClick}>
-          <i className="fas fa-times-circle fa-2x"></i>
+        <i class="material-icons md-34">close</i>
         </div>
         <ExpandedView tbClick={this.tbClick} 
                       photos={this.props.photos} 

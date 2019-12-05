@@ -134,11 +134,11 @@ class StyleSelector extends React.Component {
             {
             this.props.styles.map((style, i) => {
               return (
-                <div key={i} className="col-sm-3 pr-2">
-                  {/* <div className="style-tb-div"> */}
+                <div key={i} className="col-sm-3">
+                  <div className="style-tb-div d-flex justify-content-center align-items-center">
                   {style.style_id===this.props.selectedStyle.style_id ? <i className="material-icons checkmark"> check_circle </i> : null}
-                  <img id={style.style_id} onClick={this.styleClick} src={style.photos[0].thumbnail_url} className="style-tb img-fluid"></img>
-                  {/* </div> */}
+                  <img id={style.style_id} onClick={this.styleClick} src={style.photos[0].thumbnail_url} className="style-tb"></img>
+                  </div>
                 </div>)
             })
             }

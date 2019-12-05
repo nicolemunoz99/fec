@@ -15,6 +15,10 @@
   pointer-events: none;
 }
 
+.photo-nav {
+  cursor: pointer;
+}
+
 .photo-nav > * {
   pointer-events: none;
 }
@@ -102,18 +106,25 @@
 }
 
 .style-tb-div {
-  width: 5vw;
-  height: 5vw;
+  width: 8vw;
+  height: 8vw;
   overflow: hidden;
+  border-radius: 7vw;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
 }
 
 .style-tb {
+  height: 8vw;
+  object-fit: contain;
   cursor: pointer;
 }
 
 .checkmark {
   position: absolute;
-  top: -1.35rem
+  top: -0.5rem;
+  right: 1rem
 }
 
 .checkout-container {
@@ -185,7 +196,6 @@ textarea {
   position: absolute;
   left: -6%;
   top: 50%;
-  cursor: pointer;
 }
 
 .material-icons.md-34 { font-size: 34px; }
@@ -198,7 +208,6 @@ textarea {
   position: absolute;
   right: -6%;
   top: 50%;
-  cursor: pointer;
 }
 
 
