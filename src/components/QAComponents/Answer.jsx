@@ -30,7 +30,11 @@ const Answer = ({ answer }) => {
 
     return (
         <div className="answer">
-            <p><span className="answer-head">A:</span> {answer.body}</p>
+            <p><span className="answer-head">A: </span>
+                {answer.body}
+                <span className="highlight">{answer.body_match}</span>
+                {answer.body_tail}
+            </p>
             {answer.photos.length > 0 && <AnswerPhotos answer={answer}/>}
             <div className="q-subtext">
                 <span>by {answer.answerer_name} on {moment(answer.date).utc().format('MMMM Do YYYY')}</span>

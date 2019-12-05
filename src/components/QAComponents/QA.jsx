@@ -70,30 +70,39 @@ class QA extends Component {
 
     applyFilter() {
         const searchTerm = this.state.searchTerm.length > 2 ? this.state.searchTerm : '';
-        let filteredQs = [...this.state.questions].filter(question => {
+        let filteredQs = this.state.questions.filter(question => {
             if (question.question_body.includes(searchTerm)) {
                 return true;
             } else {
                 return Object.values(question.answers).some(answer => answer.body.includes(searchTerm));
             }
-        })
-        let highlightedQs = filteredQs.map(question => {
+        }).map(question => {
             let newQ = _.cloneDeep(question);
             if (newQ.question_body.includes(searchTerm)) {
-                newQ.question_body = this.highlightText(newQ.question_body);
+                this.highlightText(newQ);
             } 
             for (let answer in newQ.answers) {
                 if (newQ.answers[answer].body.includes(searchTerm)) {
-                    newQ.answers[answer].body = this.highlightText(newQ.answers[answer].body);
+                    this.highlightText(newQ.answers[answer]);
                 }
             }
             return newQ;
         });
-        this.setState({ activeQuestions: this.sortByHelpfulness(highlightedQs) });
+        this.setState({ activeQuestions: this.sortByHelpfulness(filteredQs) });
     }
 
     highlightText(item) {
-        return  ('U WOT M8');
+        const { searchTerm } = this.state;
+        const body = item.body || item.question_body;
+        const start = body.indexOf(searchTerm);
+        const end = searchTerm.length;
+        item.body_match = body.substr(start, end);
+        item.body_tail = body.substr(start + end);
+        if (item.body) {
+            item.body = body.substr(0, start);
+        } else {
+            item.question_body = body.substr(0, start);
+        }
     }
 
     refresh() {

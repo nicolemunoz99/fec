@@ -105,8 +105,8 @@ class Question extends Component {
             <div className="question">
                 <div className="q-main">
                     <h4>Q: {question.question_body}
-                    {/* <span>{question.question_match}</span>
-                    <span>{question.question_tail}</span> */}
+                    <span class="highlight">{question.body_match}</span>
+                    {question.body_tail}
                 </h4>
                     <div className="q-subtext">
                         <span>Helpful? <span className="clickable" onClick={this.isHelpful}>Yes</span> ({question.question_helpfulness})</span>
