@@ -58,7 +58,7 @@ class Overview extends React.Component {
         <div className="QA">
           <QA productId={this.state.productInfo.id}/>
         </div>
-        <div>
+        <div className='reviews'>
           <Reviews productInfo={this.state.productInfo} />
         </div>
       </div>

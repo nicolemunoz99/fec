@@ -5,12 +5,15 @@ const url = 'http://3.134.102.30/reviews/';
 
 class Reviews extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       more: false,
       reviews: [],
-      meta: {}
-    }
+      meta: {},
+      page: 1,
+      sort: 'helpful',
+      charsLeft: 50
+    };
 
     this.updateState = this.updateState.bind(this);
     this.markHelpful = this.markHelpful.bind(this);
@@ -19,13 +22,14 @@ class Reviews extends React.Component {
   }
 
   getReviews() {
-    fetch(url + this.props.productInfo.id + `/list`)
+    fetch(url + this.props.productInfo.id + `/list?page=${this.state.page}&sort=${this.state.sort}`)
       .then((response) => {
+        console.log(this.state);
         return response.json();
       })
       .then((result) => {
         this.setState({
-          reviews: result.results
+          reviews: this.state.reviews.concat(result.results)
         }, () => {
           // console.log('Reviews retrieved and state updated successfully!');
         })
@@ -85,10 +89,9 @@ class Reviews extends React.Component {
         'Content-Type': 'application/json'
       }
     })
-    .then(() => {
-      this.getReviews();
+    .then((response) => {
       this.getMeta();
-      // console.log('New review added')
+      // console.log('New review added', response.status)
     })
     .catch((err) => {
       console.error(err);
@@ -97,10 +100,15 @@ class Reviews extends React.Component {
 
   force() {
     this.forceUpdate();
+    // console.log('updated');
   }
 
-  updateState(obj) {
-    this.setState(obj);
+  updateState(obj, update) {
+    this.setState(obj, () => {
+      if (update) {
+        this.getReviews();
+      }
+    });
   }
 
   componentDidMount() {
@@ -123,7 +131,14 @@ class Reviews extends React.Component {
       <div id='reviews'>
         RATINGS & REVIEWS
         <Ratings />
-        <ReviewList reviews={this.state.reviews} more={this.state.more} update={this.updateState} helpful={this.markHelpful} report={this.reportReview} pname={this.props.productInfo.name} christics={this.state.meta.characteristics} force={this.force} submit={this.submitReview}/>
+        <ReviewList state={this.state} 
+        update={this.updateState} 
+        helpful={this.markHelpful} 
+        report={this.reportReview} 
+        pname={this.props.productInfo.name} 
+        force={this.force} 
+        submit={this.submitReview}
+        total={this.state.meta.recommended['0'] + this.state.meta.recommended['1']}/>
       </div>
     )
   }
