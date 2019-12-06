@@ -49,11 +49,20 @@ class QA extends Component {
         });
     }
 
-    //clear scroll listener when all questions loaded
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
+        //clear scroll listener when all questions loaded
         if (this.state.moreToLoad === false) {
             $('.questions-container').off('scroll');
-        } 
+        }
+        if (this.props.productId !== prevProps.productId) {
+            $('.questions-container').off('scroll');
+            this.scrollHandler();
+            this.setState({ questions: [] }, () => {
+                this.fetchQuestions(0, () => {
+                    this.setState({ activeQuestions: this.state.questions, searchTerm: '' }); //initialize active questions to all questions
+                });
+            })
+        }
     }
 
 
