@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import $ from 'jquery';
 
 const AnswerPhotos = ({ answer }) => {
 
@@ -8,6 +9,16 @@ const AnswerPhotos = ({ answer }) => {
     const togglePic = (e) => {
         setExpandedUrl(e.target.src);
         setShowExpanded(true);
+        keyPress();
+    }
+    
+    const keyPress = () => {
+       $(document).on('keydown', (e) => {
+           if (e.key === 'Escape') {
+               setShowExpanded(false);
+               $(document).off('keydown');
+           }
+       })
     }
 
     return (
