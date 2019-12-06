@@ -3,6 +3,7 @@ import Question from './Question.jsx';
 import NewQuestion from './NewQuestion.jsx';
 import axios from 'axios';
 import $ from 'jquery';
+import _ from 'lodash';
 const api = 'http://3.134.102.30/qa';
 
 class QA extends Component {
@@ -23,6 +24,7 @@ class QA extends Component {
         this.refresh = this.refresh.bind(this);
         this.scrollHandler = this.scrollHandler.bind(this);
         this.loadMore = this.loadMore.bind(this);
+        this.highlightText = this.highlightText.bind(this);
     }
 
     fetchQuestions(page, cb = () => { }) {
@@ -48,10 +50,10 @@ class QA extends Component {
     }
 
     //clear scroll listener when all questions loaded
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         if (this.state.moreToLoad === false) {
             $('.questions-container').off('scroll');
-        }
+        } 
     }
 
 
@@ -59,22 +61,44 @@ class QA extends Component {
         this.setState({ searchTerm: e.target.value }, () => {
             if (this.state.searchTerm.length > 2) {
                 this.applyFilter()
-            } else if (this.state.searchTerm.length === 0) {
+            } else if (!_.isEqual(this.state.questions, this.state.activeQuestions)) {
                 this.setState({ activeQuestions: this.state.questions });
             }
         });
     }
 
     applyFilter() {
-        const searchTerm = this.state.searchTerm.length > 2 ? this.state.searchTerm : '';
-        const filteredQs = [...this.state.questions].filter(question => {
-            if (question.question_body.includes(searchTerm)) {
-                return true;
-            } else {
-                return Object.values(question.answers).some(answer => answer.body.includes(searchTerm));
+        const searchTerm = this.state.searchTerm.length > 2 ? this.state.searchTerm.toLowerCase() : '';
+        let filteredQs = this.state.questions.filter(question => {
+            return question.question_body.toLowerCase().includes(searchTerm) ? true :
+                Object.values(question.answers).some(answer => answer.body.toLowerCase().includes(searchTerm));
+        }).map(question => {
+            let newQ = _.cloneDeep(question);
+            if (newQ.question_body.toLowerCase().includes(searchTerm)) {
+                this.highlightText(newQ);
+            } 
+            for (let answer in newQ.answers) {
+                if (newQ.answers[answer].body.toLowerCase().includes(searchTerm)) {
+                    this.highlightText(newQ.answers[answer]);
+                }
             }
+            return newQ;
         });
         this.setState({ activeQuestions: this.sortByHelpfulness(filteredQs) });
+    }
+
+    highlightText(item) {
+        const searchTerm = this.state.searchTerm.toLowerCase();
+        const body = item.body || item.question_body;
+        const start = body.toLowerCase().indexOf(searchTerm);
+        const end = searchTerm.length;
+        item.body_match = body.substr(start, end);
+        item.body_tail = body.substr(start + end);
+        if (item.body) {
+            item.body = body.substr(0, start);
+        } else {
+            item.question_body = body.substr(0, start);
+        }
     }
 
     refresh() {
@@ -96,7 +120,14 @@ class QA extends Component {
     }
 
     togglePopup(e, data) {
-        this.setState({ showPopup: !this.state.showPopup });
+        this.setState({ showPopup: !this.state.showPopup }, () => {
+            if (this.state.showPopup) {
+                $(document).on('keydown', () => {
+                    $(document).off('keydown');
+                    this.togglePopup();
+                })
+            }
+        });
         if (data) {
             axios.post(`${api}/${this.props.productId}`, data)
                 .then((res) => {

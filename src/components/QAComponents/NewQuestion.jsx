@@ -48,7 +48,7 @@ class NewQuestion extends Component {
         return(
             <div className="popup">
                 <div className="popup-body">
-                    <span onClick={this.props.togglePopup}>close</span>
+                    <span onClick={this.props.togglePopup}>close (esc)</span>
                     <h3>Ask A Question:</h3>
                     <form onSubmit={this.handleSubmit}>
                         <p>Your Question (required)</p>

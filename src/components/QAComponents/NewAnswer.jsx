@@ -50,7 +50,7 @@ export default class NewAnswer extends Component {
         return(
             <div className="popup">
                 <div className="popup-body">
-                    <span onClick={this.props.togglePopup}>close</span>
+                    <span onClick={this.props.togglePopup}>close (esc)</span>
                     <h3>Answer This Question:</h3>
                     <form onSubmit={this.handleSubmit}>
                         <p>Your Answer (required)</p>
