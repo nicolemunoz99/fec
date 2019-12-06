@@ -43,6 +43,8 @@ class App extends React.Component {
       if (this.state.searchTerm.length && this.state.searchTerm.length % 2 === 0) {
         results = this.searchProducts(this.state.searchTerm);
         this.setState({ searchResults: results, showSearchResults: true })
+      } else if (this.state.searchTerm.length === 0) {
+        this.setState({showSearchResults: false});
       }
     })
   }
