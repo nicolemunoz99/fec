@@ -454,3 +454,8 @@
 .highlight {
   background-color: #FFFF00;
 }
+
+#searchResults {
+    max-height: 80vh;
+    overflow-y: auto;
+}
