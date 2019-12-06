@@ -12,7 +12,8 @@ class Reviews extends React.Component {
       meta: {},
       page: 1,
       sort: 'helpful',
-      charsLeft: 50
+      charsLeft: 50,
+      starFilters: []
     };
 
     this.updateState = this.updateState.bind(this);
@@ -130,7 +131,9 @@ class Reviews extends React.Component {
     return (
       <div id='reviews'>
         RATINGS & REVIEWS
-        <Ratings />
+        <Ratings state={this.state}
+        meta={this.state.meta}
+        update={this.updateState}/>
         <ReviewList state={this.state} 
         update={this.updateState} 
         helpful={this.markHelpful} 

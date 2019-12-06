@@ -4,13 +4,18 @@ import ReviewCard from './ReviewCard.jsx';
 const ReviewList = (props) => {
   // console.log(props);
   let moreButton = '';
-  if (props.state.reviews.length > 2) {
+  let currentReviews = (props.state.reviews.length);
+  if (currentReviews > 2 && !props.state.starFilters.length) {
     moreButton = (<button onClick={(e) => props.update({ more: !props.state.more })}>{props.state.more ? 'LESS REVIEWS' : 'MORE REVIEWS'}</button>);
   }
-  let currentReviews = (props.state.reviews.length);
+  let now = new Date().getTime();
   window.onscroll = (e) => {
     if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight && props.state.more && props.total !== currentReviews) {
-      props.update({ page: props.state.page + 1 }, true);
+      if (new Date().getTime() - now > 250) {
+        // console.log('this only happens occasionally')
+        props.update({ page: props.state.page + 1 }, true);
+        now = new Date().getTime();
+      }
     }
   };
   window.onclick = (e) => {
@@ -80,10 +85,27 @@ const ReviewList = (props) => {
         </select>
       </div>
       {props.state.reviews.map((review, i) => {
-        if (props.state.more) {
-          return <ReviewCard review={review} helpful={props.helpful} report={props.report} key={i} />
-        } else if (i < 2) {
-          return <ReviewCard review={review} helpful={props.helpful} report={props.report} key={i} />
+        if (props.state.more || i < 2) {
+          if (props.state.starFilters.length) {
+            let filters = props.state.starFilters.map((filter, i) => {
+              if (filter === 'fivestars') {
+                return 5;
+              } else if (filter === 'fourstars') {
+                return 4;
+              } else if (filter === 'threestars') {
+                return 3;
+              } else if (filter === 'twostars') {
+                return 2;
+              } else if (filter === 'onestar') {
+                return 1;
+              }
+            })
+            if (filters.includes(review.rating)) {
+              return <ReviewCard review={review} helpful={props.helpful} report={props.report} key={i} />;
+            }
+          } else {
+            return <ReviewCard review={review} helpful={props.helpful} report={props.report} key={i} />;
+          }
         }
       })}
       {moreButton}

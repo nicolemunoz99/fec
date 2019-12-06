@@ -437,3 +437,11 @@
   color: black;
 }
 
+.progress {
+  height: 3px;
+  border-radius: 0;
+}
+
+.rbreakdown {
+  text-decoration: underline;
+}
