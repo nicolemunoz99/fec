@@ -1,6 +1,6 @@
 import React from 'react';
 import Overview from './overview/Overview.jsx'
-import axios from 'axios';
+import defaultProduct from './defaultProduct.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -9,7 +9,8 @@ class App extends React.Component {
       allProducts: null,
       searchResults: null,
       searchTerm: null,
-      showSearchResults: false
+      showSearchResults: false,
+      selectedProduct: defaultProduct
     }
     this.onChangeProducts = this.onChangeProducts.bind(this);
     this.getProducts = this.getProducts.bind(this);
@@ -19,7 +20,6 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    console.log('hiiiii')
     this.getProducts();
   }
 
@@ -63,7 +63,10 @@ class App extends React.Component {
   }
 
   clickProduct(e) {
-    console.log(e.target.id)
+    let selectedProduct = this.state.searchResults.filter(product => {
+      return product.id === Number(e.target.id)
+    })
+    this.setState({selectedProduct: selectedProduct[0]})
     this.setState({showSearchResults: false})
   }
 
@@ -93,7 +96,7 @@ class App extends React.Component {
           </div>
         </div>
       </div>
-      <Overview />
+      <Overview productInfo={this.state.selectedProduct} />
       </div>
     )
   }

@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import StyleSelector from './StyleSelector.jsx'
 import styles from './sampleData/productStyles.js'
-import productInfo from './sampleData/productInfo.js'
 import ImageGallery from './imageGallery/ImageGallery.jsx'
 import ProductBasics from './ProductBasics.jsx'
 import QA from '../QAComponents/QA.jsx'
@@ -12,8 +11,7 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      allProducts: null,
-      productInfo: productInfo,
+      productInfo: this.props.productInfo,
       styles: styles.results,
       selectedStyle: styles.results[0] // default is first style
     }
@@ -30,6 +28,10 @@ class Overview extends React.Component {
     } else {
       this.createSessionId()
     }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    //database query
   }
 
   createSessionId() {
@@ -66,21 +68,6 @@ class Overview extends React.Component {
   render() {
     return (
       <div>
-      {/* product selector   */}
-      {/* <div className="container-fluid">
-        <div className="row mt-3">
-          <div className="col-sm-4 selector-container">
-            <div id="product" onClick={this.toggleSelector} className="selectorMain selector justify-content-center">
-              <div className="ml-2">Explore Products</div>
-            </div>
-          </div>
-          <div className="col-sm-8">
-
-          </div>
-        </div>
-      </div> */}
-
-
         <div className="overview-main">
         <div className="container-fluid">
           <div className="row">
@@ -107,10 +94,10 @@ class Overview extends React.Component {
         </div>
         </div>
         <div className="QA">
-          <QA productId={this.state.productInfo.id}/>
+          <QA productId={this.props.productInfo.id}/>
         </div>
         <div className='reviews'>
-          <Reviews productInfo={this.state.productInfo} />
+          <Reviews productInfo={this.props.productInfo} />
         </div>
       </div>
     )
