@@ -21,12 +21,6 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://3.134.102.30/products/list')
-    .then( response => {
-      console.log(response)
-    })
-    // this.setState({ allProducts: })
-
     // when user has previously visited site (i.e., sessionId at state or in localstorage)
     if (this.state.sessionId) { return; }
     let sessionId = localStorage.getItem('greenfieldSessionId');
