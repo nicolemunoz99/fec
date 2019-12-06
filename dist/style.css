@@ -437,6 +437,14 @@
   color: black;
 }
 
+.progress {
+  height: 3px;
+  border-radius: 0;
+}
+
+.rbreakdown {
+  text-decoration: underline;
+}
 .highlight {
   background-color: #FFFF00;
 }
