@@ -61,28 +61,24 @@ class QA extends Component {
         this.setState({ searchTerm: e.target.value }, () => {
             if (this.state.searchTerm.length > 2) {
                 this.applyFilter()
-            } else if (this.state.searchTerm.length === 0) {
-                console.log('resetting questions..')
+            } else if (!_.isEqual(this.state.questions, this.state.activeQuestions)) {
                 this.setState({ activeQuestions: this.state.questions });
             }
         });
     }
 
     applyFilter() {
-        const searchTerm = this.state.searchTerm.length > 2 ? this.state.searchTerm : '';
+        const searchTerm = this.state.searchTerm.length > 2 ? this.state.searchTerm.toLowerCase() : '';
         let filteredQs = this.state.questions.filter(question => {
-            if (question.question_body.includes(searchTerm)) {
-                return true;
-            } else {
-                return Object.values(question.answers).some(answer => answer.body.includes(searchTerm));
-            }
+            return question.question_body.toLowerCase().includes(searchTerm) ? true :
+                Object.values(question.answers).some(answer => answer.body.toLowerCase().includes(searchTerm));
         }).map(question => {
             let newQ = _.cloneDeep(question);
-            if (newQ.question_body.includes(searchTerm)) {
+            if (newQ.question_body.toLowerCase().includes(searchTerm)) {
                 this.highlightText(newQ);
             } 
             for (let answer in newQ.answers) {
-                if (newQ.answers[answer].body.includes(searchTerm)) {
+                if (newQ.answers[answer].body.toLowerCase().includes(searchTerm)) {
                     this.highlightText(newQ.answers[answer]);
                 }
             }
@@ -92,9 +88,9 @@ class QA extends Component {
     }
 
     highlightText(item) {
-        const { searchTerm } = this.state;
+        const searchTerm = this.state.searchTerm.toLowerCase();
         const body = item.body || item.question_body;
-        const start = body.indexOf(searchTerm);
+        const start = body.toLowerCase().indexOf(searchTerm);
         const end = searchTerm.length;
         item.body_match = body.substr(start, end);
         item.body_tail = body.substr(start + end);
