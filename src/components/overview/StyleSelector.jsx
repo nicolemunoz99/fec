@@ -136,7 +136,7 @@ class StyleSelector extends React.Component {
               return (
                 <div key={i} className="col-sm-3">
                   <div className="style-tb-div d-flex justify-content-center align-items-center">
-                  {style.style_id===this.props.selectedStyle.style_id ? <i className="material-icons checkmark"> check_circle </i> : null}
+                  {style.style_id===this.props.selectedStyle.style_id ? <i className="material-icons checkmark icon-bg"> check_circle </i> : null}
                   <img id={style.style_id} onClick={this.styleClick} src={style.photos[0].thumbnail_url} className="style-tb"></img>
                   </div>
                 </div>)

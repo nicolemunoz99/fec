@@ -101,6 +101,11 @@
   border-color: grey;
 }
 
+.icon-bg {
+  background-color: white;
+  border-radius: 1em;
+}
+
 .style-selector {
   margin: 0.5rem
 }
@@ -123,8 +128,9 @@
 
 .checkmark {
   position: absolute;
-  top: -0.5rem;
-  right: 1rem
+  top: -0.3em;
+  right: 0.9em;
+
 }
 
 .checkout-container {

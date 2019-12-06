@@ -12,6 +12,7 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      allProducts: null,
       productInfo: productInfo,
       styles: styles.results,
       selectedStyle: styles.results[0] // default is first style
@@ -20,6 +21,12 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
+    axios.get('http://3.134.102.30/products/list')
+    .then( response => {
+      console.log(response)
+    })
+    // this.setState({ allProducts: })
+
     // when user has previously visited site (i.e., sessionId at state or in localstorage)
     if (this.state.sessionId) { return; }
     let sessionId = localStorage.getItem('greenfieldSessionId');
@@ -33,7 +40,6 @@ class Overview extends React.Component {
 
   createSessionId() {
     let sessionId = Math.floor(Math.random() * 9999);;
-    
     // checks if sessionId is a duplicate
     // if it is, then create a new one
     let checkForId = (id) => {
@@ -50,8 +56,6 @@ class Overview extends React.Component {
         return
       })
     }
-
-    // check if sessionId is a duplicate
     checkForId(sessionId)
   }
 
@@ -68,6 +72,21 @@ class Overview extends React.Component {
   render() {
     return (
       <div>
+      {/* product selector   */}
+      {/* <div className="container-fluid">
+        <div className="row mt-3">
+          <div className="col-sm-4 selector-container">
+            <div id="product" onClick={this.toggleSelector} className="selectorMain selector justify-content-center">
+              <div className="ml-2">Explore Products</div>
+            </div>
+          </div>
+          <div className="col-sm-8">
+
+          </div>
+        </div>
+      </div> */}
+
+
         <div className="overview-main">
         <div className="container-fluid">
           <div className="row">
