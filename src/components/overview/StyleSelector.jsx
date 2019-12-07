@@ -29,6 +29,14 @@ class StyleSelector extends React.Component {
       selectedQty: null
     })
   }
+
+  sortSkus(style) {
+    let skus = Object.keys(style.skus);
+    skus.sort((a, b) => { // only sort numbers
+      if (Number(a)) { return a-b }
+    })
+    return skus
+  }
   
   handleOutsideDropdown(e) { 
     if (this.popupNode && this.popupNode.contains(e.target)) {
@@ -113,7 +121,6 @@ class StyleSelector extends React.Component {
         document.addEventListener('click', this.closePopup)
       })
     })
-
     // reset dropdown menus
     this.setState({
       selectedSku: null,
@@ -161,7 +168,7 @@ class StyleSelector extends React.Component {
                   {/* show dropdown when user clicks on it, selects a size, or clicks off of it */}
                   { this.state.activeDropdown === 'sku' ? 
                     <div ref={node => {this.node = node}}>
-                        {Object.keys(this.props.selectedStyle.skus).map((sku, i) => {
+                        { this.sortSkus(this.props.selectedStyle).map((sku, i) => {
                         return (
                           <div key={i} onClick={this.selectSize} id={sku} className="selector d-flex justify-content-center">
                             {sku}

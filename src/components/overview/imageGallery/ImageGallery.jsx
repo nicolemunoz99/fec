@@ -28,18 +28,14 @@ class ImageGallery extends React.Component {
     let numTb = this.props.style.photos.length
     let tbIndices = numTb > this.numThumbnails ? [...Array(this.numThumbnails).keys()] : [...Array(numTb).keys()]
     if (prevProps.photos[0].url !== this.props.photos[0].url) {
-      console.log('new product registered in ImageGallery')
       this.setState({
         photos: this.props.photos,
         currentPhotoIndex: 0,
         tbIndices: tbIndices
-      }, () => {
-        console.log('state', this.state.photos)
       })
     }
     // render new style 
     if (prevProps.style.style_id !== this.props.style.style_id) {
-      console.log('new style registered in ImageGallery')
       this.setState({tbIndices: tbIndices, photos: this.props.photos })
     }
 
@@ -50,12 +46,10 @@ class ImageGallery extends React.Component {
     let newTopIndex;
     // when thumnail nav-down clicked
     if (clickedNav === 'tb-nav-down') {
-      // new top thumnail is original index of top displayed minus 1
       newTopIndex = this.state.tbIndices[0] - 1;
     }
     // when thumnail nav-up clicked
     if (clickedNav === 'tb-nav-up') {
-      // new top thumbnail is original index of top thumbnail plus 1
       newTopIndex = this.state.tbIndices[0] + 1;
     }
     // update thumbnails displayed
@@ -91,16 +85,11 @@ class ImageGallery extends React.Component {
         document.getElementById("photo-nav-left").classList.remove("hidden")
         document.getElementById("photo-nav-right").classList.remove("hidden")
       }
-      // // if total num of thumbnails is greater than this.numThumbnails
-      // if (this.photos.length > this.numThumnails) {
-        // update displayed thumbnails when currentPhotoInd > bottomOriginalInd OR currentPhotoInd < topOriginalInd
         let topOriginalInd = this.state.tbIndices[0]; // original index of thumb at TOP
         let bottomOriginalInd = this.state.tbIndices[this.state.tbIndices.length - 1]; // original index of thumb at BOTTOM
         if (this.state.currentPhotoIndex >= bottomOriginalInd || this.state.currentPhotoIndex < topOriginalInd) {
           this.calcTbDisplayed(this.state.currentPhotoIndex); // update state.tbDisplayed
         }
-      // }
-
     })
   }
 
@@ -124,7 +113,6 @@ calcTbDisplayed (index) {
         wrapIndex++
       }
     }
-    console.log('in calcTbDisplayed: ', tbIndices)
     this.setState({ tbIndices: tbIndices })
   }
 }
@@ -163,23 +151,13 @@ expandedClick(e) {
             <div className="row no-gutters">
               <div className="col-12 d-flex align-items-center justify-content-center">
                 <div>
-                  { console.log('tbIndices: ', this.state.tbIndices)}
                   {
-    
                     this.state.tbIndices.map((tbIndex, i) => {
                       let tbSelected = tbIndex === this.state.currentPhotoIndex ? "tb-div d-flex justify-content-center align-items-center tb-selected" : "tb-div d-flex justify-content-center align-items-center";
                       return (<div className={tbSelected} key={i}>
                                   <img id={tbIndex} onClick={this.tbClick} className={"default-view-tb"} src={this.state.photos[tbIndex].thumbnail_url}></img>
                               </div>)
                     })
-
-                    // this.state.photos.slice(0, this.numThumbnails).map((photo, index) => {
-                    //   let tbSelected = photo.originalIndex === this.state.currentPhotoIndex ? "tb-div d-flex justify-content-center align-items-center tb-selected" : "tb-div d-flex justify-content-center align-items-center";
-                    //   return (<div className={tbSelected} key={index}>
-                    //               <img id={photo.originalIndex} onClick={this.tbClick} className={"default-view-tb"} src={photo.thumbnail_url}></img>
-                    //           </div>)
-                    // })
-
                   }
                 </div>
               </div>
