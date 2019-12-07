@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import StyleSelector from './StyleSelector.jsx'
-import styles from './sampleData/productStyles.js'
+import defaultStyles from './defaultStyles.js'
 import ImageGallery from './imageGallery/ImageGallery.jsx'
 import ProductBasics from './ProductBasics.jsx'
 import QA from '../QAComponents/QA.jsx'
@@ -12,13 +12,17 @@ class Overview extends React.Component {
     super(props);
     this.state = {
       productInfo: this.props.productInfo,
-      styles: styles.results,
-      selectedStyle: styles.results[0] // default is first style
+      styles: defaultStyles.results,
+      selectedStyle: defaultStyles.results[0] // default is first style
     }
     this.clickStyleHandler = this.clickStyleHandler.bind(this)
   }
 
   componentDidMount() {
+    // get styles
+    this.getStyles(this.props.productInfo.id)
+
+    // create session id
     // when user has previously visited site (i.e., sessionId at state or in localstorage)
     if (this.state.sessionId) { return; }
     let sessionId = localStorage.getItem('greenfieldSessionId');
@@ -30,8 +34,23 @@ class Overview extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    //database query
+  componentDidUpdate(prevProps) {
+    // console.log('this.state.styles.product_id', this.state.styles.product_id)
+    if(prevProps.productInfo.id !== this.props.productInfo.id) {
+      // get styles
+      this.getStyles(this.props.productInfo.id)
+    }
+  }
+
+  getStyles(productId) {
+    axios.get(`http://3.134.102.30/products/${productId}/styles`)
+    .then(response => {
+      this.setState({
+        productInfo: this.props.productInfo,
+        styles: response.data.results,
+        selectedStyle: response.data.results[0] // default is first style
+       })
+    })
   }
 
   createSessionId() {
@@ -62,7 +81,7 @@ class Overview extends React.Component {
         selectedStyle = style
       }
     })
-    this.setState({ selectedStyle: selectedStyle })
+    this.setState({ selectedStyle: selectedStyle, })
   }
 
   render() {
@@ -97,7 +116,7 @@ class Overview extends React.Component {
           <QA productId={this.props.productInfo.id}/>
         </div>
         <div className='reviews'>
-          <Reviews productInfo={this.props.productInfo} />
+          <Reviews productInfo={this.props.productInfo.id} />
         </div>
       </div>
     )

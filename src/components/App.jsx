@@ -1,6 +1,7 @@
 import React from 'react';
-import Overview from './overview/Overview.jsx'
-import defaultProduct from './defaultProduct.js'
+import Overview from './overview/Overview.jsx';
+import defaultProduct from './defaultProduct.js';
+
 
 class App extends React.Component {
   constructor(props) {
