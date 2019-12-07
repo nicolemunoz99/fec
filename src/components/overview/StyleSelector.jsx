@@ -137,7 +137,7 @@ class StyleSelector extends React.Component {
             <p>${this.props.selectedStyle.original_price}</p>
             <p>{this.props.selectedStyle.name}</p>
           
-            <div className="row no-gutters mt-4 mb-1">
+            <div className="row no-gutters mt-4">
             {
             this.props.styles.map((style, i) => {
               return (
