@@ -1,6 +1,7 @@
 import React from 'react'
 import ReviewList from './ReviewList.jsx'
 import Ratings from './Ratings.jsx';
+import NewReview from './NewReview.jsx'
 const url = 'http://3.134.102.30/reviews/';
 
 class Reviews extends React.Component {
@@ -13,7 +14,8 @@ class Reviews extends React.Component {
       page: 1,
       sort: 'helpful',
       charsLeft: 50,
-      starFilters: []
+      starFilters: [],
+      currentRating: -1
     };
 
     this.updateState = this.updateState.bind(this);
@@ -132,16 +134,17 @@ class Reviews extends React.Component {
       <div id='reviews'>
         RATINGS & REVIEWS
         <Ratings state={this.state}
-        meta={this.state.meta}
         update={this.updateState}/>
         <ReviewList state={this.state} 
         update={this.updateState} 
         helpful={this.markHelpful} 
         report={this.reportReview} 
+        total={this.state.meta.recommended['0'] + this.state.meta.recommended['1']}/>
+        <NewReview state={this.state}
+        update={this.updateState}
         pname={this.props.productInfo.name} 
         force={this.force} 
-        submit={this.submitReview}
-        total={this.state.meta.recommended['0'] + this.state.meta.recommended['1']}/>
+        submit={this.submitReview} />
       </div>
     )
   }
