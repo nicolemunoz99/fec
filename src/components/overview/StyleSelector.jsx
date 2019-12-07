@@ -20,7 +20,7 @@ class StyleSelector extends React.Component {
     this.closePopup = this.closePopup.bind(this);
   }
   
-  // update selected style when clicking on thumnail
+  // update selected style when clicking on thumbnail
   styleClick(e) {
     this.props.clickStyleHandler(Number(e.target.id))
     // reset size and qty dropdowns
@@ -55,7 +55,7 @@ class StyleSelector extends React.Component {
      // if state.activeDropdown isn't set
      else {
       this.setState({
-        activeDropdown: e.target.attributes.dropdownname.value
+        activeDropdown: e.target.id
       })
       // add an event Listener to document
       document.addEventListener('click', this.handleOutsideDropdown)
@@ -73,8 +73,10 @@ class StyleSelector extends React.Component {
         if (i > 15) { break; } // show a max of 15 available
         qtyOptions.push(i);
       }
-      this.setState({ qtyOptions: qtyOptions })
-      this.setState({ selectedQty: 1 }) // default is 1
+      this.setState({ 
+        qtyOptions: qtyOptions,
+        selectedQty: 1 // default is 1
+      })
     })
   }
 
@@ -82,12 +84,9 @@ class StyleSelector extends React.Component {
     let selectedQty = e.target.id;
     this.setState({ selectedQty: selectedQty }, () => {
     });
-    // hide quantity options
-    document.getElementById('qtySelector').style.display='none';
   }
 
   closePopup(e) {
-    console.log('hi')
     this.setState({ addedToCart: null })
     document.removeEventListener('click', this.closePopup)
   }
@@ -97,7 +96,6 @@ class StyleSelector extends React.Component {
     if (!this.state.selectedSku) {
       //pop-up prompting user to select size
       this.setState({ addedToCart: 'Please select a size' }, () => {
-        console.log('this.popupNode: ', this.popupNode)
         // expand size selector
         document.getElementById('sku').click()
         document.addEventListener('click', this.closePopup)
@@ -157,7 +155,7 @@ class StyleSelector extends React.Component {
             {/* size selector */}      
             <div className="col-sm-6 selector-container checkout-item ">
               <div className="col-sm-12">
-                <div id="sku" dropdownname="sku" onClick={this.toggleSelector} className="selectorMain selector justify-content-center">
+                <div id="sku" onClick={this.toggleSelector} className="selectorMain selector justify-content-center">
                   {/* set default value based on whether or not style is in stock */}
                   {Object.keys(this.props.selectedStyle.skus).length === 0 ?
                   <span className="disabled ml-2 mr-2">Out of Stock</span> :
@@ -167,7 +165,7 @@ class StyleSelector extends React.Component {
                 <div className="selector-options">
                   {/* show dropdown when user clicks on it, selects a size, or clicks off of it */}
                   { this.state.activeDropdown === 'sku' ? 
-                    <div ref={node => {this.node = node}}>
+                    <div>
                         { this.sortSkus(this.props.selectedStyle).map((sku, i) => {
                         return (
                           <div key={i} onClick={this.selectSize} id={sku} className="selector d-flex justify-content-center">
@@ -184,22 +182,23 @@ class StyleSelector extends React.Component {
             {/* quantity selector */}
             <div className="col-sm-3 selector-container checkout-item">
               <div className="col-sm-12"><span className="pr-2">Quantity:</span> 
-                <div id="qty" dropdownname="qty" onClick={this.toggleSelector} className="selectorMain selector d-flex align-items-center justify-content-center">
+                <div id="qty" onClick={this.toggleSelector} className="selectorMain selector d-flex align-items-center justify-content-center">
                   {/* set default value based on whether or not size has been selected */}
                   <span className="ml-2 mr-2">{ this.state.selectedQty ? this.state.selectedQty : '-' }</span> 
                 </div>
                 <div id="qtySelector" className="selector-options" >
-                {/* show dropdown when user clicks on it, selects a quantity, or clicks off of it */}
                 { this.state.selectedSku && this.state.activeDropdown === 'qty' ?
-                    <div ref={node => {this.node = node}}>
+                    <div>
                       {this.state.qtyOptions.map((qty, i) => {
+                        console.log('in map', qty)
                         return (
                           <div key={i} onClick={this.selectQty} id={qty} className="selector d-flex align-items-center justify-content-center">
                             {qty}
                           </div>
                         )
                       })}
-                    </div> : null
+                    </div> 
+                  : null
                 }
                 </div>
               </div>

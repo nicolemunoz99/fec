@@ -23,7 +23,7 @@ class Overview extends React.Component {
     this.getStyles(this.props.productInfo.id)
 
     // create session id
-    // when user has previously visited site (i.e., sessionId at state or in localstorage)
+    // when user has previously visited site
     if (this.state.sessionId) { return; }
     let sessionId = localStorage.getItem('greenfieldSessionId');
     if (sessionId) {
@@ -41,7 +41,7 @@ class Overview extends React.Component {
       this.getStyles(this.props.productInfo.id)
     }
   }
-
+  // Ruben 1450 Dress - typo in 1st style thumbnail url
   getStyles(productId) {
     axios.get(`http://3.134.102.30/products/${productId}/styles`)
     .then(response => {
@@ -49,6 +49,8 @@ class Overview extends React.Component {
         productInfo: this.props.productInfo,
         styles: response.data.results,
         selectedStyle: response.data.results[0] // default is first style
+       }, () => {
+         console.log(this.state.styles[0])
        })
     })
   }
