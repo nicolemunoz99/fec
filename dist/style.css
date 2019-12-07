@@ -153,6 +153,11 @@
   padding: 0 1rem;
 }
 
+.inline-centered {
+  text-align: center;
+  vertical-align: middle
+}
+
 .vertical-center {
   display: inline-block;
   margin-top: auto;

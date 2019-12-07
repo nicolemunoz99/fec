@@ -188,15 +188,14 @@ class StyleSelector extends React.Component {
             {/* quantity selector */}
             <div className="col-sm-3 selector-container checkout-item">
               <div className="col-sm-12"><span className="pr-2">Quantity:</span> 
-                <div id="qty" onClick={this.toggleSelector} className="selectorMain selector d-flex align-items-center justify-content-center">
+                <div id="qty" onClick={this.state.selectedSku ? this.toggleSelector : null} className="selectorMain selector d-flex align-items-center justify-content-center">
                   {/* set default value based on whether or not size has been selected */}
                   <span className="ml-2 mr-2">{ this.state.selectedQty ? this.state.selectedQty : '-' }</span> 
                 </div>
                 <div id="qtySelector" className="selector-options" >
-                { this.state.selectedSku && this.state.activeDropdown === 'qty' ?
+                { this.state.activeDropdown === 'qty' ?
                     <div>
                       {this.state.qtyOptions.map((qty, i) => {
-                        console.log('in map', qty)
                         return (
                           <div key={i} onClick={this.selectQty} id={qty} className="selector d-flex align-items-center justify-content-center">
                             {qty}

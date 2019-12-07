@@ -83,7 +83,7 @@ class Overview extends React.Component {
         selectedStyle = style
       }
     })
-    this.setState({ selectedStyle: selectedStyle, })
+    this.setState({ selectedStyle: selectedStyle })
   }
 
   render() {

@@ -83,7 +83,7 @@ class App extends React.Component {
           <div className="col-sm-6">
             <div>
               <input onChange={this.onChangeProducts} placeholder="Search for products" value={this.state.searchTerm}></input>
-              <button onClick={this.submitSearch}><i className="material-icons">search</i></button>
+              <button onClick={this.submitSearch}><i className="inline-centered material-icons">search</i></button>
             </div>
             <div className="col-sm-8 selector-container">
               {
