@@ -6,6 +6,14 @@
   display: none;
 }
 
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.sale-price {
+  color: red;
+}
+
 .social-icon {
   color: black
 }
@@ -294,6 +302,9 @@
 .expanded-view-container {
   min-height: 96vh;
   margin-top: 1rem
+}
+.expanded-view-container .photo-nav {
+  margin: 2em;
 }
 
 .expanded-view-photo {

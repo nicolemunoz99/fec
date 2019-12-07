@@ -35,7 +35,7 @@ class StyleSelector extends React.Component {
     skus.sort((a, b) => { // only sort numbers
       if (Number(a)) { return a-b }
     })
-    return skus
+    return skus;
   }
   
   handleOutsideDropdown(e) { 
@@ -132,7 +132,13 @@ class StyleSelector extends React.Component {
       <div className="row">
         {/* // Style Selector */}
           <div className="col-sm-12">
-            <p>${this.props.selectedStyle.original_price}</p>
+            
+              {this.props.selectedStyle.sale_price !== '0' ? 
+                <p><span className="sale-price mr-2">${this.props.selectedStyle.sale_price}</span><span className="strikethrough">${this.props.selectedStyle.original_price}</span></p> :
+                <p><span>${this.props.selectedStyle.original_price}</span></p>
+              }
+              
+            
             <p>{this.props.selectedStyle.name}</p>
           
             <div className="row no-gutters mt-4">
@@ -205,7 +211,11 @@ class StyleSelector extends React.Component {
             </div>
           </div>      
           <div className="col-sm-12 mb-3 d-flex align-items-center justify-content-center">
-            <div><button onClick={this.addToCart}>Add to cart</button></div>
+            {/* hide cart button when style is out of stock */}
+            {Object.keys(this.props.selectedStyle.skus).length === 0 ? null :
+              <div><button onClick={this.addToCart}>Add to cart</button></div>
+            }
+            
           </div>
           { !this.state.addedToCart ? null :
             <div ref={node => {this.popupNode = node}} >

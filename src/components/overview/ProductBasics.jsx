@@ -14,8 +14,8 @@ const ProductBasics = props => {
         <div className="col-sm-12">
           <p>Category: {props.productInfo.category}</p>
           <h2>{props.productInfo.name}</h2>
-          <p>{props.productInfo.description ?
-              props.productInfo.description : null}
+          <p>
+            {props.productInfo.description ? props.productInfo.description : null}
           </p>
           <p>
           <a target="NONE" href="http://facebook.com" className="social-icon fab fa-facebook fa-1x px-2"></a>

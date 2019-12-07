@@ -20,7 +20,7 @@ class Overview extends React.Component {
 
   componentDidMount() {
     // get styles
-    this.getStyles(this.props.productInfo.id)
+    // this.getStyles(this.props.productInfo.id)
 
     // create session id
     // when user has previously visited site
