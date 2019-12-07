@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import StyleSelector from './StyleSelector.jsx'
 import styles from './sampleData/productStyles.js'
-import productInfo from './sampleData/productInfo.js'
 import ImageGallery from './imageGallery/ImageGallery.jsx'
 import ProductBasics from './ProductBasics.jsx'
 import QA from '../QAComponents/QA.jsx'
@@ -12,7 +11,7 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productInfo: productInfo,
+      productInfo: this.props.productInfo,
       styles: styles.results,
       selectedStyle: styles.results[0] // default is first style
     }
@@ -31,9 +30,12 @@ class Overview extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    //database query
+  }
+
   createSessionId() {
     let sessionId = Math.floor(Math.random() * 9999);;
-    
     // checks if sessionId is a duplicate
     // if it is, then create a new one
     let checkForId = (id) => {
@@ -50,8 +52,6 @@ class Overview extends React.Component {
         return
       })
     }
-
-    // check if sessionId is a duplicate
     checkForId(sessionId)
   }
 
@@ -94,10 +94,10 @@ class Overview extends React.Component {
         </div>
         </div>
         <div className="QA">
-          <QA productId={this.state.productInfo.id}/>
+          <QA productId={this.props.productInfo.id}/>
         </div>
         <div className='reviews'>
-          <Reviews productInfo={this.state.productInfo} />
+          <Reviews productInfo={this.props.productInfo} />
         </div>
       </div>
     )
