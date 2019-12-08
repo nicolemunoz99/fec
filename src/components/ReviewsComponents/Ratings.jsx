@@ -31,7 +31,7 @@ const Ratings = (props) => {
   let createSliders = (char, meaning) => {
     charSliders.push(
       <div className='slidercontainer' key={char}>
-        <label htmlFor={char}>{char}</label><br></br>
+        {char}<br></br>
         <input type='range' min='1' max='5' id={char} defaultValue={props.state.meta.characteristics[char].value} disabled={true} step='0.1' class='slider'></input>
         <div className='bottom-meaning'>
           <div>{meaning[0]}</div>
@@ -42,7 +42,7 @@ const Ratings = (props) => {
     );
   }
   if (props.state.meta.characteristics.hasOwnProperty('Size')) {
-    createSliders('Size', ['A size to small', 'Perfect', 'A size too big']);
+    createSliders('Size', ['Too small', 'Perfect', 'Too big']);
   }
   if (props.state.meta.characteristics.hasOwnProperty('Length')) {
     createSliders('Length', ['Runs short', 'Perfect', 'Runs long']);
@@ -54,10 +54,10 @@ const Ratings = (props) => {
     createSliders('Fit', ['Runs tight', 'Perfect', 'Runs long']);
   }
   if (props.state.meta.characteristics.hasOwnProperty('Comfort')) {
-    createSliders('Comfort', ['Uncomfortable', 'Okay', 'Perfect']);
+    createSliders('Comfort', ['Uncomfy', 'Okay', 'Perfect']);
   }
   if (props.state.meta.characteristics.hasOwnProperty('Quality')) {
-    createSliders('Quality', ['Poor', 'What I expected', 'Perfect']);
+    createSliders('Quality', ['Poor', 'Expected', 'Perfect']);
   }
   return (
     <div className='ratings'>
@@ -66,8 +66,9 @@ const Ratings = (props) => {
       <StarRatings 
           rating={averageRating}
           starRatedColor='black'
-          starDimension='15px'
-          starSpacing='3px' />
+          starDimension='1.2em'
+          starSpacing='0.1em'
+          starEmptyColor='#e9ecef' />
       </div>
       <div className='recos'>{Math.ceil((props.state.meta.recommended['1'] / totalRatings) * 100)}% of reviews recommend this product</div>
       <div className='rbreakdown'>

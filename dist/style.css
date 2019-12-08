@@ -150,13 +150,15 @@
 }
 
 .reviews {
-  width: 80%;
+  margin-top: 3em;
+  max-width: 80%;
   margin-left: 10%;
 }
 
 .text-button {
   cursor: pointer;
   text-decoration: underline;
+  display: inline-block;
 }
 
 .rmodal {
@@ -206,7 +208,10 @@
 
 .r-body {
   /* good name, I know */
+  max-width: 100%;
   word-wrap: break-word;
+  margin-top: 0.7em;
+  margin-bottom: 0.7em;
 }
 
 #photo-nav-left {
@@ -444,8 +449,9 @@
 }
 
 .progress {
-  height: 3px;
+  height: 0.4em;
   border-radius: 0;
+  margin-bottom: 0.5em;
 }
 
 .rbreakdown {
@@ -460,7 +466,7 @@
   -webkit-appearance: none;
   width: 100%;
   height: 4px; 
-  background: #d3d3d3;
+  background: #e9ecef;
   outline: none;
 }
 
@@ -468,12 +474,114 @@
   -webkit-appearance: none;
   width: 0; 
   height: 0; 
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid grey;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid grey;
 }
 
 #searchResults {
     max-height: 80vh;
     overflow-y: auto;
+}
+
+#reviews {
+  display: flex;
+  flex-direction: row;
+}
+
+.ratings {
+  min-width: 33%;
+  width: 33%;
+  padding-right: 2.5em;
+  padding-left: 0;
+  padding-top: 0.5em;
+  padding-bottom: 3em;
+}
+
+.reviewlist {
+  max-width: 67%;
+  min-width: 67%;
+  padding-top: 5px;
+  padding-bottom: 3em;
+}
+
+.rating, .ratingStars {
+  display: inline-block;
+}
+
+.rating {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.infoSort, #sortSelect {
+  font-weight: bold;
+  margin-bottom: 0.7em;
+}
+
+.r-info, .r-bottom, .ratings:not(.starRatings) {
+  font-size: 0.7em;
+}
+
+.bottom-meaning {
+  display: flex;
+  justify-content: space-between;
+}
+
+.r-info {
+  float: right;
+}
+
+.r-summary {
+  font-weight: bold;
+}
+
+.recos {
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+}
+
+.slidercontainer {
+  margin-top: 2em;
+}
+
+button {
+  background-color: white;
+  border: 0.05em solid black;
+  font-weight: bold;
+  padding: 0.7em;
+}
+
+.reviewsButton {
+  margin-left: 1em;
+}
+
+.r-stars {
+  margin-bottom: 0.7em;
+}
+
+.rmodal label, .radio {
+  margin-left: 0.5em;
+}
+
+.char {
+  display: flex;
+  justify-content: space-between;
+}
+
+.indicator {
+  text-align: center;
+}
+
+.charContainer {
+  margin-top: 1em;
+}
+
+#christics, #rsummary, .body-container, #ruser, #remail, #rimages {
+  margin-bottom: 1em;
+}
+
+#rsummary, #ruser, #remail {
+  width: 15em;
+  display: inline-block;
 }

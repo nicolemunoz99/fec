@@ -19,18 +19,30 @@ const NewReview = (props) => {
       }
     }
     christics.push(
-      <div id={char + '-char'} key={char}>
-        {char}: <div id={char + '-indicator'}>{index !== undefined ? meaning[index] : 'None selected'}</div>
-        <input type='radio' name={char} value='1' required onChange={(e) => props.force()}></input>
-        <label htmlFor='1'>1</label>
-        <input type='radio' name={char} value='2' onChange={(e) => props.force()}></input>
-        <label htmlFor='2'>2</label>
-        <input type='radio' name={char} value='3' onChange={(e) => props.force()}></input>
-        <label htmlFor='3'>3</label>
-        <input type='radio' name={char} value='4' onChange={(e) => props.force()}></input>
-        <label htmlFor='4'>4</label>
-        <input type='radio' name={char} value='5' onChange={(e) => props.force()}></input>
-        <label htmlFor='5'>5</label>
+      <div className='charContainer' key={char}>
+        {char}: <div className='indicator'>{index !== undefined ? meaning[index] : 'None selected'}</div>
+        <div className='char'>
+          <div>
+            <input type='radio' name={char} value='1' required onChange={(e) => props.force()}></input>
+            <label htmlFor='1'>1</label>
+          </div>
+          <div>
+            <input type='radio' name={char} value='2' onChange={(e) => props.force()}></input>
+            <label htmlFor='2'>2</label>
+          </div>
+          <div>
+            <input type='radio' name={char} value='3' onChange={(e) => props.force()}></input>
+            <label htmlFor='3'>3</label>
+          </div>
+          <div>
+            <input type='radio' name={char} value='4' onChange={(e) => props.force()}></input>
+            <label htmlFor='4'>4</label>
+          </div>
+          <div>
+            <input type='radio' name={char} value='5' onChange={(e) => props.force()}></input>
+            <label htmlFor='5'>5</label>
+          </div>
+        </div>
         <div className='bottom-meaning'>
           <div>{meaning[0]}</div>
           <div>{meaning[4]}</div>
@@ -104,41 +116,49 @@ const NewReview = (props) => {
           document.getElementById('rmodal').style.display = 'none';
         }}>
           Rating:
-          <input type='radio' name='rrating' value='1' required></input>
+          <input className='radio' type='radio' name='rrating' value='1' required></input>
           <label htmlFor='1'>1</label>
-          <input type='radio' name='rrating' value='2'></input>
+          <input className='radio' type='radio' name='rrating' value='2'></input>
           <label htmlFor='2'>2</label>
-          <input type='radio' name='rrating' value='3'></input>
+          <input className='radio' type='radio' name='rrating' value='3'></input>
           <label htmlFor='3'>3</label>
-          <input type='radio' name='rrating' value='4'></input>
+          <input className='radio' type='radio' name='rrating' value='4'></input>
           <label htmlFor='4'>4</label>
-          <input type='radio' name='rrating' value='5'></input>
+          <input className='radio' type='radio' name='rrating' value='5'></input>
           <label htmlFor='5'>5</label><br></br>
-          Recommended: <input type='radio' name='rrecommend' value='true' required></input>
-          <label htmlFor='yes'>Yes</label>
-          <input type='radio' name='rrecommend' value='false'></input>
-          <label htmlFor='no'>No</label><br></br>
-          Characteristics:<br></br>
-          <div id='christics'>{christics}</div>
+          <div className='rrecommend'>Recommended:
+            <input className='radio' type='radio' name='rrecommend' value='true' required></input>
+            <label htmlFor='yes'>Yes</label>
+            <input className='radio' type='radio' name='rrecommend' value='false'></input>
+            <label htmlFor='no'>No</label>
+          </div>
+          <div id='christics'>
+            Characteristics:<br></br>
+            {christics}
+          </div>
           Summary:<br></br>
-          <input type='text' id='rsummary' style={{ width: '15em' }} placeholder='Example: Best purchase ever!' maxLength='60' autoFocus required></input><br></br>
-          Review body:<br></br>
-          <textarea id='rbody' rows='4' minLength='50' maxLength='1000' required onChange={(e) => {
-            charsLeft = 50 - document.getElementById('rbody').value.length;
-            if (charsLeft < 0) {
-              charsLeft = 0;
-            }
-            props.update({ charsLeft });
-          }} placeholder="Why did or didn't you like the product?"></textarea><br></br>
-          {props.state.charsLeft ? 'Minimum required characters left: ' + props.state.charsLeft : 'Minimum reached'}<br></br>
+          <input type='text' id='rsummary' placeholder='Example: Best purchase ever!' maxLength='60' autoFocus required></input><br></br>
+          <div className='body-container'>
+            Review body:<br></br>
+            <textarea id='rbody' rows='4' minLength='50' maxLength='1000' required onChange={(e) => {
+              charsLeft = 50 - document.getElementById('rbody').value.length;
+              if (charsLeft < 0) {
+                charsLeft = 0;
+              }
+              props.update({ charsLeft });
+            }} placeholder="Why did or didn't you like the product?"></textarea><br></br>
+            {props.state.charsLeft ? 'Minimum required characters left: ' + props.state.charsLeft : 'Minimum reached'}
+          </div>
           Nickname:<br></br>
-          <input type='text' id='ruser' style={{ width: '15em' }} placeholder='Example: jackson11!' required></input><br></br>
+          <input type='text' id='ruser' placeholder='Example: jackson11!' required></input><br></br>
           Email:<br></br>
-          <input type='text' id='remail' style={{ width: '15em' }} placeholder='Example: jackson11@email.com' required pattern='[^@\s]+@[^@\s]+\.[^@\s]+'></input><br></br>
+          <input type='text' id='remail' placeholder='Example: jackson11@email.com' required pattern='[^@\s]+@[^@\s]+\.[^@\s]+'></input><br></br>
           For authentication reasons, you will not be emailed <br></br>
           Images:<br></br>
-          <em>FUTURE FEATURE</em><br></br>
-          <button>Submit Review</button>
+          <div id='rimages'>
+            <em>FUTURE FEATURE</em>
+          </div>
+          <button>SUBMIT REVIEW</button>
         </form>
       </div>
     </div>

@@ -32,8 +32,9 @@ const ReviewCard = (props) => {
         <StarRatings 
           rating={props.review.rating}
           starRatedColor='black'
-          starDimension='15px'
-          starSpacing='3px' />
+          starDimension='0.8em'
+          starSpacing='0.08em'
+          starEmptyColor='#e9ecef' />
       </div>
       <div className='r-info'>{props.review.reviewer_name}, {date}</div>
       <div className='r-summary'>{props.review.summary}</div>
@@ -46,6 +47,7 @@ const ReviewCard = (props) => {
         // props.report(props.review.review_id);
         e.target.parentNode.parentNode.innerHTML = '<em>Thank you for your report. This review is now being examined by a moderator</em>';
       }}>Report</div></div>
+      <hr></hr>
     </div>
   );
 }
