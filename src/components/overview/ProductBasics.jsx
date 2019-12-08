@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from 'axios';
+import StarRating from './StarRating.jsx'
 
 
 // get number of reviews from GET to /reviews/:product_id/meta and summing
@@ -7,23 +9,41 @@ import React from 'react';
 class ProductBasics extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      avgRating: null
+    }
+    this.getMetaRating = this.getMetaRating.bind(this);
+  }
+
+  componentDidMount() {
+    // console.log('productBasics mounted')
+    this.getMetaRating(this.props.productInfo.id)
+  }
+
+  componentDidUpdate(prevProps) {
+    // console.log('productBasics updated')
+    if (prevProps.productInfo.id !== this.props.productInfo.id) {
+      this.getMetaRating(this.props.productInfo.id)
+    }
+  }
+
+  getMetaRating(productId) {
+    axios.get(`http://3.134.102.30/reviews/${productId}/meta`)
+    .then(response => {
+      let avgRating = this.calcAvgRating(response.data.ratings)
+      this.setState({ avgRating })
+    })
   }
 
   calcAvgRating(ratings) {
+    if (Object.keys(ratings).length === 0) { return }
     let sum = 0;
     let count = 0;
     for (const key in ratings) {
       count += ratings[key];
-      sum += key * ratings[key];
+      sum += Number(key) * Number(ratings[key]);
     }
     return sum / count;
-  }
-
-  renderStars(avgRating) {
-    let numFilled = Math.floor(avgRating);
-    let numQuarters = Math.floor((avgRating - numFilled) * 4);
-
-
   }
 
   render() {
@@ -31,7 +51,7 @@ class ProductBasics extends React.Component {
         <div className="row">
           
           <div className="col-sm-12 overview-component mt-2 mb-2">
-            **** Reviews
+            <StarRating rating={this.state.avgRating} />
           </div>
           <div className="col-sm-12">
             <p>Category: {this.props.productInfo.category}</p>

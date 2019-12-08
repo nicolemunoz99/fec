@@ -19,9 +19,6 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    // get styles
-    // this.getStyles(this.props.productInfo.id)
-
     // create session id
     // when user has previously visited site
     if (this.state.sessionId) { return; }
@@ -35,7 +32,6 @@ class Overview extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // console.log('this.state.styles.product_id', this.state.styles.product_id)
     if(prevProps.productInfo.id !== this.props.productInfo.id) {
       // get styles
       this.getStyles(this.props.productInfo.id)
@@ -50,7 +46,7 @@ class Overview extends React.Component {
         styles: response.data.results,
         selectedStyle: response.data.results[0] // default is first style
        }, () => {
-         console.log(this.state.styles[0])
+        //  console.log(this.state.styles[0])
        })
     })
   }
