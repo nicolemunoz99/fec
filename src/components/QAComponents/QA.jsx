@@ -172,7 +172,7 @@ class QA extends Component {
     render() {
         return (
             <div>
-                <h3>Questions and Answers</h3>
+                <p className>QUESTIONS & ANSWERS</p>
                 <form className="searchQuestions">
                     <input type="text"
                         className="q-search"

@@ -346,26 +346,25 @@
 
 .questions-container {
   overflow-y: auto;
-  height: 70vh;
+  max-height: 70vh;
   margin-bottom: 1em; 
 }
 
-.q-main {
-  padding-bottom: 0.75em;
+.qa-bold {
+  font-weight: bold;
 }
 
-.q-main h4 {
-  margin-bottom: 0em;
+.q-main .qa-bold {
   display: inline-block;
 }
 
 .q-main .q-subtext {
   float: right;
-  margin-top: 0.5em;
+  /* margin-top: 0.5em; */
 }
 
 .q-search {
-  width: 50%;
+  width: 100%;
 }
 
 .q-subtext {
@@ -384,6 +383,10 @@
   font-weight: bold;
 }
 
+.answer .q-subtext {
+  margin-top: 0.25em;
+}
+
 .divider-bar {
   margin-left: 0.75em;
   margin-right: 0.75em;  
@@ -396,6 +399,11 @@
 .question .clickable {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.load-more {
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .popup {

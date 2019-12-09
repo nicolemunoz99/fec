@@ -30,7 +30,7 @@ const Answer = ({ answer }) => {
 
     return (
         <div className="answer">
-            <p><span className="answer-head">A: </span>
+            <p><span className="qa-bold">A: </span>
                 {answer.body}
                 <span className="highlight">{answer.body_match}</span>
                 {answer.body_tail}
