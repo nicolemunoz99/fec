@@ -173,14 +173,16 @@ class QA extends Component {
         return (
             <div>
                 <p className>QUESTIONS & ANSWERS</p>
-                <form className="searchQuestions">
-                    <input type="text"
-                        className="q-search"
-                        placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS."
-                        value={this.state.searchTerm}
-                        onChange={this.handleChange}
-                    />
-                </form>
+                {!!this.state.questions.length && 
+                    <form className="searchQuestions">
+                        <input type="text"
+                            className="q-search"
+                            placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS."
+                            value={this.state.searchTerm}
+                            onChange={this.handleChange}
+                        />
+                    </form>
+                }
                 {this.state.showUserQuestion &&
                     <div>
                         <h4>Thanks for adding a question!</h4>
@@ -191,6 +193,9 @@ class QA extends Component {
                         question={question}
                         key={question.question_id}
                         updateParent={this.refresh.bind(this)} />)}
+                    {!this.state.questions.length && 
+                        <p>Be the first to ask a question about this product!</p>
+                    }
                 </div>
                 <button onClick={this.togglePopup}>Ask A Question +</button>
                 {this.state.showPopup && <NewQuestion togglePopup={this.togglePopup} />}
