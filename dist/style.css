@@ -644,8 +644,9 @@ button {
 }
 
 ::selection {
-  background: #ffb7b7; /* WebKit/Blink Browsers */
-}
+  background: #ffb7b7; 
+} 
+
 
 * {
   color: #444649
