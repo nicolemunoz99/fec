@@ -197,7 +197,7 @@ class QA extends Component {
                         <p className="text-reg">Be the first to ask a question about this product!</p>
                     }
                 </div>
-                <button onClick={this.togglePopup}>Ask A Question +</button>
+                <button onClick={this.togglePopup}>ASK A QUESTION +</button>
                 {this.state.showPopup && <NewQuestion togglePopup={this.togglePopup} />}
             </div>
         )

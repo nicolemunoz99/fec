@@ -354,8 +354,7 @@
 }
 
 .question {
-  padding-top: 1em;
-  padding-bottom: 1em;
+  margin-top: 1rem;
 }
 
 .questions-container {
@@ -382,7 +381,7 @@
 }
 
 .answer {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .answer-head {
@@ -646,7 +645,6 @@ button {
 ::selection {
   background: #ffb7b7; 
 } 
-
 
 * {
   color: #444649
