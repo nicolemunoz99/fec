@@ -31,11 +31,13 @@ class Reviews extends React.Component {
         return response.json();
       })
       .then((result) => {
-        this.setState({
-          reviews: this.state.reviews.concat(result.results)
-        }, () => {
-          // console.log('Reviews retrieved and state updated successfully!');
-        })
+        if (JSON.stringify(this.state.reviews) !== JSON.stringify(result.results)) {
+          this.setState({
+            reviews: this.state.reviews.concat(result.results)
+          }, () => {
+            // console.log('Reviews retrieved and state updated successfully!');
+          })
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -119,8 +121,18 @@ class Reviews extends React.Component {
     this.getMeta();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     this.render();
+    if (this.props !== prevProps) {
+      console.log('new reviews props I guess')
+      this.setState({
+        reviews: []
+      }, () => {
+        console.log('should have reset state', this.state)
+        this.getReviews();
+        this.getMeta();
+      })
+    }
   }
 
   render() {
