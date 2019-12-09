@@ -144,7 +144,7 @@ expandedClick(e) {
             <div className="row">
               <div className="col-12 d-flex align-items-center justify-content-center">
                 {this.state.photos.length > this.numThumbnails ? <div id="tb-nav-up" onClick={this.tbNavHandler} className={"photo-nav"}>
-                  <i class="material-icons md-34">arrow_drop_up</i>
+                  <i className="material-icons md-34">arrow_drop_up</i>
                 </div> : null}
               </div>
             </div>
@@ -166,7 +166,7 @@ expandedClick(e) {
               <div className="col-12 d-flex align-items-center justify-content-center">
                 {/* only show thumbnail navigation if there are more than this.numThumnails */}
                 {this.state.photos.length > this.numThumbnails ? <div id="tb-nav-down" onClick={this.tbNavHandler} className={"photo-nav"}>
-                  <i class="material-icons md-34">arrow_drop_down</i>
+                  <i className="material-icons md-34">arrow_drop_down</i>
                 </div> : null}
               </div>
             </div>
@@ -187,10 +187,10 @@ expandedClick(e) {
             })
           }
           <div id="photo-nav-left" onClick={this.photoNavHandler} className="photo-nav">
-            <i class="material-icons">arrow_backward</i>
+            <i className="material-icons">arrow_backward</i>
           </div>
           <div id="photo-nav-right" onClick={this.photoNavHandler} className="photo-nav">
-            <i class="material-icons">arrow_forward</i>
+            <i className="material-icons">arrow_forward</i>
           </div>
         </div>
 
@@ -199,7 +199,7 @@ expandedClick(e) {
       {/* expanded view overlay */}
       <div id="gallery-overlay">
         <div className="close-expanded-view nav-bg" onClick={this.expandedClick}>
-        <i class="material-icons md-34">close</i>
+        <i className="material-icons md-34">close</i>
         </div>
         <ExpandedView tbClick={this.tbClick} 
                       photos={this.state.photos} 
