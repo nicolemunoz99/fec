@@ -2,11 +2,10 @@ import React from 'react';
 import StarRatings from 'react-star-ratings';
 
 const Ratings = (props) => {
-  console.log(props);
+  // console.log(props);
   let averageRating = 1;
   let totalRatings = 0;
   let highest = 0;
-  console.log('props.state', props.state)
   for (let key in props.state.meta.ratings) {
     
     averageRating += key * props.state.meta.ratings[key]
@@ -65,7 +64,6 @@ const Ratings = (props) => {
     <div className='ratings'>
       <div className='rating'>{averageRating.toFixed(1)}</div>
       <div className='ratingStars'>
-        {console.log({averageRating})}
       <StarRatings 
           rating={averageRating}
           starRatedColor='black'
