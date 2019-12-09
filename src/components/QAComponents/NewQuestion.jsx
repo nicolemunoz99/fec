@@ -49,9 +49,9 @@ class NewQuestion extends Component {
             <div className="popup">
                 <div className="popup-body">
                     <span onClick={this.props.togglePopup}>close (esc)</span>
-                    <h3>Ask A Question:</h3>
+                    <p className="text-main bold">Ask A Question:</p>
                     <form onSubmit={this.handleSubmit}>
-                        <p>Your Question (required)</p>
+                        <p className="text-reg">Your Question (required)</p>
                         <textarea 
                             name="question" 
                             value={this.state.question}
@@ -59,7 +59,7 @@ class NewQuestion extends Component {
                             placeholder="What's on your mind?"
                             onChange={this.handleChange}>
                         </textarea>
-                        <p>Your Nickname (required)</p>
+                        <p className="text-reg">Your Nickname (required)</p>
                         <input 
                             type="text" 
                             value={this.state.nickname}
@@ -68,7 +68,7 @@ class NewQuestion extends Component {
                             placeholder="Example: Bob"
                             onChange={this.handleChange}
                         />
-                        <p>Your Email (required)</p>
+                        <p className="text-reg">Your Email (required)</p>
                         <input 
                             type="text"
                             value={this.state.email}

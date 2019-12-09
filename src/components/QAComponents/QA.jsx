@@ -172,18 +172,20 @@ class QA extends Component {
     render() {
         return (
             <div>
-                <h3>Questions and Answers</h3>
-                <form className="searchQuestions">
-                    <input type="text"
-                        className="q-search"
-                        placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS."
-                        value={this.state.searchTerm}
-                        onChange={this.handleChange}
-                    />
-                </form>
+                <p className="text-main">QUESTIONS & ANSWERS</p>
+                {!!this.state.questions.length && 
+                    <form className="searchQuestions">
+                        <input type="text"
+                            className="q-search"
+                            placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS."
+                            value={this.state.searchTerm}
+                            onChange={this.handleChange}
+                        />
+                    </form>
+                }
                 {this.state.showUserQuestion &&
-                    <div>
-                        <h4>Thanks for adding a question!</h4>
+                    <div className="text-reg">
+                        <p>Thanks for adding a question!</p>
                         <p>You asked: "{this.state.userQuestion}"</p>
                     </div>}
                 <div className="questions-container">
@@ -191,6 +193,9 @@ class QA extends Component {
                         question={question}
                         key={question.question_id}
                         updateParent={this.refresh.bind(this)} />)}
+                    {!this.state.questions.length && 
+                        <p className="text-reg">Be the first to ask a question about this product!</p>
+                    }
                 </div>
                 <button onClick={this.togglePopup}>Ask A Question +</button>
                 {this.state.showPopup && <NewQuestion togglePopup={this.togglePopup} />}

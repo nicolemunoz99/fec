@@ -360,42 +360,37 @@
 
 .questions-container {
   overflow-y: auto;
-  height: 70vh;
+  max-height: 70vh;
   margin-bottom: 1em; 
 }
 
-.q-main {
-  padding-bottom: 0.75em;
-}
-
-.q-main h4 {
-  margin-bottom: 0em;
+.q-main .text-main {
   display: inline-block;
+  margin-bottom: 0.25rem;
 }
 
-.q-main .q-subtext {
+.q-main .text-sub {
   float: right;
-  margin-top: 0.5em;
 }
 
 .q-search {
-  width: 50%;
-}
-
-.q-subtext {
-  font-size: 0.75em;
+  width: 100%;
 }
 
 .answer p {
-  margin-bottom: 0em;
+  display: inline;
 }
 
 .answer {
-  margin-bottom: 0.5em;
+  margin-bottom: 1rem;
 }
 
 .answer-head {
   font-weight: bold;
+}
+
+.answer .text-sub {
+  margin-top: 0.25rem;
 }
 
 .divider-bar {
@@ -410,6 +405,11 @@
 .question .clickable {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.load-more {
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .popup {
@@ -429,7 +429,7 @@
   width: 40%;
   margin-top: 12.5%;
   margin-left: 30%;
-  border-style: solid;
+  /* border-style: solid; */
   background-color: white;
   padding: 0.5em;
 }
@@ -623,4 +623,31 @@ button {
 #rsummary, #ruser, #remail {
   width: 15em;
   display: inline-block;
+}
+
+.text-main {
+  font-size: 1rem;
+}
+
+.text-main.bold {
+  font-weight: 600;
+}
+
+.text-sub {
+  font-size: 0.65rem;
+  
+}
+
+.text-reg {
+  font-size: 0.8rem;
+  
+}
+
+::selection {
+  background: #ffb7b7; 
+} 
+
+
+* {
+  color: #444649
 }
