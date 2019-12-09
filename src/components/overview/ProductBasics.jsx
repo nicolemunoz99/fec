@@ -10,7 +10,8 @@ class ProductBasics extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      avgRating: null
+      avgRating: undefined,
+      numReviews: 0
     }
     this.getMetaRating = this.getMetaRating.bind(this);
   }
@@ -43,6 +44,7 @@ class ProductBasics extends React.Component {
       count += ratings[key];
       sum += Number(key) * Number(ratings[key]);
     }
+    this.setState({ numReviews: count })
     return sum / count;
   }
 
@@ -50,9 +52,17 @@ class ProductBasics extends React.Component {
     return (
         <div className="row">
           
-          <div className="col-sm-12 overview-component mt-2 mb-2">
-            <StarRating rating={this.state.avgRating} />
+          <div className="col-sm-12 mt-2 mb-2 mt-4">
+            <span>
+              <StarRating rating={this.state.avgRating} />
+              {
+              this.state.avgRating === undefined ? null :
+                <span className="overview-reviews pl-1"><a href="#reviews">{`Read all ${this.state.numReviews} reviews`}</a></span>
+              }
+                </span>
+          
           </div>
+ 
           <div className="col-sm-12">
             <div id="fb-root"></div> 
             <p>Category: {this.props.productInfo.category}</p>

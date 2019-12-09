@@ -60,6 +60,10 @@
   color: rgb(182, 179, 179);
 }
 
+.overview-reviews {
+  font-size: 0.8em
+}
+
 #gallery-overlay {
   position: fixed;
   display: none;
