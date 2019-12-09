@@ -354,7 +354,7 @@
 }
 
 .question {
-  margin-top: 1rem;
+  margin-top: 1.2rem;
 }
 
 .questions-container {
@@ -381,11 +381,17 @@
 }
 
 .answer {
+  display: flex;
   margin-bottom: 0.5rem;
 }
 
-.answer-head {
-  font-weight: bold;
+.answer-body {
+  display: inline-block;
+  width: 100%;
+}
+
+.answer-title {
+  margin-top: 0.1rem;
 }
 
 .answer .text-sub {
@@ -409,6 +415,7 @@
 .load-more {
   cursor: pointer;
   font-weight: 600;
+  margin-left: 1.5rem;
 }
 
 .popup {
