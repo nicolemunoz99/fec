@@ -6,7 +6,9 @@ const Ratings = (props) => {
   let averageRating = 1;
   let totalRatings = 0;
   let highest = 0;
+  console.log('props.state', props.state)
   for (let key in props.state.meta.ratings) {
+    
     averageRating += key * props.state.meta.ratings[key]
     totalRatings += props.state.meta.ratings[key];
     if (props.state.meta.ratings[key] > highest) {
@@ -63,11 +65,12 @@ const Ratings = (props) => {
     <div className='ratings'>
       <div className='rating'>{averageRating.toFixed(1)}</div>
       <div className='ratingStars'>
-      {/* <StarRatings 
+        {console.log({averageRating})}
+      <StarRatings 
           rating={averageRating}
           starRatedColor='black'
           starDimension='15px'
-          starSpacing='3px' /> */}
+          starSpacing='3px' />
       </div>
       <div className='recos'>{Math.ceil((props.state.meta.recommended['1'] / totalRatings) * 100)}% of reviews recommend this product</div>
       <div className='rbreakdown'>
