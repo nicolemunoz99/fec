@@ -472,11 +472,13 @@
 .progress {
   height: 0.4em;
   border-radius: 0;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
 }
 
 .rbreakdown {
   text-decoration: underline;
+  display: flex;
+  flex-direction: row;
 }
 
 .highlight {
@@ -608,5 +610,16 @@ button {
 
 #rsummary, #ruser, #remail {
   width: 15em;
-  display: inline-block;
+  display: block;
+}
+
+.rlabels {
+  display: flex;
+  flex-direction: column;
+  width: 24%;
+}
+
+.rprogress {
+  margin-top: 0.7em;
+  width: 76%
 }

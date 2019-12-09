@@ -136,7 +136,7 @@ const NewReview = (props) => {
             Characteristics:<br></br>
             {christics}
           </div>
-          Summary:<br></br>
+          Summary:
           <input type='text' id='rsummary' placeholder='Example: Best purchase ever!' maxLength='60' autoFocus required></input><br></br>
           <div className='body-container'>
             Review body:<br></br>

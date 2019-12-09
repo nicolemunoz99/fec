@@ -150,7 +150,7 @@ class Reviews extends React.Component {
         update={this.updateState} 
         helpful={this.markHelpful} 
         report={this.reportReview} 
-        total={this.state.meta.recommended['0'] + this.state.meta.recommended['1']}/>
+        total={this.state.meta.recommended['0'] && this.state.meta.recommended['1'] ? this.state.meta.recommended['0'] + this.state.meta.recommended['1'] : (this.state.meta.recommended['0'] ? this.state.meta.recommended['0'] : this.state.meta.recommended['1'])}/>
         <NewReview state={this.state}
         update={this.updateState}
         pname={this.props.productInfo.name} 
