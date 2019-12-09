@@ -131,9 +131,11 @@ class QA extends Component {
     togglePopup(e, data) {
         this.setState({ showPopup: !this.state.showPopup }, () => {
             if (this.state.showPopup) {
-                $(document).on('keydown', () => {
-                    $(document).off('keydown');
-                    this.togglePopup();
+                $(document).on('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        $(document).off('keydown');
+                        this.togglePopup();
+                    }
                 })
             }
         });

@@ -54,7 +54,8 @@ class Question extends Component {
         const { question_id } = this.props.question;
         axios.put(`${api}/question/${question_id}/helpful`)
             .then(() => {
-                const updatedQuestion = {...this.props.question};
+                console.log('setting state')
+                let updatedQuestion = {...this.props.question};
                 updatedQuestion.question_helpfulness = this.props.question.question_helpfulness + 1;
                 this.setState({question: updatedQuestion});
             });
@@ -74,9 +75,11 @@ class Question extends Component {
     togglePopup(e, data) {
         this.setState({ showPopup: !this.state.showPopup }, () => {
             if (this.state.showPopup) {
-                $(document).on('keydown', () => {
-                    $(document).off('keydown');
-                    this.togglePopup();
+                $(document).on('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        $(document).off('keydown');
+                        this.togglePopup();
+                    }
                 })
             }
         });
