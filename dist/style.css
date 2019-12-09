@@ -13,9 +13,17 @@
 .sale-price {
   color: red;
 }
+.social-icons-container {
+}
 
-.social-icon {
-  color: black
+.social-icon-twitter {
+  top: 0.4rem;
+  left: -0.3rem;
+}
+
+.social-icons-container * {
+  margin-right: 0.3em;
+  position: relative
 }
 
 /* disable click events for all children */
@@ -58,6 +66,12 @@
 
 .disabled {
   color: rgb(182, 179, 179);
+}
+
+.overview-reviews {
+  font-size: 0.8em;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 #gallery-overlay {
