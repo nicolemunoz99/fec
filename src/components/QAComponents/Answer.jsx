@@ -31,7 +31,7 @@ const Answer = ({ answer }) => {
     return (
         <div className="answer">
             <span className="text-main bold">A: </span>
-            <p className="text-body">
+            <p className="text-reg">
                 {answer.body}
                 <span className="highlight">{answer.body_match}</span>
                 {answer.body_tail}

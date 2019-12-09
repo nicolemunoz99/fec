@@ -364,23 +364,10 @@
   margin-bottom: 1em; 
 }
 
-/* .qa-bold {
-  font-weight: bold;
-}
-
-.q-main .qa-bold {
-  display: inline-block;
-} */
-
 .q-main .text-main {
   display: inline-block;
   margin-bottom: 0.25rem;
 }
-
-/* .q-main .q-subtext {
-  float: right;
-  margin-top: 0.5em;
-} */
 
 .q-main .text-sub {
   float: right;
@@ -388,10 +375,6 @@
 
 .q-search {
   width: 100%;
-}
-
-.q-subtext {
-  font-size: 0.75em;
 }
 
 .answer p {
@@ -404,10 +387,6 @@
 
 .answer-head {
   font-weight: bold;
-}
-
-.answer .q-subtext {
-  margin-top: 0.25em;
 }
 
 .answer .text-sub {
@@ -430,7 +409,7 @@
 
 .load-more {
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .popup {
@@ -647,7 +626,7 @@ button {
 }
 
 .text-main {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .text-main.bold {
@@ -655,13 +634,19 @@ button {
 }
 
 .text-sub {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
+  
 }
 
-.text-body {
-  font-size: 1rem;
+.text-reg {
+  font-size: 0.8rem;
+  
 }
 
 ::selection {
   background: #ffb7b7; /* WebKit/Blink Browsers */
+}
+
+* {
+  color: #444649
 }

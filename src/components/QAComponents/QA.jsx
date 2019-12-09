@@ -184,7 +184,7 @@ class QA extends Component {
                     </form>
                 }
                 {this.state.showUserQuestion &&
-                    <div className="text-body">
+                    <div className="text-reg">
                         <p>Thanks for adding a question!</p>
                         <p>You asked: "{this.state.userQuestion}"</p>
                     </div>}
@@ -194,7 +194,7 @@ class QA extends Component {
                         key={question.question_id}
                         updateParent={this.refresh.bind(this)} />)}
                     {!this.state.questions.length && 
-                        <p className="text-body">Be the first to ask a question about this product!</p>
+                        <p className="text-reg">Be the first to ask a question about this product!</p>
                     }
                 </div>
                 <button onClick={this.togglePopup}>Ask A Question +</button>

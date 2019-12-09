@@ -128,9 +128,9 @@ class Question extends Component {
                     <div>
                         {this.renderAnswers()}
                         {this.state.answers.length <= 2 ? null :
-                            <div className="text-sub load-more" onClick={this.showMoreOrLess}>
-                                {!this.state.showAllAnswers && 'Load More Answers'}
-                                {this.state.showAllAnswers && 'Show Less'}
+                            <div className="text-reg load-more" onClick={this.showMoreOrLess}>
+                                {!this.state.showAllAnswers && 'LOAD MORE ANSWERS'}
+                                {this.state.showAllAnswers && 'SHOW LESS'}
                             </div>
                         }
                     </div>

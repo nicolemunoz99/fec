@@ -53,7 +53,7 @@ export default class NewAnswer extends Component {
                     <span onClick={this.props.togglePopup}>close (esc)</span>
                     <p className="text-main bold">Answer This Question</p>
                     <form onSubmit={this.handleSubmit}>
-                        <p className="text-body">Your Answer (required)</p>
+                        <p className="text-reg">Your Answer (required)</p>
                         <textarea 
                             name="answer" 
                             value={this.state.answer}
@@ -61,7 +61,7 @@ export default class NewAnswer extends Component {
                             placeholder="Enter your Answer Here"
                             onChange={this.handleChange}>
                         </textarea>
-                        <p className="text-body">Your Nickname (required)</p>
+                        <p className="text-reg">Your Nickname (required)</p>
                         <input 
                             type="text" 
                             value={this.state.nickname}
@@ -70,7 +70,7 @@ export default class NewAnswer extends Component {
                             placeholder="Example: Bob"
                             onChange={this.handleChange}
                         />
-                        <p className="text-body">Your Email (required)</p>
+                        <p className="text-reg">Your Email (required)</p>
                         <input 
                             type="text"
                             value={this.state.email}
@@ -79,7 +79,7 @@ export default class NewAnswer extends Component {
                             placeholder="Example: Bob@website.com"
                             onChange={this.handleChange}
                         />
-                        <p className="text-body">Photos (Optional)</p>
+                        <p className="text-reg">Photos (Optional)</p>
                         <textarea 
                             value={this.state.photos}
                             name="photos"
