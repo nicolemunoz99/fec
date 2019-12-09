@@ -47,7 +47,7 @@ class StarRating extends React.Component {
   <div className="avg-star-rating"> 
     {!this.state.stars ? null :
       this.state.stars.map((starType, i) => {
-        return <img key={i} src={this.starFilename(starType)}></img>
+        return <img className="star-rating" key={i} src={this.starFilename(starType)}></img>
       })
     }
   </div>

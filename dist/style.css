@@ -519,6 +519,10 @@
   padding-bottom: 3em;
 }
 
+.star-rating {
+  height: 20px
+}
+
 .reviewlist {
   max-width: 67%;
   min-width: 67%;
