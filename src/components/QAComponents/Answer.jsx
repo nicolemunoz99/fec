@@ -30,13 +30,14 @@ const Answer = ({ answer }) => {
 
     return (
         <div className="answer">
-            <p><span className="qa-bold">A: </span>
+            <span className="text-main bold">A: </span>
+            <p className="text-body">
                 {answer.body}
                 <span className="highlight">{answer.body_match}</span>
                 {answer.body_tail}
             </p>
             {answer.photos.length > 0 && <AnswerPhotos answer={answer}/>}
-            <div className="q-subtext">
+            <div className="text-sub">
                 <span>by {answer.answerer_name} on {moment(answer.date).utc().format('MMMM Do YYYY')}</span>
                 <span className="divider-bar">|</span>
                 <span>Helpful? <span className="clickable" onClick={isHelpful}>Yes</span> ({helpfulness})</span>

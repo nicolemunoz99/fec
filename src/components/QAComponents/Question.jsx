@@ -113,11 +113,11 @@ class Question extends Component {
         return (
             <div className="question">
                 <div className="q-main">
-                    <p className="qa-bold">Q: {question.question_body}
+                    <p className="text-main bold">Q: {question.question_body}
                     <span class="highlight">{question.body_match}</span>
                     {question.body_tail}
                 </p>
-                    <div className="q-subtext">
+                    <div className="text-sub">
                         <span>Helpful? <span className="clickable" onClick={this.isHelpful}>Yes</span> ({this.state.helpfulness})</span>
                         <span className="divider-bar">|</span>
                         <span className="clickable" onClick={this.togglePopup.bind(this)}>Add Answer</span>
@@ -128,7 +128,7 @@ class Question extends Component {
                     <div>
                         {this.renderAnswers()}
                         {this.state.answers.length <= 2 ? null :
-                            <div className="q-subtext load-more" onClick={this.showMoreOrLess}>
+                            <div className="text-sub load-more" onClick={this.showMoreOrLess}>
                                 {!this.state.showAllAnswers && 'Load More Answers'}
                                 {this.state.showAllAnswers && 'Show Less'}
                             </div>

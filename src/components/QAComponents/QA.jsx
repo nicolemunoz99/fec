@@ -172,7 +172,7 @@ class QA extends Component {
     render() {
         return (
             <div>
-                <p className>QUESTIONS & ANSWERS</p>
+                <p className="text-main">QUESTIONS & ANSWERS</p>
                 {!!this.state.questions.length && 
                     <form className="searchQuestions">
                         <input type="text"
@@ -184,8 +184,8 @@ class QA extends Component {
                     </form>
                 }
                 {this.state.showUserQuestion &&
-                    <div>
-                        <h4>Thanks for adding a question!</h4>
+                    <div className="text-body">
+                        <p>Thanks for adding a question!</p>
                         <p>You asked: "{this.state.userQuestion}"</p>
                     </div>}
                 <div className="questions-container">
@@ -194,7 +194,7 @@ class QA extends Component {
                         key={question.question_id}
                         updateParent={this.refresh.bind(this)} />)}
                     {!this.state.questions.length && 
-                        <p>Be the first to ask a question about this product!</p>
+                        <p className="text-body">Be the first to ask a question about this product!</p>
                     }
                 </div>
                 <button onClick={this.togglePopup}>Ask A Question +</button>

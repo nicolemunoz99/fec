@@ -350,17 +350,26 @@
   margin-bottom: 1em; 
 }
 
-.qa-bold {
+/* .qa-bold {
   font-weight: bold;
 }
 
 .q-main .qa-bold {
   display: inline-block;
+} */
+
+.q-main .text-main {
+  display: inline-block;
+  margin-bottom: 0.25rem;
 }
 
-.q-main .q-subtext {
+/* .q-main .q-subtext {
   float: right;
-  /* margin-top: 0.5em; */
+  margin-top: 0.5em;
+} */
+
+.q-main .text-sub {
+  float: right;
 }
 
 .q-search {
@@ -372,11 +381,11 @@
 }
 
 .answer p {
-  margin-bottom: 0em;
+  display: inline;
 }
 
 .answer {
-  margin-bottom: 0.5em;
+  margin-bottom: 1rem;
 }
 
 .answer-head {
@@ -385,6 +394,10 @@
 
 .answer .q-subtext {
   margin-top: 0.25em;
+}
+
+.answer .text-sub {
+  margin-top: 0.25rem;
 }
 
 .divider-bar {
@@ -423,7 +436,7 @@
   width: 40%;
   margin-top: 12.5%;
   margin-left: 30%;
-  border-style: solid;
+  /* border-style: solid; */
   background-color: white;
   padding: 0.5em;
 }
@@ -617,4 +630,24 @@ button {
 #rsummary, #ruser, #remail {
   width: 15em;
   display: inline-block;
+}
+
+.text-main {
+  font-size: 1.2rem;
+}
+
+.text-main.bold {
+  font-weight: 600;
+}
+
+.text-sub {
+  font-size: 0.75rem;
+}
+
+.text-body {
+  font-size: 1rem;
+}
+
+::selection {
+  background: #ffb7b7; /* WebKit/Blink Browsers */
 }
