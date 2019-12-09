@@ -6,6 +6,14 @@
   display: none;
 }
 
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.sale-price {
+  color: red;
+}
+
 .social-icon {
   color: black
 }
@@ -118,11 +126,13 @@
   border-style: solid;
   border-color: black;
   border-width: 2px;
+  margin-bottom: 0.5em;
 }
 
 .style-tb {
-  height: 8vw;
-  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
   cursor: pointer;
 }
 
@@ -141,6 +151,11 @@
   display: table-cell;
   margin-top: auto;
   padding: 0 1rem;
+}
+
+.inline-centered {
+  text-align: center;
+  vertical-align: middle
 }
 
 .vertical-center {
@@ -247,7 +262,9 @@
 }
 
 .default-view-tb  {
-  max-width: 12vw;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
   cursor: pointer;
 }
 
@@ -258,15 +275,16 @@
 }
 
 .tb-div {
-  max-width: 8vw;
-  max-height: 8vw;
+  width: 8vw;
+  height: 8vw;
   overflow: hidden;
   margin-bottom: 0.4rem;
 }
 
 .expanded-view-tb {
+  height: 100%;
+  width: 100%;
   object-fit: cover;
-  height: 8vw;
   cursor: pointer;
 }
 
@@ -294,6 +312,9 @@
 .expanded-view-container {
   min-height: 96vh;
   margin-top: 1rem
+}
+.expanded-view-container .photo-nav {
+  margin: 2em;
 }
 
 .expanded-view-photo {

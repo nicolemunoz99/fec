@@ -6,7 +6,9 @@ const Ratings = (props) => {
   let averageRating = 1;
   let totalRatings = 0;
   let highest = 0;
+  console.log('props.state', props.state)
   for (let key in props.state.meta.ratings) {
+    
     averageRating += key * props.state.meta.ratings[key]
     totalRatings += props.state.meta.ratings[key];
     if (props.state.meta.ratings[key] > highest) {
@@ -63,6 +65,7 @@ const Ratings = (props) => {
     <div className='ratings'>
       <div className='rating'>{averageRating.toFixed(1)}</div>
       <div className='ratingStars'>
+        {console.log({averageRating})}
       <StarRatings 
           rating={averageRating}
           starRatedColor='black'
