@@ -15,7 +15,8 @@ class Question extends Component {
         this.state = {
             answers: answers,
             showAllAnswers: false,
-            showPopup: false
+            showPopup: false,
+            helpfulness: this.props.question.question_helpfulness
         }
         this.showMoreOrLess = this.showMoreOrLess.bind(this);
         this.isHelpful = this.isHelpful.bind(this);
@@ -54,10 +55,7 @@ class Question extends Component {
         const { question_id } = this.props.question;
         axios.put(`${api}/question/${question_id}/helpful`)
             .then(() => {
-                console.log('setting state')
-                let updatedQuestion = {...this.props.question};
-                updatedQuestion.question_helpfulness = this.props.question.question_helpfulness + 1;
-                this.setState({question: updatedQuestion});
+                this.setState({helpfulness: this.state.helpfulness + 1});
             });
         //clear onClick listener
         e.target.classList.remove('clickable');
@@ -120,7 +118,7 @@ class Question extends Component {
                     {question.body_tail}
                 </h4>
                     <div className="q-subtext">
-                        <span>Helpful? <span className="clickable" onClick={this.isHelpful}>Yes</span> ({question.question_helpfulness})</span>
+                        <span>Helpful? <span className="clickable" onClick={this.isHelpful}>Yes</span> ({this.state.helpfulness})</span>
                         <span className="divider-bar">|</span>
                         <span className="clickable" onClick={this.togglePopup.bind(this)}>Add Answer</span>
                     </div>
