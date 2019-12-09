@@ -1,6 +1,7 @@
 import React from 'react';
-import Overview from './overview/Overview.jsx'
-import defaultProduct from './defaultProduct.js'
+import Overview from './overview/Overview.jsx';
+import defaultProduct from './defaultProduct.js';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class App extends React.Component {
     this.state = {
       allProducts: null,
       searchResults: null,
-      searchTerm: null,
+      searchTerm: '',
       showSearchResults: false,
       selectedProduct: defaultProduct
     }
@@ -40,7 +41,7 @@ class App extends React.Component {
   onChangeProducts(e) {
     this.setState({ searchTerm: e.target.value }, () => {
       let results;
-      if (this.state.searchTerm.length && this.state.searchTerm.length % 2 === 0) {
+      if (this.state.searchTerm.length && this.state.searchTerm.length > 2) {
         results = this.searchProducts(this.state.searchTerm);
         this.setState({ searchResults: results, showSearchResults: true })
       } else if (this.state.searchTerm.length === 0) {
@@ -60,14 +61,18 @@ class App extends React.Component {
   submitSearch(e) {
     let results = this.searchProducts(this.state.searchTerm);
     this.setState({ searchResults: results, showSearchResults: true })
+    
   }
 
   clickProduct(e) {
     let selectedProduct = this.state.searchResults.filter(product => {
       return product.id === Number(e.target.id)
     })
-    this.setState({selectedProduct: selectedProduct[0]})
-    this.setState({showSearchResults: false})
+    this.setState({
+      selectedProduct: selectedProduct[0],
+      showSearchResults: false,
+      searchTerm: ''
+    })
   }
 
   render() {
@@ -77,8 +82,8 @@ class App extends React.Component {
         <div className="row mt-3">
           <div className="col-sm-6">
             <div>
-              <input onChange={this.onChangeProducts} placeholder="Search for products"></input>
-              <button onClick={this.submitSearch}><i className="material-icons">search</i></button>
+              <input onChange={this.onChangeProducts} placeholder="Search for products" value={this.state.searchTerm}></input>
+              <button onClick={this.submitSearch}><i className="inline-centered material-icons">search</i></button>
             </div>
             <div className="col-sm-8 selector-container">
               {

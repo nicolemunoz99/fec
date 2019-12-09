@@ -5,8 +5,9 @@ class ImageGallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      photos: this.props.photos,
       currentPhotoIndex: 0, // default is first image
-      tbIndices: [0,1,2,3,4] // default first 5 thumbnails
+      tbIndices: [0, 1, 2, 3, 4] // default 1 thumbnail
     }
     this.photoNavHandler = this.photoNavHandler.bind(this);
     this.tbNavHandler = this.tbNavHandler.bind(this);
@@ -16,23 +17,39 @@ class ImageGallery extends React.Component {
   }
   componentDidMount() {
     // hide left arrow upon load (first image is default)
+    this.setState({tbIndices: [...Array(this.numThumbnails).keys()] })
     if (this.state.currentPhotoIndex === 0) {
       document.getElementById("photo-nav-left").classList.add("hidden");
     }
   }
 
+  componentDidUpdate(prevProps) {
+    // render new product 
+    let numTb = this.props.style.photos.length
+    let tbIndices = numTb > this.numThumbnails ? [...Array(this.numThumbnails).keys()] : [...Array(numTb).keys()]
+    if (prevProps.photos[0].url !== this.props.photos[0].url) {
+      this.setState({
+        photos: this.props.photos,
+        currentPhotoIndex: 0,
+        tbIndices: tbIndices
+      })
+    }
+    // render new style 
+    if (prevProps.style.style_id !== this.props.style.style_id) {
+      this.setState({tbIndices: tbIndices, photos: this.props.photos })
+    }
+
+  }
+
   tbNavHandler(e) {
     let clickedNav = e.target.id;
-    console.log('clickedNav', clickedNav)
-    let newTopIndex
+    let newTopIndex;
     // when thumnail nav-down clicked
     if (clickedNav === 'tb-nav-down') {
-      // new top thumnail is original index of top displayed minus 1
       newTopIndex = this.state.tbIndices[0] - 1;
     }
     // when thumnail nav-up clicked
     if (clickedNav === 'tb-nav-up') {
-      // new top thumbnail is original index of top thumbnail plus 1
       newTopIndex = this.state.tbIndices[0] + 1;
     }
     // update thumbnails displayed
@@ -42,15 +59,14 @@ class ImageGallery extends React.Component {
   photoNavHandler(e, index) {
     if (e) { // when photoNavHandler called upon photo nav button clicked
       // update state.currentPhotoIndex
-      var clickedNav = e.target.id
-      console.log('clickedNav: ', clickedNav)
+      var clickedNav = e.target.id;
       if (clickedNav === 'photo-nav-right') { // right nav button was clicked
         var newPhotoIndex = this.state.currentPhotoIndex + 1;
-        if (newPhotoIndex >= this.props.photos.length) { newPhotoIndex = 0 }
+        if (newPhotoIndex >= this.state.photos.length) { newPhotoIndex = 0 }
       }
       if (clickedNav === 'photo-nav-left' ) { // left nav button was clicked
         var newPhotoIndex = this.state.currentPhotoIndex - 1;
-        if (newPhotoIndex < 0 ) { newPhotoIndex = this.props.photos.length - 1}
+        if (newPhotoIndex < 0 ) { newPhotoIndex = this.state.photos.length - 1}
       }
     } else { // when photoNavHandler called upon thumbnail being clicked
       var newPhotoIndex = index
@@ -62,42 +78,43 @@ class ImageGallery extends React.Component {
       if (newPhotoIndex === 0) {
         document.getElementById("photo-nav-left").classList.add("hidden")
       }
-      else if (newPhotoIndex === this.props.photos.length - 1) {
+      else if (newPhotoIndex === this.state.photos.length - 1) {
         document.getElementById("photo-nav-right").classList.add("hidden")
       }
       else {
         document.getElementById("photo-nav-left").classList.remove("hidden")
         document.getElementById("photo-nav-right").classList.remove("hidden")
       }
-      // update displayed thumbnails when currentPhotoInd > bottomOriginalInd OR currentPhotoInd < topOriginalInd
-      let topOriginalInd = this.state.tbIndices[0]; // original index of thumb at TOP
-      let bottomOriginalInd = this.state.tbIndices[this.state.tbIndices.length - 1]; // original index of thumb at BOTTOM
-      if (this.state.currentPhotoIndex >= bottomOriginalInd || this.state.currentPhotoIndex < topOriginalInd) {
-        this.calcTbDisplayed(this.state.currentPhotoIndex); // update state.tbDisplayed
-      }
+        let topOriginalInd = this.state.tbIndices[0]; // original index of thumb at TOP
+        let bottomOriginalInd = this.state.tbIndices[this.state.tbIndices.length - 1]; // original index of thumb at BOTTOM
+        if (this.state.currentPhotoIndex >= bottomOriginalInd || this.state.currentPhotoIndex < topOriginalInd) {
+          this.calcTbDisplayed(this.state.currentPhotoIndex); // update state.tbDisplayed
+        }
     })
   }
 
 // default view: thumbnail navigation
 // calculates array of thumbnail indices to display; input: top tb index (see tbNavHandler)
 calcTbDisplayed (index) {
-  let minIndex = index;
-  let maxIndex = minIndex + this.numThumbnails - 1;
-  let wrapIndex = 0;
-  let tbIndices = [];
-  for (let i = minIndex; i <= maxIndex; i++) {
-    if (i >= 0 && i < this.props.photos.length) {
-      tbIndices.push(i)
-    } 
-    if (i < 0) {
-      tbIndices.push(this.props.photos.length + i)
+  if (this.state.photos.length > this.numThumbnails) {
+    let minIndex = index;
+    let maxIndex = minIndex + this.numThumbnails - 1;
+    let wrapIndex = 0;
+    let tbIndices = [];
+    for (let i = minIndex; i <= maxIndex; i++) {
+      if (i >= 0 && i < this.state.photos.length) {
+        tbIndices.push(i)
+      } 
+      if (i < 0) {
+        tbIndices.push(this.state.photos.length + i)
+      }
+      if (i >= this.state.photos.length) {
+        tbIndices.push(wrapIndex);
+        wrapIndex++
+      }
     }
-    if (i >= this.props.photos.length) {
-      tbIndices.push(wrapIndex);
-      wrapIndex++
-    }
+    this.setState({ tbIndices: tbIndices })
   }
-  this.setState({ tbIndices: tbIndices })
 }
 
 tbClick(e) {
@@ -126,7 +143,7 @@ expandedClick(e) {
           <div>
             <div className="row">
               <div className="col-12 d-flex align-items-center justify-content-center">
-                {this.props.photos.length > this.numThumbnails ? <div id="tb-nav-up" onClick={this.tbNavHandler} className={"photo-nav"}>
+                {this.state.photos.length > this.numThumbnails ? <div id="tb-nav-up" onClick={this.tbNavHandler} className={"photo-nav"}>
                   <i class="material-icons md-34">arrow_drop_up</i>
                 </div> : null}
               </div>
@@ -135,10 +152,10 @@ expandedClick(e) {
               <div className="col-12 d-flex align-items-center justify-content-center">
                 <div>
                   {
-                    this.state.tbIndices.map((i, index) => {
-                      let tbSelected = i === this.state.currentPhotoIndex ? "tb-div d-flex justify-content-center align-items-center tb-selected" : "tb-div d-flex justify-content-center align-items-center";
-                      return (<div className={tbSelected} key={index}>
-                                  <img id={i} onClick={this.tbClick} className={"default-view-tb"} src={this.props.photos[i].thumbnail_url}></img>
+                    this.state.tbIndices.map((tbIndex, i) => {
+                      let tbSelected = tbIndex === this.state.currentPhotoIndex ? "tb-div d-flex justify-content-center align-items-center tb-selected" : "tb-div d-flex justify-content-center align-items-center";
+                      return (<div className={tbSelected} key={i}>
+                                  <img id={tbIndex} onClick={this.tbClick} className={"default-view-tb"} src={this.state.photos[tbIndex].thumbnail_url}></img>
                               </div>)
                     })
                   }
@@ -148,7 +165,7 @@ expandedClick(e) {
             <div className="row">
               <div className="col-12 d-flex align-items-center justify-content-center">
                 {/* only show thumbnail navigation if there are more than this.numThumnails */}
-                {this.props.photos.length > this.numThumbnails ? <div id="tb-nav-down" onClick={this.tbNavHandler} className={"photo-nav"}>
+                {this.state.photos.length > this.numThumbnails ? <div id="tb-nav-down" onClick={this.tbNavHandler} className={"photo-nav"}>
                   <i class="material-icons md-34">arrow_drop_down</i>
                 </div> : null}
               </div>
@@ -159,7 +176,7 @@ expandedClick(e) {
         {/* main image */}
         <div className="col-12">
           {
-            this.props.photos.map((photo, i) => {
+            this.state.photos.map((photo, i) => {
               let photoClass = i === this.state.currentPhotoIndex ?
                 "d-flex default-view-photo-container align-items-center justify-content-center" : "hidden";
               return (
@@ -185,7 +202,7 @@ expandedClick(e) {
         <i class="material-icons md-34">close</i>
         </div>
         <ExpandedView tbClick={this.tbClick} 
-                      photos={this.props.photos} 
+                      photos={this.state.photos} 
                       currentPhotoIndex={this.state.currentPhotoIndex} 
                       photoNavHandler={this.photoNavHandler}/>
       </div>

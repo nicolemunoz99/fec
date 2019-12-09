@@ -1,4 +1,5 @@
 import React from 'react';
+import StarRatings from 'react-star-ratings';
 
 const ReviewCard = (props) => {
   // console.log(props.review)
@@ -27,7 +28,14 @@ const ReviewCard = (props) => {
   }
   return (
     <div className='review-card'>
-      <div className='r-stars'>{props.review.rating} stars</div>
+      <div className='r-stars'>
+        <StarRatings 
+          rating={props.review.rating}
+          starRatedColor='black'
+          starDimension='0.8em'
+          starSpacing='0.08em'
+          starEmptyColor='#e9ecef' />
+      </div>
       <div className='r-info'>{props.review.reviewer_name}, {date}</div>
       <div className='r-summary'>{props.review.summary}</div>
       <div className='r-body'>{props.review.body.slice(0, 250)}{showMore}</div>
@@ -39,6 +47,7 @@ const ReviewCard = (props) => {
         // props.report(props.review.review_id);
         e.target.parentNode.parentNode.innerHTML = '<em>Thank you for your report. This review is now being examined by a moderator</em>';
       }}>Report</div></div>
+      <hr></hr>
     </div>
   );
 }
