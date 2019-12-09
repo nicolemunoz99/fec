@@ -124,11 +124,9 @@ class Reviews extends React.Component {
   componentDidUpdate(prevProps) {
     this.render();
     if (this.props !== prevProps) {
-      console.log('new reviews props I guess')
       this.setState({
         reviews: []
       }, () => {
-        console.log('should have reset state', this.state)
         this.getReviews();
         this.getMeta();
       })

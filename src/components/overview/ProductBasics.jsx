@@ -10,7 +10,8 @@ class ProductBasics extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      avgRating: null
+      avgRating: undefined,
+      numReviews: 0
     }
     this.getMetaRating = this.getMetaRating.bind(this);
   }
@@ -43,16 +44,28 @@ class ProductBasics extends React.Component {
       count += ratings[key];
       sum += Number(key) * Number(ratings[key]);
     }
+    this.setState({ numReviews: count })
     return sum / count;
+  }
+  
+  goToReviews(e) {
+    document.getElementById('reviews').scrollIntoView(true)
   }
 
   render() {
     return (
         <div className="row">
           
-          <div className="col-sm-12 overview-component mt-2 mb-2">
-            <StarRating rating={this.state.avgRating} />
+          <div className="col-sm-12 mt-2 mb-2 mt-4">
+            <span>
+              <StarRating rating={this.state.avgRating} />
+              {
+              this.state.avgRating === undefined ? null :
+                <span onClick={this.goToReviews} className="overview-reviews pl-1">{`Read all ${this.state.numReviews} reviews`}</span>
+              }
+                </span>
           </div>
+ 
           <div className="col-sm-12">
             <div id="fb-root"></div> 
             <p>Category: {this.props.productInfo.category}</p>
@@ -60,14 +73,17 @@ class ProductBasics extends React.Component {
             <p>
               {this.props.productInfo.description ? this.props.productInfo.description : null}
             </p>
-            <p>
-            
-            <a target="NONE" href={`https://twitter.com/intent/tweet?text=Look%20what%20I%20found%20at%20Greenfield!!  ${this.props.productInfo.description}`} className="social-icon fab fa-twitter fa-1x px-2"></a>
-            <a href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" className="social-icon fab fa-pinterest fa-1x px-2"></a>
-            
-            <div class="fb-share-button" data-href="http://127.0.0.1:8080/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8080%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-            
-            </p>
+            <div className='social-icons-container mb-4'>
+              <span>
+                <a href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" className="social-icon fab fa-pinterest fa-1x px-2"></a>
+              </span>
+              <span>
+                <div className="fb-share-button" data-href="http://127.0.0.1:8080/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8080%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+              </span>
+              <span className="social-icon-twitter">
+                <a className="twitter-share-button" href="https://twitter.com/intent/tweet?text=Hello%20world" data-size="small">Tweet</a>
+              </span>
+            </div>
             
           </div>
         </div>

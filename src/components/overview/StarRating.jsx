@@ -20,16 +20,15 @@ class StarRating extends React.Component {
 
   calcStarTypes(rating) {
     if (!rating) { return }
-    let filled = Math.floor(rating);
-    let empty = 5 - Math.ceil(rating)
-    let quarter = Math.floor((rating - filled) * 4);
-    if (quarter === 0) { empty++ }
+    let star_filled = Math.floor(rating);
+    let star_0quarter = 5 - Math.ceil(rating)
+    let quarter = Math.floor((rating - star_filled) * 4);
     let stars = []; 
-    let typeCount = {filled, quarter, empty}
+    let typeCount = {star_filled, quarter, star_0quarter}
     for (let starType in typeCount) {
       for (let i = 0; i < typeCount[starType]; i++) {
         if (starType === 'quarter') {
-          stars.push(typeCount[starType] + starType);
+          stars.push('star_' + typeCount[starType] + starType);
           break;
         }
         stars.push(starType);
@@ -39,18 +38,18 @@ class StarRating extends React.Component {
   }
 
   starFilename(starType) {
-    return `icons/star_${starType}.png`
+    return `icons/${starType}.png`
   }
 
   render() {
     return (   
-  <div className="avg-star-rating"> 
+  <span> 
     {!this.state.stars ? null :
       this.state.stars.map((starType, i) => {
         return <img className="star-rating" key={i} src={this.starFilename(starType)}></img>
       })
     }
-  </div>
+  </span>
     )
   }
 }
