@@ -114,6 +114,7 @@ class Overview extends React.Component {
           <QA productId={this.props.productInfo.id}/>
         </div>
         <div className='reviews'>
+          RATINGS & REVIEWS
           <Reviews productInfo={this.props.productInfo} />
         </div>
       </div>

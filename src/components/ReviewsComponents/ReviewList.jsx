@@ -6,7 +6,7 @@ const ReviewList = (props) => {
   let moreButton = '';
   let currentReviews = (props.state.reviews.length);
   if (currentReviews > 2 && !props.state.starFilters.length) {
-    moreButton = (<button onClick={(e) => props.update({ more: !props.state.more })}>{props.state.more ? 'LESS REVIEWS' : 'MORE REVIEWS'}</button>);
+    moreButton = (<button className='reviewsButton' onClick={(e) => props.update({ more: !props.state.more })}>{props.state.more ? 'LESS REVIEWS' : 'MORE REVIEWS'}</button>);
   }
   let now = new Date().getTime();
   window.onscroll = (e) => {
@@ -20,7 +20,7 @@ const ReviewList = (props) => {
   };
   return (
     <div className='reviewlist'>
-      <div id='infoSort'>{props.total} reviews, sorted by 
+      <div className='infoSort'>{props.total} reviews, sorted by 
         <select id='sortSelect' onChange={(e) => {
           let select = document.getElementById("sortSelect");
           props.update({ reviews: [], page: 1, sort: select.options[select.selectedIndex].value }, true);
@@ -55,7 +55,7 @@ const ReviewList = (props) => {
         }
       })}
       {moreButton}
-      <button onClick={(e) => {
+      <button className='reviewsButton' onClick={(e) => {
         document.getElementById('rmodal').style.display = 'block';
       }}>ADD A REVIEW +</button>
     </div>
