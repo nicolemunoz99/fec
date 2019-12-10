@@ -5,7 +5,6 @@ import NewAnswer from './NewAnswer.jsx';
 import _ from 'lodash';
 import $ from 'jquery';
 const api = 'http://3.134.102.30/qa';
-//adding a comment
 
 class Question extends Component {
     constructor(props) {
