@@ -85,16 +85,16 @@ class Overview extends React.Component {
   render() {
     return (
       <div>
-        <div className="overview-main">
+        <div className="overview-main" data-widget="overview">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-sm-7 vertical-center">
+            <div className="col-12 col-md-7 vertical-center">
               <ImageGallery  style={this.state.selectedStyle} photos={this.state.selectedStyle.photos.map((photo, i) => {
                   return {originalIndex: i, thumbnail_url: photo.thumbnail_url, url: photo.url}
                 }               
                   )}  />
             </div>
-            <div className="col-sm-5">
+            <div className="col-12 col-md-5 mt-3">
               <div className="row">
                 <div className="col-sm-12">
                   <ProductBasics productInfo={this.state.productInfo} />
