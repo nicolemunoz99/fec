@@ -7,23 +7,27 @@ class ExpandedView extends React.Component {
       mouseX: 0,
       mouseY: 0,
       zoomWidth: 0,
-      zoomHeight: 0
+      zoomHeight: 0,
+      showZoomView: false
     }
     this.expandedMainPhotoClick = this.expandedMainPhotoClick.bind(this);
+    this.hideZoom = this.hideZoom.bind(this);
     this.getCoords = this.getCoords.bind(this);
   }
   // hide zoom-overlay when clicking on zoomed photo
   hideZoom(e) {
-    e.target.style.display='none'
+    this.setState({ showZoomView: false })
   }
 
   expandedMainPhotoClick(e) {
     // show zoom overlay
-    let zoomOverlay = document.getElementById('zoom-overlay');
-    zoomOverlay.style.display='block'
+    this.setState({ showZoomView: true }, () => {
+      let bgUrl = this.props.photos[this.props.currentPhotoIndex].url
+      console.log('bgUrl', bgUrl)
+      document.getElementById('zoom-overlay').style.backgroundImage = `url(${bgUrl})`;
+    })
     // show zoomed imaged by setting current photo as background
-    let bgUrl = this.props.photos[this.props.currentPhotoIndex].url
-    zoomOverlay.style.backgroundImage = `url(${bgUrl})`;
+    
   }
 
 
@@ -43,11 +47,13 @@ class ExpandedView extends React.Component {
     return (
       <div>
       {/* zoomed image overlay */}
-      <div id="zoom-overlay" onMouseMove={this.getCoords} onClick={this.hideZoom}>
-      </div>
+      {this.state.showZoomView ?
+        <div id="zoom-overlay" onMouseMove={this.getCoords} onClick={this.hideZoom}>
+        </div> : null
+      }
 
       {/* expanded view */}
-      <div id="expanded-view" className="overview-component">
+      <div id="expanded-view">
       <div className="container expanded-view-container">
         {/* main photo */}
         <div className="row">
@@ -58,10 +64,10 @@ class ExpandedView extends React.Component {
               </img>
             </div>
             <div id="photo-nav-left" onClick={this.props.photoNavHandler} className="photo-nav">
-              <i className="far fa-arrow-alt-circle-left fa-2x nav-bg"></i>
+              <i className="far fa-arrow-alt-circle-left fa-2x nav-bg black"></i>
             </div>
             <div id="photo-nav-right" onClick={this.props.photoNavHandler} className="photo-nav">
-              <i className="far fa-arrow-alt-circle-right fa-2x nav-bg"></i>
+              <i className="far fa-arrow-alt-circle-right fa-2x nav-bg black"></i>
             </div>
           </div>
         </div>

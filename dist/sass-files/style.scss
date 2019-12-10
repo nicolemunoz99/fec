@@ -5,3 +5,12 @@
 //     color: $primary-color;
 // }
 
+$screen-sm-min: 768px;
+$screen-lg-min: 992px;
+$screen-sm-max: ($screen-lg-min -1);
+$screen-lg-min: 1200px;
+
+
+@media (max-width: $screen-sm-min) {
+
+}

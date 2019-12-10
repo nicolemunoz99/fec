@@ -7,12 +7,14 @@ class ImageGallery extends React.Component {
     this.state = {
       photos: this.props.photos,
       currentPhotoIndex: 0, // default is first image
-      tbIndices: [0, 1, 2, 3, 4] // default 1 thumbnail
+      tbIndices: [0, 1, 2, 3, 4], // default 1 thumbnail
+      showExpandedView: false
     }
     this.photoNavHandler = this.photoNavHandler.bind(this);
     this.tbNavHandler = this.tbNavHandler.bind(this);
     this.tbClick = this.tbClick.bind(this)
     this.mainPhotoClick = this.mainPhotoClick.bind(this);
+    this.closeExpanded = this.closeExpanded.bind(this);
     this.numThumbnails = 5;
   }
   componentDidMount() {
@@ -123,11 +125,11 @@ tbClick(e) {
 }
 
 mainPhotoClick(e) {
-  document.getElementById('gallery-overlay').style.display = 'block';
+  this.setState({ showExpandedView: true })
 }
 
-expandedClick(e) {
-  document.getElementById('gallery-overlay').style.display='none';
+closeExpanded(e) {
+  this.setState({ showExpandedView: false })
 }
 
 
@@ -197,15 +199,22 @@ expandedClick(e) {
       </div>
       </div>
       {/* expanded view overlay */}
-      <div id="gallery-overlay">
-        <div className="close-expanded-view nav-bg" onClick={this.expandedClick}>
-        <i className="material-icons md-34">close</i>
-        </div>
-        <ExpandedView tbClick={this.tbClick} 
-                      photos={this.state.photos} 
-                      currentPhotoIndex={this.state.currentPhotoIndex} 
-                      photoNavHandler={this.photoNavHandler}/>
-      </div>
+      {
+        this.state.showExpandedView ?
+       <div id="gallery-overlay">
+          <div className="close-expanded-view nav-bg" onClick={this.closeExpanded}>
+            <i className="material-icons md-34 black">close</i>
+          </div>
+          
+          <ExpandedView tbClick={this.tbClick} 
+                        photos={this.state.photos} 
+                        currentPhotoIndex={this.state.currentPhotoIndex} 
+                        photoNavHandler={this.photoNavHandler}/>
+
+        </div> 
+      
+      : null
+      }
       </div>
     )
   }
