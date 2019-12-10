@@ -69,7 +69,7 @@
 }
 
 #sku.selectorMain {
-  width: 6rem;
+  width: 7rem;
 }
 
 .selector:hover {
@@ -153,14 +153,20 @@
 }
 
 .style-tb-div {
+  /* width: 4.0rem;
+  height: 4.0rem; */
   width: 8vw;
   height: 8vw;
+  min-width: 4rem;
+  min-height:4rem;
   overflow: hidden;
-  border-radius: 7vw;
+  border-radius: 4.0rem;
   border-style: solid;
   border-color: black;
   border-width: 2px;
   margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .style-tb {
