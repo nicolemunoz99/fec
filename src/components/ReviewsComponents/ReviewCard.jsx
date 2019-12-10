@@ -1,5 +1,5 @@
 import React from 'react';
-import StarRatings from 'react-star-ratings';
+import StarRating from '../overview/StarRating.jsx';
 
 const ReviewCard = (props) => {
   // console.log(props.review)
@@ -29,22 +29,17 @@ const ReviewCard = (props) => {
   return (
     <div className='review-card'>
       <div className='r-stars'>
-        <StarRatings 
-          rating={props.review.rating}
-          starRatedColor='black'
-          starDimension='0.8em'
-          starSpacing='0.08em'
-          starEmptyColor='#e9ecef' />
+        <StarRating rating={props.review.rating} />
       </div>
-      <div className='r-info'>{props.review.reviewer_name}, {date}</div>
-      <div className='r-summary'>{props.review.summary}</div>
-      <div className='r-body'>{props.review.body.slice(0, 250)}{showMore}</div>
-      <div className='r-bottom'>Helpful? <div className='text-button' id='helpful' onClick={(e) => {
+      <div className='r-info text-sub'>{props.review.reviewer_name}, {date}</div>
+      <div className='r-summary text-main bold'>{props.review.summary}</div>
+      <div className='r-body text-reg'>{props.review.body.slice(0, 250)}{showMore}</div>
+      <div className='r-bottom text-sub'>Helpful? <div className='text-button' id='helpful' onClick={(e) => {
         props.helpful(props.review.review_id);
         props.review.helpfulness++;
         e.target.style.display = 'none';
       }}>Yes</div> ({props.review.helpfulness}) | <div className='text-button' onClick={(e) => {
-        // props.report(props.review.review_id);
+        props.report(props.review.review_id);
         e.target.parentNode.parentNode.innerHTML = '<em>Thank you for your report. This review is now being examined by a moderator</em>';
       }}>Report</div></div>
       <hr></hr>
