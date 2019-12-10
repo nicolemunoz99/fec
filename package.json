@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "react-dev": "webpack -d --watch",
-    "start": "live-server ./dist"
+    "start": "live-server ./dist",
+    "sass-dev": "sass --watch ./dist/sass-files/style.scss ./dist/sass-compiled/compiled.css"
   },
   "keywords": [],
   "author": "",
