@@ -1,3 +1,5 @@
+@import "./sass-compiled/compiled.css";
+
 :root {
   --default-view-max-height: 50vw
 }
@@ -19,8 +21,7 @@
 .sale-price {
   color: red;
 }
-.social-icons-container {
-}
+
 
 .social-icon-twitter {
   top: 0.4rem;
@@ -269,10 +270,6 @@
 }
 
 .material-icons.md-34 { font-size: 34px; }
-
-.nav-offset {
-  /* left: 20% !important; */
-}
 
 #photo-nav-right {
   position: absolute;
