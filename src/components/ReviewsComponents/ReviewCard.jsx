@@ -29,13 +29,7 @@ const ReviewCard = (props) => {
   return (
     <div className='review-card'>
       <div className='r-stars'>
-        {/* <StarRatings 
-          rating={props.review.rating}
-          starRatedColor='black'
-          starDimension='0.8em'
-          starSpacing='0.08em'
-          starEmptyColor='#e9ecef' /> */}
-          <StarRating rating='4' />
+        <StarRating rating={props.review.rating} />
       </div>
       <div className='r-info text-sub'>{props.review.reviewer_name}, {date}</div>
       <div className='r-summary text-main bold'>{props.review.summary}</div>

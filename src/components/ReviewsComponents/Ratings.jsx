@@ -66,13 +66,7 @@ const Ratings = (props) => {
       <div className='ratings text-sub'>
         <div className='rating'>{averageRating.toFixed(1)}</div>
         <div className='ratingStars'>
-          {/* <StarRatings
-            rating={averageRating}
-            starRatedColor='black'
-            starDimension='1.2em'
-            starSpacing='0.1em'
-            starEmptyColor='#e9ecef' /> */}
-            <StarRating rating={averageRating} />
+          <StarRating rating={averageRating} />
         </div>
         <div className='recos'>{Math.ceil((props.state.meta.recommended['1'] / totalRatings) * 100)}% of reviews recommend this product</div>
         <div className='rbreakdown'>

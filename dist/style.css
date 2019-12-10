@@ -604,7 +604,6 @@ button {
   border: 0.05em solid black;
   font-weight: 650;
   padding: 0.7em;
-  border-radius: 0.6rem;
 }
 
 button:hover {
