@@ -379,10 +379,6 @@
   margin-bottom: 1em; 
 }
 
-.q-search {
-  width: 100%;
-}
-
 .answer p {
   display: inline;
 }
@@ -439,7 +435,7 @@
 
 @media (max-width: 600px) {
   .popup {
-    background-color: black;
+    backdrop-filter: blur(6px);
   }
 }
 
@@ -457,9 +453,19 @@
   display: inline-block;
 }
 
+@media (max-width: 600px) {
+  .answer-photo-div {
+    width: 16vw;
+    height: 16vw;
+  }
+
+  .answer-photo {
+    height: 18vw;
+  }
+}
+
 .answer-photo-container {
   position: relative;
-
 }
 
 .answer-photo-container img {
@@ -658,7 +664,6 @@ button:focus {
 
 .text-reg {
   font-size: 0.8rem;
-  
 }
 
 ::selection {
