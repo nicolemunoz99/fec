@@ -84,6 +84,7 @@ class App extends React.Component {
             <div>
               <input onChange={this.onChangeProducts} placeholder="Search for products" value={this.state.searchTerm}></input>
               <button onClick={this.submitSearch}><i className="inline-centered material-icons">search</i></button>
+              {/* <textarea placeholder="search for products..." rows="1.5" cols="50"></textarea> */}
             </div>
             <div className="col-sm-8 selector-container">
               {

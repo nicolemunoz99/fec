@@ -145,7 +145,7 @@ class StyleSelector extends React.Component {
             {
             this.props.styles.map((style, i) => {
               return (
-                <div key={i} className="col-sm-3">
+                <div key={i} className="col-3">
                   <div className="style-tb-div d-flex justify-content-center align-items-center">
                   {style.style_id===this.props.selectedStyle.style_id ? <i className="material-icons checkmark icon-bg"> check_circle </i> : null}
                   <img id={style.style_id} onClick={this.styleClick} src={style.photos[0].thumbnail_url} className="style-tb"></img>
@@ -186,7 +186,7 @@ class StyleSelector extends React.Component {
             </div>
 
             {/* quantity selector */}
-            <div className="col-sm-3 selector-container checkout-item">
+            <div className="col-sm-6 selector-container checkout-item">
               <div className="col-sm-12"><span className="pr-2">Quantity:</span> 
                 <div id="qty" onClick={this.state.selectedSku ? this.toggleSelector : null} className="selectorMain selector d-flex align-items-center justify-content-center">
                   {/* set default value based on whether or not size has been selected */}
