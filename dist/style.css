@@ -511,7 +511,7 @@
 .progress {
   height: 0.4em;
   border-radius: 0;
-  margin-bottom: 0.65rem;
+  margin-bottom: 1.37rem;
 }
 
 .rbreakdown {
@@ -571,12 +571,14 @@
   padding-bottom: 3em;
 }
 
-.rating, .ratingStars {
-  display: inline-block;
+.ratingStars {
+  float: right;
+  margin-top: 1rem;
 }
 
 .rating {
-  font-size: 2.5em;
+  display: inline-block;
+  font-size: 3rem;
   font-weight: bold;
 }
 
@@ -596,7 +598,7 @@
 }
 
 .slidercontainer {
-  margin-top: 2em;
+  margin-top: 1rem;
 }
 
 button {
@@ -690,4 +692,8 @@ button:focus {
 
 .progress-bar {
   background-color: #444649;
+}
+
+.rlabel {
+  margin-bottom: 0.7rem;
 }
