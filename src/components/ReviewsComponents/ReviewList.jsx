@@ -20,8 +20,8 @@ const ReviewList = (props) => {
     }
     return (
       <div className='reviewlist'>
-        <div className='infoSort'>{props.total} reviews, sorted by 
-          <select id='sortSelect' onChange={(e) => {
+        <div className='infoSort text-main bold'>{props.total} reviews, sorted by 
+          <select id='sortSelect' className='text-main bold' onChange={(e) => {
             let select = document.getElementById("sortSelect");
             props.update({ reviews: [], page: 1, sort: select.options[select.selectedIndex].value }, true);
           }}>
@@ -30,6 +30,7 @@ const ReviewList = (props) => {
             <option value='relevant'>relevance</option>
           </select>
         </div>
+        <div className='filters text-sub'>Filters: {props.state.starFilters.length ? props.state.starFilters.join(', ') : 'none'}</div>
         {props.state.reviews.map((review, i) => {
           if (props.state.more || i < 2) {
             if (props.state.starFilters.length) {

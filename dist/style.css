@@ -486,7 +486,7 @@
 .progress {
   height: 0.4em;
   border-radius: 0;
-  margin-bottom: 1em;
+  margin-bottom: 0.65rem;
 }
 
 .rbreakdown {
@@ -555,15 +555,6 @@
   font-weight: bold;
 }
 
-.infoSort, #sortSelect {
-  font-weight: bold;
-  margin-bottom: 0.7em;
-}
-
-.r-info, .r-bottom, .ratings:not(.starRatings) {
-  font-size: 0.7em;
-}
-
 .bottom-meaning {
   display: flex;
   justify-content: space-between;
@@ -571,10 +562,7 @@
 
 .r-info {
   float: right;
-}
-
-.r-summary {
-  font-weight: bold;
+  margin-top: 0.35rem;
 }
 
 .recos {
@@ -589,7 +577,7 @@
 button {
   background-color: white;
   border: 0.05em solid black;
-  font-weight: bold;
+  font-weight: 650;
   padding: 0.7em;
 }
 
@@ -624,18 +612,18 @@ button {
 
 #rsummary, #ruser, #remail {
   width: 15em;
-  display: block;
+  display: inline-block;
 }
 
 .rlabels {
   display: flex;
   flex-direction: column;
-  width: 24%;
+  min-width: 2rem;
 }
 
 .rprogress {
   margin-top: 0.7em;
-  width: 76%;
+  width: 100%;
   display: inline-block;
 }
 
@@ -664,4 +652,8 @@ button {
 
 * {
   color: #444649
+}
+
+.progress-bar {
+  background-color: #444649;
 }

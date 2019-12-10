@@ -1,5 +1,5 @@
 import React from 'react';
-import StarRatings from 'react-star-ratings';
+import StarRating from '../overview/StarRating.jsx';
 
 const Ratings = (props) => {
   // console.log(props);
@@ -63,15 +63,16 @@ const Ratings = (props) => {
       createSliders('Quality', ['Poor', 'Expected', 'Perfect']);
     }
     return (
-      <div className='ratings'>
+      <div className='ratings text-sub'>
         <div className='rating'>{averageRating.toFixed(1)}</div>
         <div className='ratingStars'>
-          <StarRatings
+          {/* <StarRatings
             rating={averageRating}
             starRatedColor='black'
             starDimension='1.2em'
             starSpacing='0.1em'
-            starEmptyColor='#e9ecef' />
+            starEmptyColor='#e9ecef' /> */}
+            <StarRating rating={averageRating} />
         </div>
         <div className='recos'>{Math.ceil((props.state.meta.recommended['1'] / totalRatings) * 100)}% of reviews recommend this product</div>
         <div className='rbreakdown'>
@@ -84,19 +85,19 @@ const Ratings = (props) => {
           </div>
           <div className='rprogress'>
             <div className="progress">
-              <div className="progress-bar bg-success" role="progressbar" style={{ width: five + '%' }} aria-valuenow={five} aria-valuemin="0" aria-valuemax="100"></div>
+              <div className="progress-bar" role="progressbar" style={{ width: five + '%' }} aria-valuenow={five} aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div className="progress">
-              <div className="progress-bar bg-success" role="progressbar" style={{ width: four + '%' }} aria-valuenow={four} aria-valuemin="0" aria-valuemax="100"></div>
+              <div className="progress-bar" role="progressbar" style={{ width: four + '%' }} aria-valuenow={four} aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div className="progress">
-              <div className="progress-bar bg-success" role="progressbar" style={{ width: three + '%' }} aria-valuenow={three} aria-valuemin="0" aria-valuemax="100"></div>
+              <div className="progress-bar" role="progressbar" style={{ width: three + '%' }} aria-valuenow={three} aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div className="progress">
-              <div className="progress-bar bg-success" role="progressbar" style={{ width: two + '%' }} aria-valuenow={two} aria-valuemin="0" aria-valuemax="100"></div>
+              <div className="progress-bar" role="progressbar" style={{ width: two + '%' }} aria-valuenow={two} aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div className="progress">
-              <div className="progress-bar bg-success" role="progressbar" style={{ width: one + '%' }} aria-valuenow={one} aria-valuemin="0" aria-valuemax="100"></div>
+              <div className="progress-bar" role="progressbar" style={{ width: one + '%' }} aria-valuenow={one} aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
         </div>
