@@ -354,8 +354,7 @@
 }
 
 .question {
-  padding-top: 1em;
-  padding-bottom: 1em;
+  margin-top: 1.2rem;
 }
 
 .questions-container {
@@ -382,11 +381,17 @@
 }
 
 .answer {
-  margin-bottom: 1rem;
+  display: flex;
+  margin-bottom: 0.5rem;
 }
 
-.answer-head {
-  font-weight: bold;
+.answer-body {
+  display: inline-block;
+  width: 100%;
+}
+
+.answer-title {
+  margin-top: 0.1rem;
 }
 
 .answer .text-sub {
@@ -410,6 +415,7 @@
 .load-more {
   cursor: pointer;
   font-weight: 600;
+  margin-left: 1.5rem;
 }
 
 .popup {
@@ -648,7 +654,6 @@ button {
 ::selection {
   background: #ffb7b7; 
 } 
-
 
 * {
   color: #444649
