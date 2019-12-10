@@ -14,7 +14,7 @@ const ReviewList = (props) => {
       }
     }
   };
-  if (currentReviews) {
+  // if (currentReviews) {
     if (currentReviews > 2 && !props.state.starFilters.length) {
       moreButton = (<button className='reviewsButton' onClick={(e) => props.update({ more: !props.state.more })}>{props.state.more ? 'LESS REVIEWS' : 'MORE REVIEWS'}</button>);
     }
@@ -23,15 +23,20 @@ const ReviewList = (props) => {
         <div className='infoSort text-main bold'>{props.total} reviews, sorted by 
           <select id='sortSelect' className='text-main bold' onChange={(e) => {
             let select = document.getElementById("sortSelect");
-            props.update({ reviews: [], page: 1, sort: select.options[select.selectedIndex].value }, true);
+            let selected = select.options[select.selectedIndex];
+            for (let i = 0; i < select.options.length; ++i) {
+              select.options[i].style.display = 'block';
+            }
+            selected.style.display = 'none';
+            props.update({ reviews: [], page: 1, sort: selected.value }, true);
           }}>
-            <option defaultValue value='helpful'>helpfulness</option>
+            <option defaultValue value='helpful' style={{ display: 'none' }}>helpfulness</option>
             <option value='newest'>newest</option>
             <option value='relevant'>relevance</option>
           </select>
         </div>
         <div className='filters text-sub'>Filters: {props.state.starFilters.length ? props.state.starFilters.join(', ') : 'none'}</div>
-        {props.state.reviews.map((review, i) => {
+        {props.state.reviews.length ? props.state.reviews.map((review, i) => {
           if (props.state.more || i < 2) {
             if (props.state.starFilters.length) {
               let filters = props.state.starFilters.map((filter, i) => {
@@ -54,23 +59,23 @@ const ReviewList = (props) => {
               return <ReviewCard review={review} helpful={props.helpful} report={props.report} key={i} />;
             }
           }
-        })}
+        }) : (<em>No reviews posted... yet</em>)}
         {moreButton}
         <button className='reviewsButton' onClick={(e) => {
           document.getElementById('rmodal').style.display = 'block';
         }}>ADD A REVIEW +</button>
       </div>
     );
-  } else {
-    return (
-      <div className='reviewList'>
-        <em>No reviews posted... yet</em>
-        <button className='reviewsButton' onClick={(e) => {
-          document.getElementById('rmodal').style.display = 'block';
-        }}>ADD A REVIEW +</button>
-      </div>
-    )
-  }
+  // } else {
+  //   return (
+  //     <div className='reviewList'>
+  //       <em>No reviews posted... yet</em>
+  //       <button className='reviewsButton' onClick={(e) => {
+  //         document.getElementById('rmodal').style.display = 'block';
+  //       }}>ADD A REVIEW +</button>
+  //     </div>
+  //   )
+  // }
   
 };
 
