@@ -69,10 +69,10 @@ class ExpandedView extends React.Component {
         <div className="row">
           <div className="col-sm-12 d-flex align-items-center justify-content-center">
             {
-            this.props.photos.map(photo => {
+            this.props.photos.map((photo, i) => {
               let tbSelected = photo.originalIndex === this.props.currentPhotoIndex ? "expanded-tb-selected" : null
               return (
-                <div className={tbSelected}>
+                <div key={i} className={tbSelected}>
                   <div className="expanded-view-tb-div">
                     <img id={photo.originalIndex} onClick={this.props.tbClick} className="expanded-view-tb" src={photo.thumbnail_url}></img>
                   </div>

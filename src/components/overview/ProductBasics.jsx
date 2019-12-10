@@ -78,7 +78,7 @@ class ProductBasics extends React.Component {
                 <a href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" className="social-icon fab fa-pinterest fa-1x px-2"></a>
               </span>
               <span>
-                <div className="fb-share-button" data-href="http://127.0.0.1:8080/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8080%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+                <div className="fb-share-button" data-href="http://127.0.0.1:8080/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8080%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Share</a></div>
               </span>
               <span className="social-icon-twitter">
                 <a className="twitter-share-button" href="https://twitter.com/intent/tweet?text=Hello%20world" data-size="small">Tweet</a>

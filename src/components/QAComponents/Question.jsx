@@ -114,7 +114,7 @@ class Question extends Component {
             <div className="question">
                 <div className="q-main">
                     <p className="text-main bold">Q: {question.question_body}
-                    <span class="highlight">{question.body_match}</span>
+                    <span className="highlight">{question.body_match}</span>
                     {question.body_tail}
                 </p>
                     <div className="text-sub">

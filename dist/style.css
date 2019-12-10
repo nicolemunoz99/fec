@@ -2,6 +2,12 @@
   --default-view-max-height: 50vw
 }
 
+@media (max-width: 575px) {
+  .default-thumbnails {
+    display: none;
+  }
+}
+
 .hidden {
   display: none;
 }
@@ -54,6 +60,19 @@
   border-color: black;
   border-style: solid;
   border-width: 1px;
+  text-align: center;
+}
+
+#qty.selectorMain {
+  width: 4rem;
+}
+
+#sku.selectorMain {
+  width: 6rem;
+}
+
+.selector:hover {
+ outline: 1px dotted;
 }
 
 .selector-options {
@@ -597,6 +616,17 @@ button {
   border: 0.05em solid black;
   font-weight: bold;
   padding: 0.7em;
+  border-radius: 0.6rem;
+}
+
+button:hover {
+  color: white;
+  background-color: black;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 5px 5px 5px grey;
 }
 
 .reviewsButton {

@@ -11,6 +11,11 @@ class StarRating extends React.Component {
     this.starTypes = this.calcStarTypes(this.props.rating)
   }
 
+  componentDidMount() {
+    let stars = this.calcStarTypes(this.props.rating)
+      this.setState({ stars: stars })
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.rating !== this.props.rating) {
       let stars = this.calcStarTypes(this.props.rating)
