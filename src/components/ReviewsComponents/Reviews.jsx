@@ -27,11 +27,15 @@ class Reviews extends React.Component {
   getReviews() {
     fetch(url + this.props.productInfo.id + `/list?page=${this.state.page}&sort=${this.state.sort}`)
       .then((response) => {
-        // console.log(this.state);
+        console.log(this.state);
         return response.json();
       })
       .then((result) => {
-        if (JSON.stringify(this.state.reviews) !== JSON.stringify(result.results)) {
+        if (!this.state.reviews.length) {
+          this.setState({
+            reviews: result.results
+          });
+        } else if (JSON.stringify(this.state.reviews) !== JSON.stringify(result.results)) {
           this.setState({
             reviews: this.state.reviews.concat(result.results)
           }, () => {
@@ -124,6 +128,8 @@ class Reviews extends React.Component {
   componentDidUpdate(prevProps) {
     this.render();
     if (this.props !== prevProps) {
+      console.log('rerendering for no reason')
+
       this.setState({
         reviews: []
       }, () => {
@@ -148,7 +154,7 @@ class Reviews extends React.Component {
         update={this.updateState} 
         helpful={this.markHelpful} 
         report={this.reportReview} 
-        total={this.state.meta.recommended['0'] && this.state.meta.recommended['1'] ? this.state.meta.recommended['0'] + this.state.meta.recommended['1'] : (this.state.meta.recommended['0'] ? this.state.meta.recommended['0'] : this.state.meta.recommended['1'])}/>
+        total={this.state.meta.recommended['0'] && this.state.meta.recommended['1'] ? this.state.meta.recommended['0'] + this.state.meta.recommended['1'] : (this.state.meta.recommended['0'] ? this.state.meta.recommended['0'] : (this.state.meta.recommended['1'] ? this.state.meta.recommended['1'] : 0))}/>
         <NewReview state={this.state}
         update={this.updateState}
         pname={this.props.productInfo.name} 
