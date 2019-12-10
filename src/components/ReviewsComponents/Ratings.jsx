@@ -35,11 +35,11 @@ const Ratings = (props) => {
       charSliders.push(
         <div className='slidercontainer' key={char}>
           {char}<br></br>
-          <input type='range' min='1' max='5' id={char} defaultValue={props.state.meta.characteristics[char].value} disabled={true} step='0.1' class='slider'></input>
+          <input type='range' min='1' max='5' id={char} defaultValue={props.state.meta.characteristics[char].value} disabled={true} step='0.1' className='slider'></input>
           <div className='bottom-meaning'>
             <div>{meaning[0]}</div>
             <div>{meaning[1]}</div>
-            <div>{meaning[2]}</div>
+            <div style={{ 'text-align': 'right' }}>{meaning[2]}</div>
           </div>
         </div>
       );
@@ -64,18 +64,18 @@ const Ratings = (props) => {
     }
     return (
       <div className='ratings text-sub'>
-        <div className='rating'>{averageRating.toFixed(1)}</div>
-        <div className='ratingStars'>
+        <span className='ratingStars'>
           <StarRating rating={averageRating} />
-        </div>
+        </span>
+        <div className='rating'>{averageRating.toFixed(1)}</div>
         <div className='recos'>{Math.ceil((props.state.meta.recommended['1'] / totalRatings) * 100)}% of reviews recommend this product</div>
         <div className='rbreakdown'>
           <div className='rlabels'>
-            <div className='text-button' id='fivestars' onClick={(e) => ratingFilter(e.target.id)}>5 stars</div>
-            <div className='text-button' id='fourstars' onClick={(e) => ratingFilter(e.target.id)}>4 stars</div>
-            <div className='text-button' id='threestars' onClick={(e) => ratingFilter(e.target.id)}>3 stars</div>
-            <div className='text-button' id='twostars' onClick={(e) => ratingFilter(e.target.id)}>2 stars</div>
-            <div className='text-button' id='onestar' onClick={(e) => ratingFilter(e.target.id)}>1 star</div>
+            <div className='text-button rlabel' id='fivestars' onClick={(e) => ratingFilter(e.target.id)}>5 stars</div>
+            <div className='text-button rlabel' id='fourstars' onClick={(e) => ratingFilter(e.target.id)}>4 stars</div>
+            <div className='text-button rlabel' id='threestars' onClick={(e) => ratingFilter(e.target.id)}>3 stars</div>
+            <div className='text-button rlabel' id='twostars' onClick={(e) => ratingFilter(e.target.id)}>2 stars</div>
+            <div className='text-button rlabel' id='onestar' onClick={(e) => ratingFilter(e.target.id)}>1 star</div>
           </div>
           <div className='rprogress'>
             <div className="progress">
