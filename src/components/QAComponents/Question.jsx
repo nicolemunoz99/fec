@@ -80,7 +80,7 @@ class Question extends Component {
                     }
                 })
             }
-        });
+        }); 
         if (data) {
             const { question_id } = this.props.question;
             axios.post(`${api}/${question_id}/answers`, data)
@@ -113,11 +113,11 @@ class Question extends Component {
         return (
             <div className="question">
                 <div className="q-main">
-                    <h4>Q: {question.question_body}
+                    <p className="text-main bold">Q: {question.question_body}
                     <span className="highlight">{question.body_match}</span>
                     {question.body_tail}
-                </h4>
-                    <div className="q-subtext">
+                </p>
+                    <div className="text-sub">
                         <span>Helpful? <span className="clickable" onClick={this.isHelpful}>Yes</span> ({this.state.helpfulness})</span>
                         <span className="divider-bar">|</span>
                         <span className="clickable" onClick={this.togglePopup.bind(this)}>Add Answer</span>
@@ -128,10 +128,10 @@ class Question extends Component {
                     <div>
                         {this.renderAnswers()}
                         {this.state.answers.length <= 2 ? null :
-                            <button onClick={this.showMoreOrLess}>
-                                {!this.state.showAllAnswers && 'Show More'}
-                                {this.state.showAllAnswers && 'Show Less'}
-                            </button>
+                            <div className="text-reg load-more" onClick={this.showMoreOrLess}>
+                                {!this.state.showAllAnswers && 'LOAD MORE ANSWERS'}
+                                {this.state.showAllAnswers && 'SHOW LESS'}
+                            </div>
                         }
                     </div>
                 }

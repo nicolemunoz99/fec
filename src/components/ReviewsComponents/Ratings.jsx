@@ -75,25 +75,29 @@ const Ratings = (props) => {
         </div>
         <div className='recos'>{Math.ceil((props.state.meta.recommended['1'] / totalRatings) * 100)}% of reviews recommend this product</div>
         <div className='rbreakdown'>
-          <div className='text-button' id='fivestars' onClick={(e) => ratingFilter(e.target.id)}>5 stars</div>
-          <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" style={{ width: five + '%' }} aria-valuenow={five} aria-valuemin="0" aria-valuemax="100"></div>
+          <div className='rlabels'>
+            <div className='text-button' id='fivestars' onClick={(e) => ratingFilter(e.target.id)}>5 stars</div>
+            <div className='text-button' id='fourstars' onClick={(e) => ratingFilter(e.target.id)}>4 stars</div>
+            <div className='text-button' id='threestars' onClick={(e) => ratingFilter(e.target.id)}>3 stars</div>
+            <div className='text-button' id='twostars' onClick={(e) => ratingFilter(e.target.id)}>2 stars</div>
+            <div className='text-button' id='onestar' onClick={(e) => ratingFilter(e.target.id)}>1 star</div>
           </div>
-          <div className='text-button' id='fourstars' onClick={(e) => ratingFilter(e.target.id)}>4 stars</div>
-          <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" style={{ width: four + '%' }} aria-valuenow={four} aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <div className='text-button' id='threestars' onClick={(e) => ratingFilter(e.target.id)}>3 stars</div>
-          <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" style={{ width: three + '%' }} aria-valuenow={three} aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <div className='text-button' id='twostars' onClick={(e) => ratingFilter(e.target.id)}>2 stars</div>
-          <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" style={{ width: two + '%' }} aria-valuenow={two} aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <div className='text-button' id='onestar' onClick={(e) => ratingFilter(e.target.id)}>1 star</div>
-          <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" style={{ width: one + '%' }} aria-valuenow={one} aria-valuemin="0" aria-valuemax="100"></div>
+          <div className='rprogress'>
+            <div className="progress">
+              <div className="progress-bar bg-success" role="progressbar" style={{ width: five + '%' }} aria-valuenow={five} aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div className="progress">
+              <div className="progress-bar bg-success" role="progressbar" style={{ width: four + '%' }} aria-valuenow={four} aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div className="progress">
+              <div className="progress-bar bg-success" role="progressbar" style={{ width: three + '%' }} aria-valuenow={three} aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div className="progress">
+              <div className="progress-bar bg-success" role="progressbar" style={{ width: two + '%' }} aria-valuenow={two} aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div className="progress">
+              <div className="progress-bar bg-success" role="progressbar" style={{ width: one + '%' }} aria-valuenow={one} aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
           </div>
         </div>
         <div className='char-sliders'>
@@ -107,7 +111,7 @@ const Ratings = (props) => {
     </div>);
   }
 
-  
+
 }
 
 

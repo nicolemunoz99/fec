@@ -30,21 +30,24 @@ const Answer = ({ answer }) => {
 
     return (
         <div className="answer">
-            <p><span className="answer-head">A: </span>
-                {answer.body}
-                <span className="highlight">{answer.body_match}</span>
-                {answer.body_tail}
-            </p>
-            {answer.photos.length > 0 && <AnswerPhotos answer={answer}/>}
-            <div className="q-subtext">
-                <span>by {answer.answerer_name} on {moment(answer.date).utc().format('MMMM Do YYYY')}</span>
-                <span className="divider-bar">|</span>
-                <span>Helpful? <span className="clickable" onClick={isHelpful}>Yes</span> ({helpfulness})</span>
-                <span className="divider-bar">|</span>
-                {isReported === false ?
-                    <span className="clickable" onClick={reportAnswer}>Report</span>
-                : <span>Thank you for your concern. Our team will review this question.</span>
-            }
+            <span className="answer-title text-main bold">A: &nbsp;</span>
+            <div className="answer-body">
+                <p className="text-reg">
+                    {answer.body}
+                    <span className="highlight">{answer.body_match}</span>
+                    {answer.body_tail}
+                </p>
+                {answer.photos.length > 0 && <AnswerPhotos answer={answer}/>}
+                <div className="text-sub">
+                    <span>by {answer.answerer_name} on {moment(answer.date).utc().format('MMMM Do YYYY')}</span>
+                    <span className="divider-bar">|</span>
+                    <span>Helpful? <span className="clickable" onClick={isHelpful}>Yes</span> ({helpfulness})</span>
+                    <span className="divider-bar">|</span>
+                    {isReported === false ?
+                        <span className="clickable" onClick={reportAnswer}>Report</span>
+                    : <span>Thank you for your concern. Our team will review this question.</span>
+                }
+                </div>
             </div>
         </div>
     )
