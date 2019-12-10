@@ -379,15 +379,6 @@
   margin-bottom: 1em; 
 }
 
-.q-main .text-main {
-  display: inline-block;
-  margin-bottom: 0.25rem;
-}
-
-.q-main .text-sub {
-  float: right;
-}
-
 .q-search {
   width: 100%;
 }
@@ -446,30 +437,10 @@
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.popup-body {
-  height: auto;
-  width: 40%;
-  margin-top: 12.5%;
-  margin-left: 30%;
-  /* border-style: solid; */
-  background-color: white;
-  padding: 0.5em;
-}
-
-.popup-body textarea {
-  width: 100%;
-}
-
-.popup-body input {
-  width: 50%;
-}
-
-.popup-body span {
-  font-size: 0.4em;
-  text-decoration: underline;
-  color: #979595;
-  float: right;
-  cursor: pointer;
+@media (max-width: 600px) {
+  .popup {
+    background-color: black;
+  }
 }
 
 .answer-photo {

@@ -1,3 +1,54 @@
+.q-main {
+  display: flex;
+  flex-wrap: wrap;
+}
+.q-main .text-main {
+  margin-bottom: 0.25rem;
+}
+.q-main .text-sub {
+  margin-left: auto;
+  margin-top: 0.3rem;
+}
+@media (max-width: 600px) {
+  .q-main .text-main {
+    min-width: 100%;
+    flex-basis: 100%;
+  }
+  .q-main .text-sub {
+    margin-left: 0;
+    margin-top: 0;
+  }
+}
 
+.popup-body {
+  height: auto;
+  width: 40%;
+  margin-top: 12.5%;
+  margin-left: 30%;
+  background-color: white;
+  padding: 0.5em;
+}
+.popup-body textarea {
+  width: 100%;
+}
+.popup-body input {
+  width: 50%;
+}
+.popup-body span {
+  font-size: 0.4em;
+  text-decoration: underline;
+  color: #979595;
+  float: right;
+  cursor: pointer;
+}
+.popup-body .text-reg {
+  margin-bottom: 0;
+}
+@media (max-width: 600px) {
+  .popup-body {
+    width: 90vw;
+    margin-left: 5vw;
+  }
+}
 
 /*# sourceMappingURL=compiled.css.map */
