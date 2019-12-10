@@ -22,12 +22,10 @@ class ExpandedView extends React.Component {
   expandedMainPhotoClick(e) {
     // show zoom overlay
     this.setState({ showZoomView: true }, () => {
+      // show zoomed imaged by setting current photo as background
       let bgUrl = this.props.photos[this.props.currentPhotoIndex].url
-      console.log('bgUrl', bgUrl)
       document.getElementById('zoom-overlay').style.backgroundImage = `url(${bgUrl})`;
-    })
-    // show zoomed imaged by setting current photo as background
-    
+    })    
   }
 
 

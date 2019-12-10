@@ -44,6 +44,7 @@ class ImageGallery extends React.Component {
   }
 
   tbNavHandler(e) {
+    console.log('target: ', e.target.attributes['data-widget'].value)
     let clickedNav = e.target.id;
     let newTopIndex;
     // when thumnail nav-down clicked
@@ -167,7 +168,8 @@ closeExpanded(e) {
             <div className="row">
               <div className="col-12 d-flex align-items-center justify-content-center">
                 {/* only show thumbnail navigation if there are more than this.numThumnails */}
-                {this.state.photos.length > this.numThumbnails ? <div id="tb-nav-down" onClick={this.tbNavHandler} className={"photo-nav"}>
+                {this.state.photos.length > this.numThumbnails ?
+                  <div id="tb-nav-down" onClick={this.tbNavHandler} className={"photo-nav"} data-widget="test">
                   <i className="material-icons md-34">arrow_drop_down</i>
                 </div> : null}
               </div>
