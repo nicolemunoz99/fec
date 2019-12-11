@@ -69,7 +69,6 @@
   }
 }
 
-<<<<<<< HEAD
 .selector .selector-main {
   background-color: white;
   border-color: black;
@@ -109,7 +108,7 @@
 .product-search input {
   padding: 1rem 1rem;
   line-height: 1rem;
-=======
+}
 .answer br {
   display: none;
 }
@@ -120,7 +119,6 @@
   .answer .divider-bar {
     display: none;
   }
->>>>>>> 1cd13af0607b328603810f2dbdc155daad45ed9e
 }
 
 /*# sourceMappingURL=compiled.css.map */
