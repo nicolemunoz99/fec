@@ -40,12 +40,12 @@ class App extends React.Component {
       })
   }
 
-  //had to add 'el &&' conditions bc of weird bug in q&a section when closing modals
   findName (el, type) {
-    if (el && el.attributes[type]) {
+    if (el.attributes[type]) {
       return el.attributes[type].value;
     }
-    else if (el && !Array.prototype.includes.call(document.children, el)) {
+    //had to add 'el.parentNode' condition bc of weird bug in q&a section when closing modals
+    else if (el.parentNode && !Array.prototype.includes.call(document.children, el)) {
       return this.findName(el.parentNode, type);
     }
     else if (type === 'data-widget') {
