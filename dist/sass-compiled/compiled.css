@@ -66,4 +66,45 @@
   }
 }
 
+.selector .selector-main {
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
+  border-width: 1px;
+  cursor: pointer;
+}
+.selector .selector-main * {
+  pointer-events: none;
+}
+.selector .selector-main:hover {
+  outline: 1px dotted;
+}
+.selector .options {
+  display: block;
+  position: absolute;
+  z-index: 10;
+  width: inherit;
+  padding-left: inherit;
+  padding-right: inherit;
+  left: -0.04rem;
+}
+.selector .item {
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
+  border-width: 1px;
+  cursor: pointer;
+}
+.selector .item:hover {
+  color: white;
+  background-color: black;
+}
+
+.product-search input {
+  padding: 1rem 1rem;
+  line-height: 1rem;
+}
+
 /*# sourceMappingURL=compiled.css.map */

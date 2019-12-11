@@ -137,10 +137,7 @@ class StyleSelector extends React.Component {
                 <p><span className="sale-price mr-2">${this.props.selectedStyle.sale_price}</span><span className="strikethrough">${this.props.selectedStyle.original_price}</span></p> :
                 <p><span>${this.props.selectedStyle.original_price}</span></p>
               }
-              
-            
             <p>{this.props.selectedStyle.name}</p>
-          
             <div className="row no-gutters mt-4">
             {
             this.props.styles.map((style, i) => {
@@ -156,48 +153,48 @@ class StyleSelector extends React.Component {
             </div>
           </div>
 
-          {/* Add To Cart */}
+          
           <div className="col-sm-12 mt-1 mb-4 d-flex justify-content-center">
             {/* size selector */}      
-            <div className="col-sm-6 selector-container checkout-item" data-selector="select-size">
+            <div className="col-sm-6 checkout-item selector" data-selector="select-size">
               <div className="col-sm-12">
-                <div id="sku" onClick={this.toggleSelector} className="selectorMain selector justify-content-center align-items-center">
+                <div id="sku" onClick={this.toggleSelector} className="selector-main justify-content-center align-items-center">
                   {/* set default value based on whether or not style is in stock */}
                   {Object.keys(this.props.selectedStyle.skus).length === 0 ?
                   <span className="disabled ml-2 mr-2">Out of Stock</span> :
                   <span className="ml-2 mr-2">{this.state.selectedSku ? "size " + this.state.selectedSku : "Select Size" }</span>
                   }
                 </div>
-                <div className="selector-options">
-                  {/* show dropdown when user clicks on it, selects a size, or clicks off of it */}
+                
+                  {/* toggle dropdown when user clicks on it, selects a size, or clicks off of it */}
                   { this.state.activeDropdown === 'sku' ? 
-                    <div>
+                    <div className="options">
                         { this.sortSkus(this.props.selectedStyle).map((sku, i) => {
                         return (
-                          <div key={i} onClick={this.selectSize} id={sku} className="selector d-flex justify-content-center">
+                          <div key={i} onClick={this.selectSize} id={sku} className="item d-flex justify-content-center">
                             {sku}
                           </div>
                         )
                       })}
                     </div> : null
                   }
-                </div>
+                
               </div>
             </div>
 
             {/* quantity selector */}
-            <div className="col-sm-6 selector-container checkout-item" data-selector="select-quantity">
-              <div className="col-sm-12"><span className="pr-2">Quantity:</span> 
-                <div id="qty" onClick={this.state.selectedSku ? this.toggleSelector : null} className="selectorMain selector d-flex align-items-center justify-content-center">
+            <div className="col-sm-6 checkout-item selector d-flex align-items-center justify-content-center" data-selector="select-quantity">
+              <div className="col-7">
+                <div className="pr-2">Quantity:</div> 
+                <div id="qty" onClick={this.state.selectedSku ? this.toggleSelector : null} className="selector-main d-flex align-items-center justify-content-center">
                   {/* set default value based on whether or not size has been selected */}
                   <span className="ml-2 mr-2">{ this.state.selectedQty ? this.state.selectedQty : '-' }</span> 
                 </div>
-                <div id="qtySelector" className="selector-options" >
                 { this.state.activeDropdown === 'qty' ?
-                    <div>
+                    <div id="qtySelector" className="options">
                       {this.state.qtyOptions.map((qty, i) => {
                         return (
-                          <div key={i} onClick={this.selectQty} id={qty} className="selector d-flex align-items-center justify-content-center">
+                          <div key={i} onClick={this.selectQty} id={qty} className="item d-flex align-items-center justify-content-center">
                             {qty}
                           </div>
                         )
@@ -205,14 +202,15 @@ class StyleSelector extends React.Component {
                     </div> 
                   : null
                 }
-                </div>
+             
               </div>
             </div>
-          </div>      
+          </div> 
+          {/* Add To Cart */}
           <div className="col-sm-12 mb-3 d-flex align-items-center justify-content-center" data-selector="add-to-cart">
             {/* hide cart button when style is out of stock */}
             {Object.keys(this.props.selectedStyle.skus).length === 0 ? null :
-              <div><button onClick={this.addToCart}>Add to cart</button></div>
+              <button className="block-button" onClick={this.addToCart}>Add to cart</button>
             }
             
           </div>
