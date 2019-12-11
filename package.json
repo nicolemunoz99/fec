@@ -7,7 +7,8 @@
     "build": "webpack --mode production",
     "react-dev": "webpack -d --watch",
     "start": "live-server ./dist",
-    "sass-dev": "sass --watch ./dist/sass-files/style.scss ./dist/sass-compiled/compiled.css"
+    "sass-dev": "sass --watch ./dist/sass-files/style.scss ./dist/sass-compiled/compiled.css",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,7 @@
     "@babel/preset-react": "^7.7.4",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
+    "jest": "^24.9.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
