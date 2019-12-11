@@ -28,12 +28,13 @@ const AnswerPhotos = ({ answer }) => {
                     <img 
                         src={photo.url || photo} 
                         className="answer-photo"
-                        onClick={togglePic}>
+                        onClick={togglePic}
+                        data-selector={`answer-${answer.answer_id}-photos`}>
                     </img>
                 </div>)
             })}
             {showExpanded && 
-                <div className="popup">
+                <div className="popup" data-selector={`answer-${answer.answer_id}-photo-popup`}>
                     <div className="answer-photo-container">
                         <span className="clickable" onClick={()=>setShowExpanded(false)}>CLOSE</span>
                         <img src={expandedUrl}></img>

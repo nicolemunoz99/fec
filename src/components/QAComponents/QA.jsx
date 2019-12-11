@@ -171,7 +171,7 @@ class QA extends Component {
 
     render() {
         return (
-            <div data-widget={`questions-answers-${this.props.productId}`}>
+            <div data-widget={`Q&A-${this.props.productId}`}>
                 <p className="text-main" data-selector="qa-title">QUESTIONS & ANSWERS</p>
                 {!!this.state.questions.length && 
                     <form className="searchQuestions" data-selector="qa-search">
