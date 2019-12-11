@@ -8,6 +8,12 @@
   .default-thumbnails {
     display: none;
   }
+  .expanded-view-photo {
+    pointer-events: none;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
 }
 
 .hidden {
@@ -20,6 +26,10 @@
 
 .sale-price {
   color: red;
+}
+
+.black {
+  color: black !important;
 }
 
 
@@ -69,7 +79,7 @@
 }
 
 #sku.selectorMain {
-  width: 6rem;
+  width: 7rem;
 }
 
 .selector:hover {
@@ -96,7 +106,7 @@
 
 #gallery-overlay {
   position: fixed;
-  display: none;
+  /* display: none; */
   width: 100%;
   height: 100%;
   top: 0;
@@ -109,7 +119,6 @@
 
 #zoom-overlay {
   position: fixed;
-  display: none;
   width: 100%;
   height: 100%;
   top: 0;
@@ -153,14 +162,20 @@
 }
 
 .style-tb-div {
+  /* width: 4.0rem;
+  height: 4.0rem; */
   width: 8vw;
   height: 8vw;
+  min-width: 4rem;
+  min-height:4rem;
   overflow: hidden;
-  border-radius: 7vw;
+  border-radius: 4.0rem;
   border-style: solid;
   border-color: black;
   border-width: 2px;
   margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .style-tb {
@@ -379,19 +394,6 @@
   margin-bottom: 1em; 
 }
 
-.q-main .text-main {
-  display: inline-block;
-  margin-bottom: 0.25rem;
-}
-
-.q-main .text-sub {
-  float: right;
-}
-
-.q-search {
-  width: 100%;
-}
-
 .answer p {
   display: inline;
 }
@@ -446,30 +448,10 @@
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.popup-body {
-  height: auto;
-  width: 40%;
-  margin-top: 12.5%;
-  margin-left: 30%;
-  /* border-style: solid; */
-  background-color: white;
-  padding: 0.5em;
-}
-
-.popup-body textarea {
-  width: 100%;
-}
-
-.popup-body input {
-  width: 50%;
-}
-
-.popup-body span {
-  font-size: 0.4em;
-  text-decoration: underline;
-  color: #979595;
-  float: right;
-  cursor: pointer;
+@media (max-width: 600px) {
+  .popup {
+    backdrop-filter: blur(6px);
+  }
 }
 
 .answer-photo {
@@ -486,9 +468,19 @@
   display: inline-block;
 }
 
+@media (max-width: 600px) {
+  .answer-photo-div {
+    width: 16vw;
+    height: 16vw;
+  }
+
+  .answer-photo {
+    height: 18vw;
+  }
+}
+
 .answer-photo-container {
   position: relative;
-
 }
 
 .answer-photo-container img {
@@ -674,7 +666,6 @@ button:focus {
 
 .text-reg {
   font-size: 0.8rem;
-  
 }
 
 ::selection {

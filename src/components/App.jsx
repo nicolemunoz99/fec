@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Overview from './overview/Overview.jsx';
 import defaultProduct from './defaultProduct.js';
 
@@ -18,10 +19,40 @@ class App extends React.Component {
     this.searchProducts = this.searchProducts.bind(this);
     this.submitSearch = this.submitSearch.bind(this);
     this.clickProduct = this.clickProduct.bind(this);
+    this.findName = this.findName.bind(this);
+    this.recordInteractions = this.recordInteractions.bind(this)
   };
 
   componentDidMount() {
     this.getProducts();
+    document.addEventListener('click', this.recordInteractions, false);
+  }
+
+  recordInteractions (e) {
+    let widget = this.findName(e.target, 'data-widget');
+    let element = this.findName(e.target, 'data-selector');
+    let time = new Date();
+    let interactions = {element, widget, time}
+    console.log('interactions: ', interactions)
+    // axios.post('http://3.134.102.30/interactions', interactions)
+    // .then(() => {
+    //   console.log('success')
+    // })
+  }
+
+  findName (el, type) {
+    if (el.attributes[type]) {
+      return el.attributes[type].value;
+    }
+    else if (!Array.prototype.includes.call(document.children, el)) {
+      return this.findName(el.parentNode, type);
+    }
+    else if (type === 'data-widget') {
+      return 'app';
+    }
+    else {  //type is 'data-selector
+      return 'null';
+    }
   }
 
   getProducts() {
@@ -80,7 +111,7 @@ class App extends React.Component {
       <div>
       <div className="container-fluid">
         <div className="row mt-3">
-          <div className="col-sm-6">
+          <div className="col-sm-6" data-widget="search-bar">
             <div>
               <input onChange={this.onChangeProducts} placeholder="Search for products" value={this.state.searchTerm}></input>
               <button onClick={this.submitSearch}><i className="inline-centered material-icons">search</i></button>

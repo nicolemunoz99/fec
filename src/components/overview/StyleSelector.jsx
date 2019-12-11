@@ -161,7 +161,7 @@ class StyleSelector extends React.Component {
             {/* size selector */}      
             <div className="col-sm-6 selector-container checkout-item ">
               <div className="col-sm-12">
-                <div id="sku" onClick={this.toggleSelector} className="selectorMain selector justify-content-center">
+                <div id="sku" onClick={this.toggleSelector} className="selectorMain selector justify-content-center align-items-center">
                   {/* set default value based on whether or not style is in stock */}
                   {Object.keys(this.props.selectedStyle.skus).length === 0 ?
                   <span className="disabled ml-2 mr-2">Out of Stock</span> :

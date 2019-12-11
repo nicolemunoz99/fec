@@ -54,7 +54,7 @@ class ProductBasics extends React.Component {
 
   render() {
     return (
-        <div className="row">
+        <div id="test" className="row">
           
           <div className="col-sm-12 mt-2 mb-2 mt-4">
             <span>
