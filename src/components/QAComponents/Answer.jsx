@@ -41,6 +41,7 @@ const Answer = ({ answer }) => {
                 <div className="text-sub">
                     <span data-selector={`answer-${answer.answer_id}-meta`}>by {answer.answerer_name} on {moment(answer.date).utc().format('MMMM Do YYYY')}</span>
                     <span className="divider-bar">|</span>
+                    <br></br>
                     <span data-selector={`answer-${answer.answer_id}-helpful`}>Helpful? <span className="clickable" onClick={isHelpful}>Yes</span> ({helpfulness})</span>
                     <span className="divider-bar">|</span>
                     {isReported === false ?

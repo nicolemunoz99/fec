@@ -69,4 +69,16 @@
   }
 }
 
+.answer br {
+  display: none;
+}
+@media (max-width: 600px) {
+  .answer br {
+    display: block;
+  }
+  .answer .divider-bar {
+    display: none;
+  }
+}
+
 /*# sourceMappingURL=compiled.css.map */
