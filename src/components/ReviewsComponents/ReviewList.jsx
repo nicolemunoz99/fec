@@ -19,9 +19,9 @@ const ReviewList = (props) => {
   }
   let filters = props.state.starFilters.concat(props.state.search);
   return (
-    <div className='reviewlist'>
+    <div className='reviewlist' data-selector='reviewlist'>
       <div className='infoSort text-main bold'>{props.total} reviews, sorted by
-          <select id='sortSelect' className='text-main bold' onChange={(e) => {
+          <select id='sortSelect' className='text-main bold' data-selector='reviews-sort' onChange={(e) => {
           let select = document.getElementById("sortSelect");
           let selected = select.options[select.selectedIndex];
           for (let i = 0; i < select.options.length; ++i) {
@@ -35,7 +35,7 @@ const ReviewList = (props) => {
           <option value='relevant'>relevance</option>
         </select>
       </div>
-      <span className='rsearch'><input id='rsearch' onChange={(e) => {
+      <span className='rsearch' data-selector='reviews-search'><input id='rsearch' onChange={(e) => {
         let term = document.getElementById('rsearch').value.toLowerCase().trim();
         if (term.length > 2) {
           props.update({ search: term });
@@ -70,7 +70,7 @@ const ReviewList = (props) => {
         }
       }) : (<em>No reviews posted... yet</em>)}
       {moreButton}
-      <button className='reviewsButton' onClick={(e) => {
+      <button className='reviewsButton' data-selector='new-review' onClick={(e) => {
         document.getElementById('rmodal').style.display = 'block';
       }}>ADD A REVIEW +</button>
     </div>

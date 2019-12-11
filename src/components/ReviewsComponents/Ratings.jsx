@@ -61,7 +61,7 @@ const Ratings = (props) => {
       createSliders('Quality', ['Poor', 'Expected', 'Perfect']);
     }
     return (
-      <div className='ratings text-sub'>
+      <div className='ratings text-sub' data-selector='ratings'>
         <span className='ratingStars'>
           <StarRating rating={averageRating} />
         </span>
@@ -69,11 +69,11 @@ const Ratings = (props) => {
         <div className='recos'>{Math.ceil((props.state.meta.recommended['1'] / totalRatings) * 100)}% of reviews recommend this product</div>
         <div className='rbreakdown'>
           <div className='rlabels'>
-            <div className='text-button rlabel' id='fivestars' onClick={(e) => ratingFilter(e.target.id)}>5 stars</div>
-            <div className='text-button rlabel' id='fourstars' onClick={(e) => ratingFilter(e.target.id)}>4 stars</div>
-            <div className='text-button rlabel' id='threestars' onClick={(e) => ratingFilter(e.target.id)}>3 stars</div>
-            <div className='text-button rlabel' id='twostars' onClick={(e) => ratingFilter(e.target.id)}>2 stars</div>
-            <div className='text-button rlabel' id='onestar' onClick={(e) => ratingFilter(e.target.id)}>1 star</div>
+            <div className='text-button rlabel' id='fivestars' data-selector='5star-filter' onClick={(e) => ratingFilter(e.target.id)}>5 stars</div>
+            <div className='text-button rlabel' id='fourstars' data-selector='4star-filter' onClick={(e) => ratingFilter(e.target.id)}>4 stars</div>
+            <div className='text-button rlabel' id='threestars' data-selector='3star-filter' onClick={(e) => ratingFilter(e.target.id)}>3 stars</div>
+            <div className='text-button rlabel' id='twostars' data-selector='2star-filter' onClick={(e) => ratingFilter(e.target.id)}>2 stars</div>
+            <div className='text-button rlabel' id='onestar' data-selector='1star-filter' onClick={(e) => ratingFilter(e.target.id)}>1 star</div>
           </div>
           <div className='rprogress'>
             <div className="progress">

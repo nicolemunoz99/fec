@@ -27,7 +27,7 @@ const ReviewCard = (props) => {
     }}>Show more</div>);
   }
   return (
-    <div className='review-card'>
+    <div className='review-card' data-selector='review-card'>
       <div className='r-stars'>
         <StarRating rating={props.review.rating} />
       </div>
@@ -38,10 +38,10 @@ const ReviewCard = (props) => {
         props.helpful(props.review.review_id);
         props.review.helpfulness++;
         e.target.style.display = 'none';
-      }}>Yes</div> ({props.review.helpfulness}) | <div className='text-button' onClick={(e) => {
+      }} data-selector='review-helpful'>Yes</div> ({props.review.helpfulness}) | <div className='text-button' onClick={(e) => {
         props.report(props.review.review_id);
         e.target.parentNode.parentNode.innerHTML = '<em>Thank you for your report. This review is now being examined by a moderator</em>';
-      }}>Report</div></div>
+      }} data-selector='review-report'>Report</div></div>
       <hr></hr>
     </div>
   );
