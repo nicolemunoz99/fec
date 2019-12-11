@@ -77,3 +77,18 @@
         font-size: 0.8rem;
     }
 }
+
+.answer {
+    br {
+        display: none;
+    }
+    @media (max-width: 600px) {
+        br {
+            display: block;
+        }
+        .divider-bar {
+            display: none;
+        }
+    }
+}
+
