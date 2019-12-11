@@ -33,18 +33,19 @@ class App extends React.Component {
     let element = this.findName(e.target, 'data-selector');
     let time = new Date();
     let interactions = {element, widget, time}
-    console.log('interactions: ', interactions)
-    // axios.post('http://3.134.102.30/interactions', interactions)
-    // .then(() => {
-    //   console.log('success')
-    // })
+    // console.log('interactions: ', interactions)
+    axios.post('http://3.134.102.30/interactions', interactions)
+      .then(() => {
+        console.log('Interaction data sent')
+      })
   }
 
+  //had to add 'el &&' conditions bc of weird bug in q&a section when closing modals
   findName (el, type) {
-    if (el.attributes[type]) {
+    if (el && el.attributes[type]) {
       return el.attributes[type].value;
     }
-    else if (!Array.prototype.includes.call(document.children, el)) {
+    else if (el && !Array.prototype.includes.call(document.children, el)) {
       return this.findName(el.parentNode, type);
     }
     else if (type === 'data-widget') {

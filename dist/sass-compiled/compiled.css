@@ -55,6 +55,9 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
   }
+  .popup-body input {
+    width: 100%;
+  }
 }
 
 .q-search {
