@@ -525,8 +525,8 @@
   -webkit-appearance: none;
   width: 0; 
   height: 0; 
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
   border-top: 8px solid grey;
 }
 
@@ -642,7 +642,7 @@ button:focus {
 .rlabels {
   display: flex;
   flex-direction: column;
-  min-width: 2rem;
+  min-width: 2.1rem;
 }
 
 .rprogress {
