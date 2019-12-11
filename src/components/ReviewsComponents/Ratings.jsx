@@ -37,7 +37,7 @@ const Ratings = (props) => {
           <div className='bottom-meaning'>
             <div>{meaning[0]}</div>
             <div>{meaning[1]}</div>
-            <div style={{ 'text-align': 'right' }}>{meaning[2]}</div>
+            <div style={{ textAlign: 'right' }}>{meaning[2]}</div>
           </div>
         </div>
       );

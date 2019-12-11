@@ -15,7 +15,7 @@ const ReviewList = (props) => {
     }
   };
   if (currentReviews > 2 && !props.state.starFilters.length) {
-    moreButton = (<button className='reviewsButton' onClick={(e) => props.update({ more: !props.state.more })}>{props.state.more ? 'LESS REVIEWS' : 'MORE REVIEWS'}</button>);
+    moreButton = (<button className='reviewsButton' data-selector='reviews-more' onClick={(e) => props.update({ more: !props.state.more })}>{props.state.more ? 'LESS REVIEWS' : 'MORE REVIEWS'}</button>);
   }
   let filters = props.state.starFilters.concat(props.state.search);
   return (
@@ -65,6 +65,7 @@ const ReviewList = (props) => {
               return <ReviewCard review={review} helpful={props.helpful} report={props.report} key={i} />;
             }
           } else if (review.summary.toLowerCase().includes(props.state.search) || review.body.toLowerCase().includes(props.state.search)) {
+            
             return <ReviewCard review={review} helpful={props.helpful} report={props.report} key={i} />;
           }
         }

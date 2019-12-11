@@ -36,7 +36,7 @@ class App extends React.Component {
     // console.log('interactions: ', interactions)
     axios.post('http://3.134.102.30/interactions', interactions)
       .then(() => {
-        console.log('Interaction data sent')
+        // console.log('Interaction data sent')
       })
   }
 

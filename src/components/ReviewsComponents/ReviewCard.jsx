@@ -32,15 +32,22 @@ const ReviewCard = (props) => {
         <StarRating rating={props.review.rating} />
       </div>
       <div className='r-info text-sub'>{props.review.reviewer_name}, {date}</div>
-      <div className='r-summary text-main bold'>{props.review.summary}</div>
-      <div className='r-body text-reg'>{props.review.body.slice(0, 250)}{showMore}</div>
+      <div className='r-summary text-main bold'>{props.review.summary}
+        <span className='highlighted'>{props.review.summary_match}</span>
+        {props.review.summary_tail}
+      </div>
+      <div className='r-body text-reg'>{props.review.summary_match ? props.review.body : props.review.body.slice(0, 250)}
+        <span className='highlighted'>{props.review.summary_match}</span>
+        {props.review.summary_tail}
+        {props.review.summary_match ? '' : (<div>{showMore}</div>)}
+      </div>
       <div className='r-bottom text-sub'>Helpful? <div className='text-button' id='helpful' onClick={(e) => {
         props.helpful(props.review.review_id);
         props.review.helpfulness++;
         e.target.style.display = 'none';
       }} data-selector='review-helpful'>Yes</div> ({props.review.helpfulness}) | <div className='text-button' onClick={(e) => {
         props.report(props.review.review_id);
-        e.target.parentNode.parentNode.innerHTML = '<em>Thank you for your report. This review is now being examined by a moderator</em>';
+        e.target.parentNode.parentNode.innerHTML = '<em>Thank you for your report. This review is now being examined by a moderator</em><hr></hr>';
       }} data-selector='review-report'>Report</div></div>
       <hr></hr>
     </div>
