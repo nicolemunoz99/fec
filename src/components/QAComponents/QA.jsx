@@ -171,10 +171,10 @@ class QA extends Component {
 
     render() {
         return (
-            <div>
-                <p className="text-main">QUESTIONS & ANSWERS</p>
+            <div data-widget={`Q&A-${this.props.productId}`}>
+                <p className="text-main" data-selector="qa-title">QUESTIONS & ANSWERS</p>
                 {!!this.state.questions.length && 
-                    <form className="searchQuestions">
+                    <form className="searchQuestions" data-selector="qa-search">
                         <input type="text"
                             className="q-search"
                             placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS."
@@ -184,7 +184,7 @@ class QA extends Component {
                     </form>
                 }
                 {this.state.showUserQuestion &&
-                    <div className="text-reg">
+                    <div className="text-reg" data-selector="question-added-confirmation">
                         <p>Thanks for adding a question!</p>
                         <p>You asked: "{this.state.userQuestion}"</p>
                     </div>}
@@ -194,10 +194,10 @@ class QA extends Component {
                         key={question.question_id}
                         updateParent={this.refresh.bind(this)} />)}
                     {!this.state.questions.length && 
-                        <p className="text-reg">Be the first to ask a question about this product!</p>
+                        <p className="text-reg" data-selector="no-questions">Be the first to ask a question about this product!</p>
                     }
                 </div>
-                <button onClick={this.togglePopup}>ASK A QUESTION +</button>
+                <button onClick={this.togglePopup} data-selector="new-question">ASK A QUESTION +</button>
                 {this.state.showPopup && <NewQuestion togglePopup={this.togglePopup} />}
             </div>
         )

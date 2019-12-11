@@ -47,7 +47,7 @@ class NewQuestion extends Component {
     render() {
         return(
             <div className="popup">
-                <div className="popup-body">
+                <div className="popup-body"  data-selector="new-question-modal" >
                     <span onClick={this.props.togglePopup}>close (esc)</span>
                     <p className="text-main bold">Ask A Question:</p>
                     <form onSubmit={this.handleSubmit}>
@@ -77,6 +77,7 @@ class NewQuestion extends Component {
                             placeholder="Example: Bob@website.com"
                             onChange={this.handleChange}
                         />
+                        <br/>
                         <button type="submit">Submit</button>
                     </form>
                 </div>

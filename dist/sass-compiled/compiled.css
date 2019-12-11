@@ -55,6 +55,9 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
   }
+  .popup-body input {
+    width: 100%;
+  }
 }
 
 .q-search {
@@ -66,6 +69,7 @@
   }
 }
 
+<<<<<<< HEAD
 .selector .selector-main {
   background-color: white;
   border-color: black;
@@ -105,6 +109,18 @@
 .product-search input {
   padding: 1rem 1rem;
   line-height: 1rem;
+=======
+.answer br {
+  display: none;
+}
+@media (max-width: 600px) {
+  .answer br {
+    display: block;
+  }
+  .answer .divider-bar {
+    display: none;
+  }
+>>>>>>> 1cd13af0607b328603810f2dbdc155daad45ed9e
 }
 
 /*# sourceMappingURL=compiled.css.map */

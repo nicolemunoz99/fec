@@ -29,7 +29,7 @@ const Answer = ({ answer }) => {
     }
 
     return (
-        <div className="answer">
+        <div className="answer" data-selector={`answer-${answer.answer_id}`}>
             <span className="answer-title text-main bold">A: &nbsp;</span>
             <div className="answer-body">
                 <p className="text-reg">
@@ -39,12 +39,13 @@ const Answer = ({ answer }) => {
                 </p>
                 {answer.photos.length > 0 && <AnswerPhotos answer={answer}/>}
                 <div className="text-sub">
-                    <span>by {answer.answerer_name} on {moment(answer.date).utc().format('MMMM Do YYYY')}</span>
+                    <span data-selector={`answer-${answer.answer_id}-meta`}>by {answer.answerer_name} on {moment(answer.date).utc().format('MMMM Do YYYY')}</span>
                     <span className="divider-bar">|</span>
-                    <span>Helpful? <span className="clickable" onClick={isHelpful}>Yes</span> ({helpfulness})</span>
+                    <br></br>
+                    <span data-selector={`answer-${answer.answer_id}-helpful`}>Helpful? <span className="clickable" onClick={isHelpful}>Yes</span> ({helpfulness})</span>
                     <span className="divider-bar">|</span>
                     {isReported === false ?
-                        <span className="clickable" onClick={reportAnswer}>Report</span>
+                        <span className="clickable" onClick={reportAnswer} data-selector={`answer-${answer.answer_id}-report`}>Report</span>
                     : <span>Thank you for your concern. Our team will review this question.</span>
                 }
                 </div>

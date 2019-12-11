@@ -146,7 +146,7 @@ class Reviews extends React.Component {
 
   renderReviews() {
     return (
-      <div id='reviews'>
+      <div id='reviews' data-widget={'reviews' + this.props.productInfo.id}>
         <Ratings state={this.state}
         update={this.updateState}/>
         <ReviewList state={this.state} 

@@ -111,16 +111,16 @@ class Question extends Component {
     render() {
         const question = this.props.question;
         return (
-            <div className="question">
+            <div className="question" data-selector={`question ${question.question_id}`}>
                 <div className="q-main">
                     <p className="text-main bold">Q: {question.question_body}
                     <span className="highlight">{question.body_match}</span>
                     {question.body_tail}
                 </p>
                     <div className="text-sub">
-                        <span>Helpful? <span className="clickable" onClick={this.isHelpful}>Yes</span> ({this.state.helpfulness})</span>
+                        <span data-selector={`question ${question.question_id} helpful`}>Helpful? <span className="clickable" onClick={this.isHelpful}>Yes</span> ({this.state.helpfulness})</span>
                         <span className="divider-bar">|</span>
-                        <span className="clickable" onClick={this.togglePopup.bind(this)}>Add Answer</span>
+                        <span className="clickable" onClick={this.togglePopup.bind(this)} data-selector={`question ${question.question_id} add answer`}>Add Answer</span>
                     </div>
                 </div>
                 {this.state.showPopup && <NewAnswer togglePopup={this.togglePopup.bind(this)} />}
@@ -128,7 +128,7 @@ class Question extends Component {
                     <div>
                         {this.renderAnswers()}
                         {this.state.answers.length <= 2 ? null :
-                            <div className="text-reg load-more" onClick={this.showMoreOrLess}>
+                            <div className="text-reg load-more" onClick={this.showMoreOrLess} data-selector={`question ${question.question_id} show all answers`}>
                                 {!this.state.showAllAnswers && 'LOAD MORE ANSWERS'}
                                 {this.state.showAllAnswers && 'SHOW LESS'}
                             </div>

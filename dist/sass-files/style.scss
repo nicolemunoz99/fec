@@ -65,6 +65,9 @@
         margin-left:5vw;
         margin-top: 0%;
         @include vertical-align();
+        input {
+            width: 100%;
+        }
     }
 }
 
@@ -126,3 +129,17 @@
     // padding: 0.2rem;
   }
 }
+.answer {
+    br {
+        display: none;
+    }
+    @media (max-width: 600px) {
+        br {
+            display: block;
+        }
+        .divider-bar {
+            display: none;
+        }
+    }
+}
+
