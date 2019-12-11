@@ -56,7 +56,7 @@ class ProductBasics extends React.Component {
     return (
         <div id="test" className="row">
           
-          <div className="col-sm-12 mt-2 mb-2 mt-4">
+          <div className="col-sm-12 mt-2 mb-2 mt-4" data-selector="rating">
             <span>
               <StarRating rating={this.state.avgRating} />
               {
@@ -66,14 +66,14 @@ class ProductBasics extends React.Component {
                 </span>
           </div>
  
-          <div className="col-sm-12">
+          <div className="col-sm-12" data-selector="product-description">
             <div id="fb-root"></div> 
             <p>Category: {this.props.productInfo.category}</p>
             <h2>{this.props.productInfo.name}</h2>
             <p>
               {this.props.productInfo.description ? this.props.productInfo.description : null}
             </p>
-            <div className='social-icons-container mb-4'>
+            <div className='social-icons-container mb-4' data-selector="social-sharing">
               <span>
                 <a href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" className="social-icon fab fa-pinterest fa-1x px-2"></a>
               </span>

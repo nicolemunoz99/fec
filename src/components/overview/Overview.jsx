@@ -85,7 +85,7 @@ class Overview extends React.Component {
   render() {
     return (
       <div>
-        <div className="overview-main" data-widget="overview">
+        <div className="overview-main" data-widget={"overview-" + this.props.productInfo.id}>
         <div className="container-fluid">
           <div className="row">
             <div className="col-12 col-md-7 vertical-center">

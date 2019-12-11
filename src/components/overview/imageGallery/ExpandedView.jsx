@@ -77,7 +77,7 @@ class ExpandedView extends React.Component {
               let tbSelected = photo.originalIndex === this.props.currentPhotoIndex ? "expanded-tb-selected" : null
               return (
                 <div key={i} className={tbSelected}>
-                  <div className="expanded-view-tb-div">
+                  <div className="expanded-view-tb-div" data-selector={"expanded-view-thumbnail-" + i}>
                     <img id={photo.originalIndex} onClick={this.props.tbClick} className="expanded-view-tb" src={photo.thumbnail_url}></img>
                   </div>
                 </div>
