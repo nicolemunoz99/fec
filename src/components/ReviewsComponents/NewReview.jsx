@@ -72,9 +72,9 @@ const NewReview = (props) => {
   }
   let charsLeft = 50;
   return (
-    <div id="rmodal" className="rmodal">
-      <div className="rmodal-content">
-        <span className="rclose" onClick={(e) => {
+    <div id='rmodal' className='rmodal' data-selector='new-review-modal'>
+      <div className='rmodal-content'>
+        <span className='rclose' onClick={(e) => {
           document.getElementById('rmodal').style.display = 'none';
         }}>&times;</span>
         <h3>Write Your Review</h3>
