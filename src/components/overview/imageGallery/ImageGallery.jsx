@@ -44,7 +44,6 @@ class ImageGallery extends React.Component {
   }
 
   tbNavHandler(e) {
-    console.log('target: ', e.target.attributes['data-widget'].value)
     let clickedNav = e.target.id;
     let newTopIndex;
     // when thumnail nav-down clicked
@@ -139,10 +138,9 @@ closeExpanded(e) {
     return (
       <div>
       <div className="container">
-      <div className="row align-items-center ml-4 mr-4">
-        
+      <div className="row align-items-center ml-4 mr-4">      
         {/* thumbnails */}
-        <div className="col-2 default-thumbnails">
+        <div className="col-2 default-thumbnails" data-selector="default-view-thumbnails">
           <div>
             <div className="row">
               <div className="col-12 d-flex align-items-center justify-content-center">
@@ -157,7 +155,7 @@ closeExpanded(e) {
                   {
                     this.state.tbIndices.map((tbIndex, i) => {
                       let tbSelected = tbIndex === this.state.currentPhotoIndex ? "tb-div d-flex justify-content-center align-items-center tb-selected" : "tb-div d-flex justify-content-center align-items-center";
-                      return (<div className={tbSelected} key={i}>
+                      return (<div className={tbSelected} data-selector={"default-view-thumbnail-" + i} key={i}>
                                   <img id={tbIndex} onClick={this.tbClick} className={"default-view-tb"} src={this.state.photos[tbIndex].thumbnail_url}></img>
                               </div>)
                     })
@@ -169,7 +167,7 @@ closeExpanded(e) {
               <div className="col-12 d-flex align-items-center justify-content-center">
                 {/* only show thumbnail navigation if there are more than this.numThumnails */}
                 {this.state.photos.length > this.numThumbnails ?
-                  <div id="tb-nav-down" onClick={this.tbNavHandler} className={"photo-nav"} data-widget="test">
+                  <div id="tb-nav-down" onClick={this.tbNavHandler} className={"photo-nav"}>
                   <i className="material-icons md-34">arrow_drop_down</i>
                 </div> : null}
               </div>
@@ -178,7 +176,7 @@ closeExpanded(e) {
         </div>
 
         {/* main image */}
-        <div className="col-12">
+        <div className="col-12" data-selector="default-view-mainImage">
           {
             this.state.photos.map((photo, i) => {
               let photoClass = i === this.state.currentPhotoIndex ?
@@ -203,7 +201,7 @@ closeExpanded(e) {
       {/* expanded view overlay */}
       {
         this.state.showExpandedView ?
-       <div id="gallery-overlay">
+       <div id="gallery-overlay" data-selector="expanded-view">
           <div className="close-expanded-view nav-bg" onClick={this.closeExpanded}>
             <i className="material-icons md-34 black">close</i>
           </div>

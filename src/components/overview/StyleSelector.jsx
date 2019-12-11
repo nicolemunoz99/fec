@@ -129,7 +129,7 @@ class StyleSelector extends React.Component {
   
   render() {
     return(
-      <div className="row">
+      <div className="row" data-selector="style-selector">
         {/* // Style Selector */}
           <div className="col-sm-12">
             
@@ -145,7 +145,7 @@ class StyleSelector extends React.Component {
             {
             this.props.styles.map((style, i) => {
               return (
-                <div key={i} className="col-3">
+                <div key={i} className="col-3" data-selector={"style-selector-thumbnail-" + i}>
                   <div className="style-tb-div d-flex justify-content-center align-items-center">
                   {style.style_id===this.props.selectedStyle.style_id ? <i className="material-icons checkmark icon-bg"> check_circle </i> : null}
                   <img id={style.style_id} onClick={this.styleClick} src={style.photos[0].thumbnail_url} className="style-tb"></img>
@@ -159,7 +159,7 @@ class StyleSelector extends React.Component {
           {/* Add To Cart */}
           <div className="col-sm-12 mt-1 mb-4 d-flex justify-content-center">
             {/* size selector */}      
-            <div className="col-sm-6 selector-container checkout-item ">
+            <div className="col-sm-6 selector-container checkout-item" data-selector="select-size">
               <div className="col-sm-12">
                 <div id="sku" onClick={this.toggleSelector} className="selectorMain selector justify-content-center align-items-center">
                   {/* set default value based on whether or not style is in stock */}
@@ -186,7 +186,7 @@ class StyleSelector extends React.Component {
             </div>
 
             {/* quantity selector */}
-            <div className="col-sm-6 selector-container checkout-item">
+            <div className="col-sm-6 selector-container checkout-item" data-selector="select-quantity">
               <div className="col-sm-12"><span className="pr-2">Quantity:</span> 
                 <div id="qty" onClick={this.state.selectedSku ? this.toggleSelector : null} className="selectorMain selector d-flex align-items-center justify-content-center">
                   {/* set default value based on whether or not size has been selected */}
@@ -209,7 +209,7 @@ class StyleSelector extends React.Component {
               </div>
             </div>
           </div>      
-          <div className="col-sm-12 mb-3 d-flex align-items-center justify-content-center">
+          <div className="col-sm-12 mb-3 d-flex align-items-center justify-content-center" data-selector="add-to-cart">
             {/* hide cart button when style is out of stock */}
             {Object.keys(this.props.selectedStyle.skus).length === 0 ? null :
               <div><button onClick={this.addToCart}>Add to cart</button></div>
