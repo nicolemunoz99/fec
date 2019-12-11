@@ -24,24 +24,26 @@ const NewReview = (props) => {
         <div className='char'>
           <div>
             <input type='radio' name={char} value='1' required onChange={(e) => props.force()}></input>
-            <label htmlFor='1'>1</label>
           </div>
           <div>
             <input type='radio' name={char} value='2' onChange={(e) => props.force()}></input>
-            <label htmlFor='2'>2</label>
           </div>
           <div>
             <input type='radio' name={char} value='3' onChange={(e) => props.force()}></input>
-            <label htmlFor='3'>3</label>
           </div>
           <div>
             <input type='radio' name={char} value='4' onChange={(e) => props.force()}></input>
-            <label htmlFor='4'>4</label>
           </div>
           <div>
             <input type='radio' name={char} value='5' onChange={(e) => props.force()}></input>
-            <label htmlFor='5'>5</label>
           </div>
+        </div>
+        <div className='char'>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
         </div>
         <div className='bottom-meaning'>
           <div>{meaning[0]}</div>
@@ -136,7 +138,7 @@ const NewReview = (props) => {
             Characteristics:<br></br>
             {christics}
           </div>
-          Summary:
+          Summary:<br></br>
           <input type='text' id='rsummary' placeholder='Example: Best purchase ever!' maxLength='60' autoFocus required></input><br></br>
           <div className='body-container'>
             Review body:<br></br>
@@ -151,9 +153,11 @@ const NewReview = (props) => {
           </div>
           Nickname:<br></br>
           <input type='text' id='ruser' placeholder='Example: jackson11!' required></input><br></br>
-          Email:<br></br>
-          <input type='text' id='remail' placeholder='Example: jackson11@email.com' required pattern='[^@\s]+@[^@\s]+\.[^@\s]+'></input><br></br>
-          For authentication reasons, you will not be emailed <br></br>
+          Email:
+          <div className='remailContainer'>
+            <input type='text' id='remail' placeholder='Example: jackson11@email.com' required pattern='[^@\s]+@[^@\s]+\.[^@\s]+'></input><br></br>
+          <em>For authentication reasons, you will not be emailed</em>
+          </div>
           Images:<br></br>
           <div id='rimages'>
             <em>FUTURE FEATURE</em>
