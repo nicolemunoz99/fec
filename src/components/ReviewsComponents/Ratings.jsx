@@ -6,10 +6,8 @@ const Ratings = (props) => {
   let averageRating = 0;
   let totalRatings = 0;
   let highest = 0;
-  // console.log(props.state.reviews.length);
   if (props.state.reviews.length) {
     for (let key in props.state.meta.ratings) {
-
       averageRating += key * props.state.meta.ratings[key]
       totalRatings += props.state.meta.ratings[key];
       if (props.state.meta.ratings[key] > highest) {
@@ -105,8 +103,6 @@ const Ratings = (props) => {
       <em>No ratings to display</em>
     </div>);
   }
-
-
 }
 
 

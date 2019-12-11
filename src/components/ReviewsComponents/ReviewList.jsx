@@ -17,6 +17,7 @@ const ReviewList = (props) => {
   if (currentReviews > 2 && !props.state.starFilters.length) {
     moreButton = (<button className='reviewsButton' onClick={(e) => props.update({ more: !props.state.more })}>{props.state.more ? 'LESS REVIEWS' : 'MORE REVIEWS'}</button>);
   }
+  let filters = props.state.starFilters.concat(props.state.search);
   return (
     <div className='reviewlist'>
       <div className='infoSort text-main bold'>{props.total} reviews, sorted by
@@ -34,7 +35,16 @@ const ReviewList = (props) => {
           <option value='relevant'>relevance</option>
         </select>
       </div>
-      <div className='filters text-sub'>Filters: {props.state.starFilters.length ? props.state.starFilters.join(', ') : 'none'}</div>
+      <span className='rsearch'><input id='rsearch' onChange={(e) => {
+        let term = document.getElementById('rsearch').value.toLowerCase().trim();
+        if (term.length > 2) {
+          props.update({ search: term });
+        } else if (props.state.search.length) {
+          props.update({ search: '' });
+        }
+      }} placeholder='Search by keyword...'></input></span> 
+      <div className='filters text-sub'>Filters: {filters.length && filters[0] ? filters.join(', ') : 'none'}</div>
+      <hr></hr>
       {props.state.reviews.length ? props.state.reviews.map((review, i) => {
         if (props.state.more || i < 2) {
           if (props.state.starFilters.length) {
@@ -54,7 +64,7 @@ const ReviewList = (props) => {
             if (filters.includes(review.rating)) {
               return <ReviewCard review={review} helpful={props.helpful} report={props.report} key={i} />;
             }
-          } else {
+          } else if (review.summary.toLowerCase().includes(props.state.search) || review.body.toLowerCase().includes(props.state.search)) {
             return <ReviewCard review={review} helpful={props.helpful} report={props.report} key={i} />;
           }
         }

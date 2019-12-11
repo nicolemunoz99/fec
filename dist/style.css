@@ -506,9 +506,9 @@
 }
 
 .progress {
-  height: 0.4em;
+  height: 0.5em;
   border-radius: 0;
-  margin-bottom: 1.37rem;
+  margin-bottom: 1.08rem;
 }
 
 .rbreakdown {
@@ -553,7 +553,6 @@
   width: 33%;
   padding-right: 2.5em;
   padding-left: 0;
-  padding-top: 0.5em;
   padding-bottom: 3em;
 }
 
@@ -569,8 +568,8 @@
 }
 
 .ratingStars {
-  float: right;
   margin-top: 1rem;
+  float: right;
 }
 
 .rating {
@@ -620,7 +619,7 @@ button:focus {
 }
 
 .r-stars {
-  margin-bottom: 0.7em;
+  margin-bottom: 0.5em;
 }
 
 .rmodal label, .radio {
@@ -640,13 +639,12 @@ button:focus {
   margin-top: 1em;
 }
 
-#christics, #rsummary, .body-container, #ruser, #remail, #rimages {
+#christics, #rsummary, .body-container, #ruser, .remailContainer, #rimages {
   margin-bottom: 1em;
 }
 
 #rsummary, #ruser, #remail {
   width: 15em;
-  display: inline-block;
 }
 
 .rlabels {
@@ -692,5 +690,13 @@ button:focus {
 }
 
 .rlabel {
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.rsearch {
+  float: right;
+}
+
+.infoSort {
+  display: inline-block;
 }
