@@ -112,25 +112,29 @@ class App extends React.Component {
       <div>
       <div className="container-fluid">
         <div className="row mt-3">
-          <div className="col-sm-6" data-widget="search-bar">
-            <div>
+          <div className="product-search col-sm-6 selector" data-widget="product-search">
+            <div className="col-12">
               <input onChange={this.onChangeProducts} placeholder="Search for products" value={this.state.searchTerm}></input>
               <button onClick={this.submitSearch}><i className="inline-centered material-icons">search</i></button>
               {/* <textarea placeholder="search for products..." rows="1.5" cols="50"></textarea> */}
             </div>
-            <div className="col-sm-8 selector-container">
+            {/* <div className="col-sm-8"> */}
               {
-              this.state.searchResults && this.state.showSearchResults ? <div id="searchResults" className="selector-options" >
+              this.state.searchResults && this.state.showSearchResults ? 
+              
+                <div className="options">
                 {
                   this.state.searchResults.map((product, i) => {
-                    return <div onClick={this.clickProduct} className="selector d-flex align-items-center justify-content-center" key={i} id={product.id}>
+                    return <div onClick={this.clickProduct} className="item d-flex align-items-center justify-content-center" key={i} id={product.id}>
                                 {product.name}
                           </div>
                   })
                 }
-              </div> : null
+                </div>
+              
+              : null
               }
-            </div>
+            {/* </div> */}
           </div>
         </div>
       </div>
