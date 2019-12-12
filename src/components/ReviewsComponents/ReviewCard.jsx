@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import StarRating from '../overview/StarRating.jsx';
+import AnswerPhotos from '../QAComponents/AnswerPhotos.jsx';
 
 const ReviewCard = (props) => {
   // console.log(props.review)
@@ -43,6 +44,7 @@ const ReviewCard = (props) => {
         {props.bodymatch ? props.review.body_tail : ''}
         {props.bodymatch ? '' : (<div>{showMore}</div>)}
       </div>
+      {props.review.photos.length > 0 && <AnswerPhotos answer={props.review} />}
       <div className='r-bottom text-sub'>Helpful? <div className='text-button' id='helpful' onClick={(e) => {
         props.helpful(props.review.review_id);
         props.review.helpfulness++;
