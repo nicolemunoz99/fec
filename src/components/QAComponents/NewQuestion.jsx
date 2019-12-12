@@ -51,10 +51,10 @@ class NewQuestion extends Component {
                         this.props.togglePopup();
                     }}}>
                 <div className="popup-body"  data-selector="new-question-modal" >
-                    <span onClick={this.props.togglePopup}>close (esc)</span>
+                    <span className='close' onClick={this.props.togglePopup}>&times;</span>
                     <p className="text-main bold">Ask A Question:</p>
                     <form onSubmit={this.handleSubmit}>
-                        <p className="text-reg">Your Question (required)</p>
+                        <p className="text-reg">Your Question<span className='reqstar'>*</span></p>
                         <textarea 
                             name="question" 
                             value={this.state.question}
@@ -62,7 +62,7 @@ class NewQuestion extends Component {
                             placeholder="What's on your mind?"
                             onChange={this.handleChange}>
                         </textarea>
-                        <p className="text-reg">Your Nickname (required)</p>
+                        <p className="text-reg">Your Nickname<span className='reqstar'>*</span></p>
                         <input 
                             type="text" 
                             value={this.state.nickname}
@@ -71,7 +71,7 @@ class NewQuestion extends Component {
                             placeholder="Example: Bob"
                             onChange={this.handleChange}
                         />
-                        <p className="text-reg">Your Email (required)</p>
+                        <p className="text-reg">Your Email<span className='reqstar'>*</span></p>
                         <input 
                             type="text"
                             value={this.state.email}
@@ -81,6 +81,7 @@ class NewQuestion extends Component {
                             onChange={this.handleChange}
                         />
                         <br/>
+                        <span className='reqstar'>*</span><em>Required</em><br/>
                         <button type="submit">Submit</button>
                     </form>
                 </div>

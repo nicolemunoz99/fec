@@ -34,9 +34,12 @@ const AnswerPhotos = ({ answer }) => {
                 </div>)
             })}
             {showExpanded && 
-                <div className="popup" data-selector={`answer-${answer.answer_id}-photo-popup`}>
+                <div className="popup" data-selector={`answer-${answer.answer_id}-photo-popup`} onClick={(e) => {
+                    if (e.target.className === 'popup') {
+                        setShowExpanded(false);
+                    }}}>
                     <div className="answer-photo-container">
-                        <span className="clickable" onClick={()=>setShowExpanded(false)}>CLOSE</span>
+                        <span className="close" onClick={()=>setShowExpanded(false)}>&times;</span>
                         <img src={expandedUrl}></img>
                     </div>
                 </div>

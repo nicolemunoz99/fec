@@ -53,10 +53,10 @@ export default class NewAnswer extends Component {
                     this.props.togglePopup();
                 }}}>
                 <div className="popup-body" data-selector="new-answer-modal">
-                    <span onClick={this.props.togglePopup}>close (esc)</span>
+                    <span className='close' onClick={this.props.togglePopup}>&times;</span>
                     <p className="text-main bold">Answer This Question</p>
                     <form onSubmit={this.handleSubmit}>
-                        <p className="text-reg">Your Answer (required)</p>
+                        <p className="text-reg">Your Answer<span className='reqstar'>*</span></p>
                         <textarea 
                             name="answer" 
                             value={this.state.answer}
@@ -64,7 +64,7 @@ export default class NewAnswer extends Component {
                             placeholder="Enter your Answer Here"
                             onChange={this.handleChange}>
                         </textarea>
-                        <p className="text-reg">Your Nickname (required)</p>
+                        <p className="text-reg">Your Nickname<span className='reqstar'>*</span></p>
                         <input 
                             type="text" 
                             value={this.state.nickname}
@@ -73,7 +73,7 @@ export default class NewAnswer extends Component {
                             placeholder="Example: Bob"
                             onChange={this.handleChange}
                         />
-                        <p className="text-reg">Your Email (required)</p>
+                        <p className="text-reg">Your Email<span className='reqstar'>*</span></p>
                         <input 
                             type="text"
                             value={this.state.email}
@@ -82,14 +82,15 @@ export default class NewAnswer extends Component {
                             placeholder="Example: Bob@website.com"
                             onChange={this.handleChange}
                         />
-                        <p className="text-reg">Photos (Optional)</p>
+                        <p className="text-reg">Photos <em>(Optional)</em></p>
                         <textarea 
                             value={this.state.photos}
                             name="photos"
                             maxLength="1000"
-                            placeholder="Enter image URL's seperated by commas"
+                            placeholder="Enter image URLs seperated by commas"
                             onChange={this.handleChange}>
                         </textarea>
+                        <span className='reqstar'>*</span><em>Required</em><br/>
                         <button type="submit">Submit</button>
                     </form>
                 </div>
