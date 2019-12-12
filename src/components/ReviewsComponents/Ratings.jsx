@@ -65,7 +65,7 @@ const Ratings = (props) => {
         <span className='ratingStars'>
           <StarRating rating={averageRating} />
         </span>
-        <div className='rating'>{averageRating.toFixed(1)}</div>
+        <div className='rating'>{Math.floor(averageRating * 10) / 10}</div>
         <div className='recos'>{Math.ceil((props.state.meta.recommended['1'] / totalRatings) * 100)}% of reviews recommend this product</div>
         <div className='rbreakdown'>
           <div className='rlabels'>
