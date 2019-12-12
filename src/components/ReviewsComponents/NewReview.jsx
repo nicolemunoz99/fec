@@ -2,11 +2,6 @@ import React from 'react';
 import StarRating from '../overview/StarRating.jsx';
 
 const NewReview = (props) => {
-  // window.onclick = (e) => {
-  //   if (e.target.id === 'rmodal') {
-  //     document.getElementById('rmodal').style.display = 'none';
-  //   }
-  // };
   let christics = [];
   let reqstar = (<span className='reqstar'>*</span>)
   let createChars = (char, meaning) => {
@@ -21,7 +16,7 @@ const NewReview = (props) => {
     }
     christics.push(
       <div className='charContainer' key={char}>
-        {char}{reqstar}: <div className='indicator'>{index !== undefined ? meaning[index] : 'None selected'}</div>
+        {char}{reqstar} <div className='indicator'>{index !== undefined ? meaning[index] : 'None selected'}</div>
         <div className='char'>
           <div>
             <input type='radio' name={char} value='1' required onChange={(e) => props.force()}></input>
@@ -87,12 +82,12 @@ const NewReview = (props) => {
       }
     }}>
       <div className='rmodal-content'>
-        <span className='rclose' onClick={(e) => {
+        <span className='close' onClick={(e) => {
           document.getElementById('rmodal').style.display = 'none';
         }}>&times;</span>
-        <h3>Write Your Review</h3>
-        <h5>About the {props.pname}</h5>
-        <form onSubmit={(e) => {
+        <h5>Write Your Review</h5>
+        <div className='text-main bold rlabel'>About the {props.pname}</div>
+        <form className='text-reg' onSubmit={(e) => {
           e.preventDefault();
           let review = {};
           let rating = document.getElementsByName('rrating');
@@ -126,11 +121,12 @@ const NewReview = (props) => {
               }
             }
           }
-          console.log(review);
+          review.photos = document.getElementById('rimages').value.split(',').map(str => str.trim());
+          // console.log(review);
           props.submit(review);
           document.getElementById('rmodal').style.display = 'none';
         }}>
-          Rating{reqstar}:
+          Rating{reqstar}
           <span className='newstars'>
             <StarRating rating={props.state.currentRating} update={props.update} clickable={true} /><br></br>
           </span>
@@ -139,7 +135,7 @@ const NewReview = (props) => {
           <input className='hiddenstar' type='radio' name='rrating' value='3'></input>
           <input className='hiddenstar' type='radio' name='rrating' value='4'></input>
           <input className='hiddenstar' type='radio' name='rrating' value='5'></input>
-          <div className='rrecommend'>Recommended{reqstar}:
+          <div className='rrecommend'>Recommended{reqstar}
             <input className='radio' type='radio' name='rrecommend' value='true' required></input>
             <label htmlFor='yes'>Yes</label>
             <input className='radio' type='radio' name='rrecommend' value='false'></input>
@@ -149,10 +145,10 @@ const NewReview = (props) => {
             Characteristics:<br></br>
             {christics}
           </div>
-          Summary{reqstar}:<br></br>
+          Summary{reqstar}<br></br>
           <input type='text' id='rsummary' placeholder='Example: Best purchase ever!' maxLength='60' autoFocus required></input><br></br>
           <div className='body-container'>
-            Review body{reqstar}:<br></br>
+            Review body{reqstar}<br></br>
             <textarea id='rbody' rows='4' minLength='50' maxLength='1000' required onChange={(e) => {
               charsLeft = 50 - document.getElementById('rbody').value.length;
               if (charsLeft < 0) {
@@ -162,17 +158,20 @@ const NewReview = (props) => {
             }} placeholder="Why did or didn't you like the product?"></textarea><br></br>
             {props.state.charsLeft ? 'Minimum required characters left: ' + props.state.charsLeft : 'Minimum reached'}
           </div>
-          Nickname{reqstar}:<br></br>
+          Nickname{reqstar}<br></br>
           <input type='text' id='ruser' placeholder='Example: jackson11!' maxLength='16' required></input><br></br>
-          Email{reqstar}:
+          Email{reqstar}
           <div className='remailContainer'>
             <input type='text' id='remail' placeholder='Example: jackson11@email.com' required pattern='[^@\s]+@[^@\s]+\.[^@\s]+'></input><br></br>
             <em>For authentication reasons, you will not be emailed</em>
           </div>
-          Images:<br></br>
-          <div id='rimages'>
-            <em>FUTURE FEATURE</em>
-          </div>
+          Images <em>(Optional)</em><br></br>
+          <textarea
+            id='rimages'
+            maxLength='1000'
+            placeholder='Enter image URLs seperated by commas'
+            rows='2'>
+          </textarea>
           {reqstar}<em>Required</em><br></br>
           <button>SUBMIT REVIEW</button>
         </form>

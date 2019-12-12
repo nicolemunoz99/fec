@@ -200,15 +200,15 @@
   width: 80%; 
 }
 
-.rclose {
+.close {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-.rclose:hover,
-.rclose:focus {
+.close:hover,
+.close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -221,7 +221,7 @@
   cursor: pointer;
 }
 
-#rbody {
+#rbody, #rsummary, #rimages {
   width: 100%;
 }
 
@@ -480,10 +480,10 @@
   -webkit-appearance: none;
   width: 0; 
   height: 0; 
-  margin-top: 1px;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 7px solid grey;
+  margin-top: 2px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid grey;
 }
 
 #searchResults {
@@ -592,7 +592,7 @@ button:focus {
   margin-bottom: 1em;
 }
 
-#rsummary, #ruser, #remail {
+#ruser, #remail {
   width: 15em;
 }
 
