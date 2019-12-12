@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import StarRating from '../overview/StarRating.jsx';
 
 const ReviewCard = (props) => {
@@ -21,9 +21,11 @@ const ReviewCard = (props) => {
   }
   date = monthNames[monthIndex] + ' ' + day + daySuffix + ', ' + year;
   let showMore;
-  if (props.review.body.length > 250) {
+  const [shownBody, setBody] = useState(props.review.body.slice(0, 250));
+  if (props.review.body.length > 250 && !props.bodymatch) {
     showMore = (<div className='text-button' onClick={(e) => {
-      e.target.parentNode.innerHTML = props.review.body;
+      setBody(props.review.body);
+      e.target.parentNode.innerHTML = '';
     }}>Show more</div>);
   }
   return (
@@ -32,14 +34,14 @@ const ReviewCard = (props) => {
         <StarRating rating={props.review.rating} />
       </div>
       <div className='r-info text-sub'>{props.review.reviewer_name}, {date}</div>
-      <div className='r-summary text-main bold'>{props.review.summary}
-        <span className='highlighted'>{props.review.summary_match}</span>
-        {props.review.summary_tail}
+      <div className='r-summary text-main bold'>{props.summatch ? props.review.summary_begin : props.review.summary}
+        <span className='highlight'>{props.summatch ? props.review.summary_match : ''}</span>
+        {props.summatch ? props.review.summary_tail : ''}
       </div>
-      <div className='r-body text-reg'>{props.review.summary_match ? props.review.body : props.review.body.slice(0, 250)}
-        <span className='highlighted'>{props.review.summary_match}</span>
-        {props.review.summary_tail}
-        {props.review.summary_match ? '' : (<div>{showMore}</div>)}
+      <div className='r-body text-reg'>{props.bodymatch ? props.review.body_begin : shownBody}
+        <span className='highlight'>{props.bodymatch ? props.review.body_match : ''}</span>
+        {props.bodymatch ? props.review.body_tail : ''}
+        {props.bodymatch ? '' : (<div>{showMore}</div>)}
       </div>
       <div className='r-bottom text-sub'>Helpful? <div className='text-button' id='helpful' onClick={(e) => {
         props.helpful(props.review.review_id);
