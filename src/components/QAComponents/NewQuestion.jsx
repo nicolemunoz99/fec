@@ -46,7 +46,10 @@ class NewQuestion extends Component {
 
     render() {
         return(
-            <div className="popup">
+            <div className="popup" onClick={(e) => {
+                    if (e.target.className === 'popup') {
+                        this.props.togglePopup();
+                    }}}>
                 <div className="popup-body"  data-selector="new-question-modal" >
                     <span onClick={this.props.togglePopup}>close (esc)</span>
                     <p className="text-main bold">Ask A Question:</p>
