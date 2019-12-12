@@ -182,7 +182,7 @@
 .rmodal {
   display: none;
   position: fixed; 
-  z-index: 1;
+  z-index: 3;
   left: 0;
   top: 0;
   width: 100%;
@@ -214,14 +214,15 @@
   cursor: pointer;
 }
 
-#rbody {
-  width: 100%;
-}
-
 #sortSelect {
   border: 0;
   outline: 0;
   text-decoration: underline;
+  cursor: pointer;
+}
+
+#rbody {
+  width: 100%;
 }
 
 .r-body {
@@ -479,9 +480,10 @@
   -webkit-appearance: none;
   width: 0; 
   height: 0; 
+  margin-top: 1px;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  border-top: 8px solid grey;
+  border-top: 7px solid grey;
 }
 
 #searchResults {
@@ -537,6 +539,7 @@
 .recos {
   padding-top: 0.7em;
   padding-bottom: 0.7em;
+  word-wrap: break-word;
 }
 
 .slidercontainer {

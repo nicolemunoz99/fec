@@ -2,11 +2,11 @@ import React from 'react';
 import StarRating from '../overview/StarRating.jsx';
 
 const NewReview = (props) => {
-  window.onclick = (e) => {
-    if (e.target === document.getElementById('rmodal')) {
-      document.getElementById('rmodal').style.display = 'none';
-    }
-  };
+  // window.onclick = (e) => {
+  //   if (e.target.id === 'rmodal') {
+  //     document.getElementById('rmodal').style.display = 'none';
+  //   }
+  // };
   let christics = [];
   let reqstar = (<span className='reqstar'>*</span>)
   let createChars = (char, meaning) => {
@@ -81,7 +81,11 @@ const NewReview = (props) => {
     }
   }
   return (
-    <div id='rmodal' className='rmodal' data-selector='new-review-modal'>
+    <div id='rmodal' className='rmodal' data-selector='new-review-modal' onClick={(e) => {
+      if (e.target.id === 'rmodal') {
+        document.getElementById('rmodal').style.display = 'none';
+      }
+    }}>
       <div className='rmodal-content'>
         <span className='rclose' onClick={(e) => {
           document.getElementById('rmodal').style.display = 'none';
