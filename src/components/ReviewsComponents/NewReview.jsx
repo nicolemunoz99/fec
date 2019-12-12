@@ -127,11 +127,11 @@ const NewReview = (props) => {
         }}>
           Rating:
           <StarRating rating={props.state.currentRating} update={props.update} clickable={true} /><br></br>
-          <input className='hidden' type='radio' name='rrating' value='1' required></input>
-          <input className='hidden' type='radio' name='rrating' value='2'></input>
-          <input className='hidden' type='radio' name='rrating' value='3'></input>
-          <input className='hidden' type='radio' name='rrating' value='4'></input>
-          <input className='hidden' type='radio' name='rrating' value='5'></input>
+          <input className='hiddenstar' type='radio' name='rrating' value='1' required></input>
+          <input className='hiddenstar' type='radio' name='rrating' value='2'></input>
+          <input className='hiddenstar' type='radio' name='rrating' value='3'></input>
+          <input className='hiddenstar' type='radio' name='rrating' value='4'></input>
+          <input className='hiddenstar' type='radio' name='rrating' value='5'></input>
           <div className='rrecommend'>Recommended:
             <input className='radio' type='radio' name='rrecommend' value='true' required></input>
             <label htmlFor='yes'>Yes</label>

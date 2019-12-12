@@ -77,3 +77,69 @@
         font-size: 0.8rem;
     }
 }
+
+@mixin selector-style {
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
+  border-width: 1px;
+  cursor: pointer;
+}
+
+.selector {
+  .selector-main {
+    @include selector-style();
+    
+    * {
+      pointer-events: none;
+    }
+
+    &:hover {
+      outline: 1px dotted;
+    }
+  }
+
+  .options {
+    display: block;
+    position: absolute;
+    z-index: 10;
+    width: inherit;
+    padding-left: inherit;
+    padding-right: inherit;
+    left: -0.04rem;
+  }
+
+  .item {
+    @include selector-style();
+
+    &:hover {
+      color: white;
+      background-color: black;
+    }
+  }
+}
+
+.product-search {
+  input {
+    padding: 1rem 1rem; 
+    line-height: 1rem;
+  }
+  button {
+    // padding: 0.2rem;
+  }
+}
+.answer {
+    br {
+        display: none;
+    }
+    @media (max-width: 600px) {
+        br {
+            display: block;
+        }
+        .divider-bar {
+            display: none;
+        }
+    }
+}
+
