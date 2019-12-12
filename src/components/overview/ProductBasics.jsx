@@ -81,7 +81,7 @@ class ProductBasics extends React.Component {
                 <div className="fb-share-button" data-href="http://127.0.0.1:8080/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8080%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Share</a></div>
               </span>
               <span className="social-icon-twitter">
-                <a className="twitter-share-button" href="https://twitter.com/intent/tweet?text=Hello%20world" data-size="small">Tweet</a>
+                <a className="twitter-share-button" href="https://twitter.com/intent/tweet?text=Look%20what%20I%20found%20at%20Greenfield!" data-size="small">Tweet</a>
               </span>
             </div>
             
