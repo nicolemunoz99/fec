@@ -19,6 +19,12 @@ class StyleSelector extends React.Component {
     this.handleOutsideDropdown = this.handleOutsideDropdown.bind(this);
     this.closePopup = this.closePopup.bind(this);
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedStyle.style_id !== this.props.selectedStyle.style_id) {
+      this.setState({ selectedSku: null, selectedQty: null})
+    }
+  }
   
   // update selected style when clicking on thumbnail
   styleClick(e) {
