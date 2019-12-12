@@ -271,6 +271,10 @@
   position: absolute;
   z-index: 2;
   max-height: var(--default-view-max-height);
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%) !important;
+  transform: translateY(-50%);
 }
 
 .tb-div {
