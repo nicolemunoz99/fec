@@ -29,7 +29,7 @@ const Answer = ({ answer }) => {
     }
 
     return (
-        <div className="answer" data-selector={`answer-${answer.answer_id}`}>
+        <div className="answer" data-selector={`answer-${answer.answer_id}`} data-testid="answer">
             <span className="answer-title text-main bold">A: &nbsp;</span>
             <div className="answer-body">
                 <p className="text-reg">

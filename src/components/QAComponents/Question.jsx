@@ -118,7 +118,7 @@ class Question extends Component {
                     {question.body_tail}
                 </p>
                     <div className="text-sub">
-                        <span data-selector={`question ${question.question_id} helpful`}>Helpful? <span className="clickable" onClick={this.isHelpful}>Yes</span> ({this.state.helpfulness})</span>
+                        <span data-selector={`question ${question.question_id} helpful`}>Helpful? <span className="clickable" onClick={this.isHelpful}  data-testid="helpful">Yes</span> ({this.state.helpfulness})</span>
                         <span className="divider-bar">|</span>
                         <span className="clickable" onClick={this.togglePopup.bind(this)} data-selector={`question ${question.question_id} add answer`}>Add Answer</span>
                     </div>
@@ -128,7 +128,7 @@ class Question extends Component {
                     <div>
                         {this.renderAnswers()}
                         {this.state.answers.length <= 2 ? null :
-                            <div className="text-reg load-more" onClick={this.showMoreOrLess} data-selector={`question ${question.question_id} show all answers`}>
+                            <div className="text-reg load-more" onClick={this.showMoreOrLess} data-selector={`question ${question.question_id} show all answers`} data-testid="loadMore">
                                 {!this.state.showAllAnswers && 'LOAD MORE ANSWERS'}
                                 {this.state.showAllAnswers && 'SHOW LESS'}
                             </div>
