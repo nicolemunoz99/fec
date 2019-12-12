@@ -111,7 +111,7 @@ class Question extends Component {
     render() {
         const question = this.props.question;
         return (
-            <div className="question" data-selector={`question ${question.question_id}`}>
+            <div className="question" data-selector={`question ${question.question_id}`} data-testid="question">
                 <div className="q-main">
                     <p className="text-main bold">Q: {question.question_body}
                     <span className="highlight">{question.body_match}</span>
