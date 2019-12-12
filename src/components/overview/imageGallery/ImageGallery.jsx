@@ -7,7 +7,7 @@ class ImageGallery extends React.Component {
     this.state = {
       photos: this.props.photos,
       currentPhotoIndex: 0, // default is first image
-      tbIndices: [0, 1, 2, 3, 4], // default 1 thumbnail
+      tbIndices: [0], 
       showExpandedView: false
     }
     this.photoNavHandler = this.photoNavHandler.bind(this);
@@ -18,11 +18,7 @@ class ImageGallery extends React.Component {
     this.numThumbnails = 5;
   }
   componentDidMount() {
-    // hide left arrow upon load (first image is default)
     this.setState({tbIndices: [...Array(this.numThumbnails).keys()] })
-    if (this.state.currentPhotoIndex === 0) {
-      document.getElementById("photo-nav-left").classList.add("hidden");
-    }
   }
 
   componentDidUpdate(prevProps) {
@@ -40,7 +36,6 @@ class ImageGallery extends React.Component {
     if (prevProps.style.style_id !== this.props.style.style_id) {
       this.setState({tbIndices: tbIndices, photos: this.props.photos })
     }
-
   }
 
   tbNavHandler(e) {
@@ -76,17 +71,6 @@ class ImageGallery extends React.Component {
     this.setState({
       currentPhotoIndex: newPhotoIndex
     }, () => {
-      // hide/show nav button on main image when appropriate
-      if (newPhotoIndex === 0) {
-        document.getElementById("photo-nav-left").classList.add("hidden")
-      }
-      else if (newPhotoIndex === this.state.photos.length - 1) {
-        document.getElementById("photo-nav-right").classList.add("hidden")
-      }
-      else {
-        document.getElementById("photo-nav-left").classList.remove("hidden")
-        document.getElementById("photo-nav-right").classList.remove("hidden")
-      }
         let topOriginalInd = this.state.tbIndices[0]; // original index of thumb at TOP
         let bottomOriginalInd = this.state.tbIndices[this.state.tbIndices.length - 1]; // original index of thumb at BOTTOM
         if (this.state.currentPhotoIndex >= bottomOriginalInd || this.state.currentPhotoIndex < topOriginalInd) {
@@ -134,7 +118,6 @@ closeExpanded(e) {
 
 
   render() {
-
     return (
       <div>
       <div className="container">
@@ -179,21 +162,23 @@ closeExpanded(e) {
         <div className="col-12" data-selector="default-view-mainImage">
           {
             this.state.photos.map((photo, i) => {
-              let photoClass = i === this.state.currentPhotoIndex ?
-                "d-flex default-view-photo-container align-items-center justify-content-center" : "hidden";
               return (
-                <div key={i} className={photoClass}>
+                i === this.state.currentPhotoIndex ? <div key={i} className="d-flex default-view-photo-container align-items-center justify-content-center">
                   <img id="test" onClick={this.mainPhotoClick} className="default-view-photo img-fluid" src={photo.url}></img>
-                </div>
+                </div> : null
               )
             })
           }
-          <div id="photo-nav-left" onClick={this.photoNavHandler} className="photo-nav">
+          { this.state.currentPhotoIndex === 0 ? null :
+            <div id="photo-nav-left" onClick={this.photoNavHandler} className="photo-nav">
             <i className="material-icons">arrow_backward</i>
           </div>
-          <div id="photo-nav-right" onClick={this.photoNavHandler} className="photo-nav">
+          }
+          { this.state.currentPhotoIndex ===this.state.photos.length - 1 ? null :
+            <div id="photo-nav-right" onClick={this.photoNavHandler} className="photo-nav">
             <i className="material-icons">arrow_forward</i>
           </div>
+          }
         </div>
 
       </div>

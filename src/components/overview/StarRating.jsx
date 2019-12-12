@@ -28,18 +28,17 @@ class StarRating extends React.Component {
     if (rating === undefined) { return }
     let star_filled = Math.floor(rating);
     let star_0quarter = 5 - Math.ceil(rating)
-    let quarter = Math.floor((rating - star_filled) * 4);
-    let stars = [];
-    let typeCount = { star_filled, quarter, star_0quarter }
-    for (let starType in typeCount) {
-      for (let i = 0; i < typeCount[starType]; i++) {
-        if (starType === 'quarter') {
-          stars.push('star_' + typeCount[starType] + starType);
-          break;
-        }
-        stars.push(starType);
-      }
+    let quarter;
+    if (star_filled + star_0quarter < 5 ) {
+      quarter = Math.floor((rating - star_filled) * 4);
     }
+    let stars = [];
+    // add filled stars
+    for (let i = 0; i < star_filled; i++) { stars.push('star_filled') }
+    // add quarter stars
+    if (quarter !== undefined) { stars.push(`star_${quarter}quarter`) }
+    // add empty stars
+    for (let i = 0; i < star_0quarter; i++) { stars.push('star_0quarter')}
     return stars;
   }
 
