@@ -575,7 +575,7 @@ button:focus {
   margin-bottom: 0.5em;
 }
 
-.radio, .rmodal label {
+.radio, .rmodal label, .newstars {
   margin-left: 0.5em;
 }
 
@@ -669,4 +669,8 @@ button:focus {
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
+}
+
+.reqstar {
+  color: red;
 }
