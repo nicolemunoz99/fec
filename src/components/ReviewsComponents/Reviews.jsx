@@ -15,7 +15,7 @@ class Reviews extends React.Component {
       sort: 'helpful',
       charsLeft: 50,
       starFilters: [],
-      currentRating: -1,
+      currentRating: 0,
       search: ''
     };
 

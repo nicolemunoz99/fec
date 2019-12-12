@@ -6,6 +6,7 @@ class StarRating extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      clickable: (this.props.clickable ? true : false),
       stars: null
     }
     this.starTypes = this.calcStarTypes(this.props.rating)
@@ -13,7 +14,7 @@ class StarRating extends React.Component {
 
   componentDidMount() {
     let stars = this.calcStarTypes(this.props.rating)
-      this.setState({ stars: stars })
+    this.setState({ stars: stars })
   }
 
   componentDidUpdate(prevProps) {
@@ -24,12 +25,12 @@ class StarRating extends React.Component {
   }
 
   calcStarTypes(rating) {
-    if (!rating) { return }
+    if (rating === undefined) { return }
     let star_filled = Math.floor(rating);
     let star_0quarter = 5 - Math.ceil(rating)
     let quarter = Math.floor((rating - star_filled) * 4);
-    let stars = []; 
-    let typeCount = {star_filled, quarter, star_0quarter}
+    let stars = [];
+    let typeCount = { star_filled, quarter, star_0quarter }
     for (let starType in typeCount) {
       for (let i = 0; i < typeCount[starType]; i++) {
         if (starType === 'quarter') {
@@ -47,14 +48,18 @@ class StarRating extends React.Component {
   }
 
   render() {
-    return (   
-  <span> 
-    {!this.state.stars ? null :
-      this.state.stars.map((starType, i) => {
-        return <img className="star-rating" key={i} src={this.starFilename(starType)}></img>
-      })
-    }
-  </span>
+    return (
+      <span>
+        {!this.state.stars ? null :
+          this.state.stars.map((starType, i) => {
+            return <img className="star-rating" key={i} src={this.starFilename(starType)} onClick={(e) => {
+              if (this.state.clickable) {
+                this.props.update({ currentRating: i + 1 })
+              }
+            }}></img>
+          })
+        }
+      </span>
     )
   }
 }

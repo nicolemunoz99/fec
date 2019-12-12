@@ -16,10 +16,6 @@
 
 }
 
-.hidden {
-  display: none;
-}
-
 .strikethrough {
   text-decoration: line-through;
 }
@@ -525,8 +521,8 @@
   -webkit-appearance: none;
   width: 0; 
   height: 0; 
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
   border-top: 8px solid grey;
 }
 
@@ -614,7 +610,7 @@ button:focus {
   margin-bottom: 0.5em;
 }
 
-.rmodal label, .radio {
+.radio, .rmodal label {
   margin-left: 0.5em;
 }
 
@@ -690,4 +686,22 @@ button:focus {
 
 .infoSort {
   display: inline-block;
+}
+
+.filters {
+  word-wrap: break-word;
+}
+
+.hidden:not(:active) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  margin-left: 5rem;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }

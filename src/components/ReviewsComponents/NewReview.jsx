@@ -1,5 +1,5 @@
 import React from 'react';
-import StarRatings from 'react-star-ratings';
+import StarRating from '../overview/StarRating.jsx';
 
 const NewReview = (props) => {
   window.onclick = (e) => {
@@ -71,6 +71,14 @@ const NewReview = (props) => {
     createChars('Quality', ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect']);
   }
   let charsLeft = 50;
+  let rating = document.getElementsByName('rrating');
+  if (rating) {
+    for (let i = 0; i < rating.length; ++i) {
+      if (rating[i].value == props.state.currentRating) {
+        rating[i].checked = true;
+      }
+    }
+  }
   return (
     <div id='rmodal' className='rmodal' data-selector='new-review-modal'>
       <div className='rmodal-content'>
@@ -118,16 +126,12 @@ const NewReview = (props) => {
           document.getElementById('rmodal').style.display = 'none';
         }}>
           Rating:
-          <input className='radio' type='radio' name='rrating' value='1' required></input>
-          <label htmlFor='1'>1</label>
-          <input className='radio' type='radio' name='rrating' value='2'></input>
-          <label htmlFor='2'>2</label>
-          <input className='radio' type='radio' name='rrating' value='3'></input>
-          <label htmlFor='3'>3</label>
-          <input className='radio' type='radio' name='rrating' value='4'></input>
-          <label htmlFor='4'>4</label>
-          <input className='radio' type='radio' name='rrating' value='5'></input>
-          <label htmlFor='5'>5</label><br></br>
+          <StarRating rating={props.state.currentRating} update={props.update} clickable={true} /><br></br>
+          <input className='hidden' type='radio' name='rrating' value='1' required></input>
+          <input className='hidden' type='radio' name='rrating' value='2'></input>
+          <input className='hidden' type='radio' name='rrating' value='3'></input>
+          <input className='hidden' type='radio' name='rrating' value='4'></input>
+          <input className='hidden' type='radio' name='rrating' value='5'></input>
           <div className='rrecommend'>Recommended:
             <input className='radio' type='radio' name='rrecommend' value='true' required></input>
             <label htmlFor='yes'>Yes</label>
@@ -152,11 +156,11 @@ const NewReview = (props) => {
             {props.state.charsLeft ? 'Minimum required characters left: ' + props.state.charsLeft : 'Minimum reached'}
           </div>
           Nickname:<br></br>
-          <input type='text' id='ruser' placeholder='Example: jackson11!' required></input><br></br>
+          <input type='text' id='ruser' placeholder='Example: jackson11!' maxLength='16' required></input><br></br>
           Email:
           <div className='remailContainer'>
             <input type='text' id='remail' placeholder='Example: jackson11@email.com' required pattern='[^@\s]+@[^@\s]+\.[^@\s]+'></input><br></br>
-          <em>For authentication reasons, you will not be emailed</em>
+            <em>For authentication reasons, you will not be emailed</em>
           </div>
           Images:<br></br>
           <div id='rimages'>
