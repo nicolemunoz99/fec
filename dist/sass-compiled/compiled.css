@@ -34,13 +34,6 @@
 .popup-body input {
   width: 50%;
 }
-.popup-body span {
-  font-size: 0.4em;
-  text-decoration: underline;
-  color: #979595;
-  float: right;
-  cursor: pointer;
-}
 .popup-body .text-reg {
   margin-bottom: 0;
 }
