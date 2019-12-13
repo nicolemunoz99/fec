@@ -58,7 +58,6 @@ class Reviews extends React.Component {
         this.setState({
           meta: result
         }, () => {
-          console.log('Meta retrieved and state updated successfully!', this.state.meta);
         })
       })
       .catch((err) => {

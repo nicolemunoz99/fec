@@ -119,7 +119,7 @@ class App extends React.Component {
     this.setState({
       selectedProduct: selectedProduct[0],
       searchTerm: ''
-    }, () => { console.log(this.state.selectedProduct)})
+    }, () => { })
   }
 
   render() {
