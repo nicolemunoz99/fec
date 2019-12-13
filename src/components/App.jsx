@@ -120,12 +120,16 @@ class App extends React.Component {
       selectedProduct: selectedProduct[0],
       searchTerm: ''
 <<<<<<< HEAD
+<<<<<<< HEAD
     }, () => { console.log(this.state.selectedProduct)})
 =======
     }, () => {
       console.log(this.state.selectedProduct)
     })
 >>>>>>> 610b8ac497a9604af00b99e900da3c6af74ff74d
+=======
+    }, () => { })
+>>>>>>> 8134285ab3d1d9fbfb149a739c5a57b3c8b048dd
   }
 
   render() {

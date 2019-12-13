@@ -60,7 +60,6 @@ const Ratings = (props) => {
     if (props.state.meta.characteristics.hasOwnProperty('Quality')) {
       createSliders('Quality', ['Poor', 'Expected', 'Perfect']);
     }
-    console.log('bye', props.state.meta, props.state.reviews  )
     return (
       <div className='ratings text-sub' data-selector='ratings'>
         <span className='ratingStars'>
