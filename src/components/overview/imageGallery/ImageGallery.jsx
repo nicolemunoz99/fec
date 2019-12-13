@@ -120,6 +120,7 @@ closeExpanded(e) {
   render() {
     return (
       <div>
+        {console.log(this.props.style)}
       <div className="container">
       <div className="row align-items-center ml-4 mr-4">      
         {/* thumbnails */}
@@ -127,7 +128,7 @@ closeExpanded(e) {
           <div>
             <div className="row">
               <div className="col-12 d-flex align-items-center justify-content-center">
-                {this.state.photos.length > this.numThumbnails ? <div id="tb-nav-up" onClick={this.tbNavHandler} className={"photo-nav"}>
+                {this.state.photos.length > this.numThumbnails ? <div id="tb-nav-up" role="navigation" onClick={this.tbNavHandler} className={"photo-nav"}>
                   <i className="material-icons md-34">arrow_drop_up</i>
                 </div> : null}
               </div>
@@ -139,7 +140,7 @@ closeExpanded(e) {
                     this.state.tbIndices.map((tbIndex, i) => {
                       let tbSelected = tbIndex === this.state.currentPhotoIndex ? "tb-div d-flex justify-content-center align-items-center tb-selected" : "tb-div d-flex justify-content-center align-items-center";
                       return (<div className={tbSelected} data-selector={"default-view-thumbnail-" + i} key={i}>
-                                  <img id={tbIndex} onClick={this.tbClick} className={"default-view-tb"} src={this.state.photos[tbIndex].thumbnail_url}></img>
+                                  <img alt={`${this.props.style.name}`} id={tbIndex} onClick={this.tbClick} className={"default-view-tb"} src={this.state.photos[tbIndex].thumbnail_url}></img>
                               </div>)
                     })
                   }
@@ -150,7 +151,7 @@ closeExpanded(e) {
               <div className="col-12 d-flex align-items-center justify-content-center">
                 {/* only show thumbnail navigation if there are more than this.numThumnails */}
                 {this.state.photos.length > this.numThumbnails ?
-                  <div id="tb-nav-down" onClick={this.tbNavHandler} className={"photo-nav"}>
+                  <div id="tb-nav-down" role="navigation" onClick={this.tbNavHandler} className={"photo-nav"}>
                   <i className="material-icons md-34">arrow_drop_down</i>
                 </div> : null}
               </div>
@@ -164,18 +165,18 @@ closeExpanded(e) {
             this.state.photos.map((photo, i) => {
               return (
                 i === this.state.currentPhotoIndex ? <div key={i} className="d-flex default-view-photo-container align-items-center justify-content-center">
-                  <img id="test" onClick={this.mainPhotoClick} className="default-view-photo img-fluid" src={photo.url}></img>
+                  <img alt={`${this.props.style.name}`} id="test" onClick={this.mainPhotoClick} className="default-view-photo img-fluid" src={photo.url}></img>
                 </div> : null
               )
             })
           }
           { this.state.currentPhotoIndex === 0 ? null :
-            <div id="photo-nav-left" onClick={this.photoNavHandler} className="photo-nav">
+            <div id="photo-nav-left" role="navigation" onClick={this.photoNavHandler} className="photo-nav">
             <i className="material-icons">arrow_backward</i>
           </div>
           }
           { this.state.currentPhotoIndex ===this.state.photos.length - 1 ? null :
-            <div id="photo-nav-right" onClick={this.photoNavHandler} className="photo-nav">
+            <div id="photo-nav-right" role="navigation" onClick={this.photoNavHandler} className="photo-nav">
             <i className="material-icons">arrow_forward</i>
           </div>
           }
