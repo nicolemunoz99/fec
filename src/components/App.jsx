@@ -104,6 +104,8 @@ class App extends React.Component {
       selectedProduct: selectedProduct[0],
       showSearchResults: false,
       searchTerm: ''
+    }, () => {
+      console.log(this.state.selectedProduct)
     })
   }
 
