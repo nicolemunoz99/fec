@@ -6,7 +6,7 @@ const Ratings = (props) => {
   let averageRating = 0;
   let totalRatings = 0;
   let highest = 0;
-  if (props.state.reviews.length) {
+  if (props.state.reviews.length && props.state.meta.ratings) {
     for (let key in props.state.meta.ratings) {
       averageRating += key * props.state.meta.ratings[key]
       totalRatings += props.state.meta.ratings[key];
@@ -60,12 +60,14 @@ const Ratings = (props) => {
     if (props.state.meta.characteristics.hasOwnProperty('Quality')) {
       createSliders('Quality', ['Poor', 'Expected', 'Perfect']);
     }
+    console.log('bye', props.state.meta, props.state.reviews  )
     return (
       <div className='ratings text-sub' data-selector='ratings'>
         <span className='ratingStars'>
           <StarRating rating={averageRating} />
         </span>
         <div className='rating'>{Math.floor(averageRating * 10) / 10}</div>
+        
         <div className='recos'>{Math.ceil((props.state.meta.recommended['1'] / totalRatings) * 100)}% of reviews recommend this product</div>
         <div className='rbreakdown'>
           <div className='rlabels'>
