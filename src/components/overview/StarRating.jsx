@@ -13,14 +13,12 @@ class StarRating extends React.Component {
   }
 
   componentDidMount() {
-    console.log("StarRating mounted", this.state.stars)
     let stars = this.calcStarTypes(this.props.rating)
     this.setState({ stars: stars })
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.rating !== this.props.rating) {
-      console.log("StarRating updated")
       let stars = this.calcStarTypes(this.props.rating)
       this.setState({ stars: stars })
     }
