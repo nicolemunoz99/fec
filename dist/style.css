@@ -182,7 +182,7 @@
 .rmodal {
   display: none;
   position: fixed; 
-  z-index: 1;
+  z-index: 3;
   left: 0;
   top: 0;
   width: 100%;
@@ -200,28 +200,29 @@
   width: 80%; 
 }
 
-.rclose {
+.close {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-.rclose:hover,
-.rclose:focus {
+.close:hover,
+.close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-
-#rbody {
-  width: 100%;
 }
 
 #sortSelect {
   border: 0;
   outline: 0;
   text-decoration: underline;
+  cursor: pointer;
+}
+
+#rbody, #rsummary, #rimages {
+  width: 100%;
 }
 
 .r-body {
@@ -483,8 +484,9 @@
   -webkit-appearance: none;
   width: 0; 
   height: 0; 
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
+  margin-top: 2px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
   border-top: 8px solid grey;
 }
 
@@ -541,6 +543,7 @@
 .recos {
   padding-top: 0.7em;
   padding-bottom: 0.7em;
+  word-wrap: break-word;
 }
 
 .slidercontainer {
@@ -572,7 +575,7 @@ button:focus {
   margin-bottom: 0.5em;
 }
 
-.radio, .rmodal label {
+.radio, .rmodal label, .newstars {
   margin-left: 0.5em;
 }
 
@@ -593,7 +596,7 @@ button:focus {
   margin-bottom: 1em;
 }
 
-#rsummary, #ruser, #remail {
+#ruser, #remail {
   width: 15em;
 }
 
@@ -666,4 +669,8 @@ button:focus {
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
+}
+
+.reqstar {
+  color: red;
 }
