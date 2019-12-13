@@ -120,7 +120,6 @@ closeExpanded(e) {
   render() {
     return (
       <div>
-        {console.log(this.props.style)}
       <div className="container">
       <div className="row align-items-center ml-4 mr-4">      
         {/* thumbnails */}
