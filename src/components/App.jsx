@@ -20,7 +20,8 @@ class App extends React.Component {
     this.submitSearch = this.submitSearch.bind(this);
     this.clickProduct = this.clickProduct.bind(this);
     this.findName = this.findName.bind(this);
-    this.recordInteractions = this.recordInteractions.bind(this)
+    this.recordInteractions = this.recordInteractions.bind(this);
+    this.clearSearchResults = this.clearSearchResults.bind(this)
   };
 
   componentDidMount() {
@@ -74,57 +75,73 @@ class App extends React.Component {
     this.setState({ searchTerm: e.target.value }, () => {
       let results;
       if (this.state.searchTerm.length && this.state.searchTerm.length > 2) {
+        document.addEventListener('click', this.clearSearchResults);
         results = this.searchProducts(this.state.searchTerm);
         this.setState({ searchResults: results, showSearchResults: true })
       } else if (this.state.searchTerm.length === 0) {
-        this.setState({showSearchResults: false});
+        this.clearSearchResults();
       }
     })
   }
 
+  clearSearchResults(e) {
+    let searchBtn = document.getElementById("product-search-btn");
+    if (e && (searchBtn === e.target || searchBtn.contains(e.target))) {
+      return;
+    }
+    this.setState({ 
+      showSearchResults: false,
+      searchTerm: ''
+    })
+    document.removeEventListener('click', this.clearSearchResults);
+  }
+
   searchProducts(searchTerm) {
     let results = this.state.allProducts.filter(product => {
-      let name = product.name.toLowerCase()
+      let name = product.name.toLowerCase();
       return name.indexOf(searchTerm.toLowerCase()) !== -1;
     })
     return results;    
   }
 
   submitSearch(e) {
-    let results = this.searchProducts(this.state.searchTerm);
-    this.setState({ searchResults: results, showSearchResults: true })
-    
+    if (this.state.searchTerm.length > 0) {
+      let results = this.searchProducts(this.state.searchTerm);
+      this.setState({ searchResults: results, showSearchResults: true });
+    }
   }
 
   clickProduct(e) {
     let selectedProduct = this.state.searchResults.filter(product => {
-      return product.id === Number(e.target.id)
+      return product.id === Number(e.target.id);
     })
+    this.clearSearchResults();
     this.setState({
       selectedProduct: selectedProduct[0],
-      showSearchResults: false,
       searchTerm: ''
-    }, () => {
-      console.log(this.state.selectedProduct)
-    })
+    }, () => { })
   }
 
   render() {
     return (
       <div>
       <div className="container-fluid">
-        <div className="row mt-3">
-          <div className="product-search col-sm-6 selector" data-widget="product-search">
-            <div className="col-12">
+        <div className="row mt-3 mb-3">
+          <div className="col-sm-6 selector" data-widget="product-search">
+          <div className="row no-gutters">
+            <div className="col-12 product-search">
+            <div className="row no-gutters">
+              <div className="col-10">
               <input onChange={this.onChangeProducts} placeholder="Search for products" value={this.state.searchTerm}></input>
-              <button onClick={this.submitSearch}><i className="inline-centered material-icons">search</i></button>
-              {/* <textarea placeholder="search for products..." rows="1.5" cols="50"></textarea> */}
-            </div>
-            {/* <div className="col-sm-8"> */}
-              {
-              this.state.searchResults && this.state.showSearchResults ? 
+              </div>
+              <div className="col-2">
+              <button id="product-search-btn" onClick={this.submitSearch}><i className="inline-centered material-icons">search</i></button>
               
-                <div className="options">
+              </div>
+              </div>
+              {
+              this.state.searchResults && this.state.showSearchResults ?               
+                <div className="options overflow">
                 {
                   this.state.searchResults.map((product, i) => {
                     return <div onClick={this.clickProduct} className="item d-flex align-items-center justify-content-center" key={i} id={product.id}>
@@ -132,11 +149,12 @@ class App extends React.Component {
                           </div>
                   })
                 }
-                </div>
-              
+                </div>              
               : null
               }
-            {/* </div> */}
+            </div>
+            </div>
+
           </div>
         </div>
       </div>

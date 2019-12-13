@@ -83,8 +83,7 @@ class ProductBasics extends React.Component {
               <span className="social-icon-twitter">
                 <a className="twitter-share-button" href="https://twitter.com/intent/tweet?text=Look%20what%20I%20found%20at%20Greenfield!" data-size="small">Tweet</a>
               </span>
-            </div>
-            
+            </div> 
           </div>
         </div>
     )

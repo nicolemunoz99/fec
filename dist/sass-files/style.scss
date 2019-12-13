@@ -90,7 +90,6 @@
 .selector {
   .selector-main {
     @include selector-style();
-    
     * {
       pointer-events: none;
     }
@@ -101,6 +100,9 @@
   }
 
   .options {
+    @include selector-style();
+    overflow-y: auto;
+    max-height: 32vh;
     display: block;
     position: absolute;
     z-index: 10;
@@ -112,7 +114,7 @@
 
   .item {
     @include selector-style();
-
+    color:inherit;
     &:hover {
       color: white;
       background-color: black;
@@ -121,12 +123,17 @@
 }
 
 .product-search {
+  @include selector-style();
+  cursor: default;
   input {
     padding: 1rem 1rem; 
     line-height: 1rem;
+    width: inherit;
   }
   button {
-    // padding: 0.2rem;
+    border-style: none;
+    width: inherit;
+    @include vertical-align();
   }
 }
 .answer {
