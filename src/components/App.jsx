@@ -120,8 +120,8 @@ class App extends React.Component {
       selectedProduct: selectedProduct[0],
       searchTerm: ''
     }, () => {
-      console.log(this.state.selectedProduct)
-    })
+      document.title = this.state.selectedProduct.name
+     })
   }
 
   render() {
@@ -132,7 +132,7 @@ class App extends React.Component {
           <div className="col-sm-6 selector" data-widget="product-search">
           <div className="row no-gutters">
             <div className="col-12 product-search">
-            <div className="row no-gutters">
+            <div className="row no-gutters" role="search">
               <div className="col-10">
               <input onChange={this.onChangeProducts} placeholder="Search for products" value={this.state.searchTerm}></input>
               </div>
