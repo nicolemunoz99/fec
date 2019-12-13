@@ -119,7 +119,9 @@ class App extends React.Component {
     this.setState({
       selectedProduct: selectedProduct[0],
       searchTerm: ''
-    }, () => { })
+    }, () => {
+      document.title = this.state.selectedProduct.name
+     })
   }
 
   render() {
