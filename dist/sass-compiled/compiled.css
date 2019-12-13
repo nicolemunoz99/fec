@@ -77,6 +77,14 @@
   outline: 1px dotted;
 }
 .selector .options {
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
+  border-width: 1px;
+  cursor: pointer;
+  overflow-y: auto;
+  max-height: 32vh;
   display: block;
   position: absolute;
   z-index: 10;
@@ -92,16 +100,37 @@
   text-align: center;
   border-width: 1px;
   cursor: pointer;
+  color: inherit;
 }
 .selector .item:hover {
   color: white;
   background-color: black;
 }
 
+.product-search {
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+  text-align: center;
+  border-width: 1px;
+  cursor: pointer;
+  cursor: default;
+}
 .product-search input {
   padding: 1rem 1rem;
   line-height: 1rem;
+  width: inherit;
 }
+.product-search button {
+  border-style: none;
+  width: inherit;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
 .answer br {
   display: none;
 }

@@ -35,7 +35,7 @@ class Reviews extends React.Component {
         if (!this.state.reviews.length) {
           this.setState({
             reviews: result.results
-          });
+          }, () => { console.log('this.state.reviews', this.state.reviews)} );
         } else if (JSON.stringify(this.state.reviews) !== JSON.stringify(result.results)) {
           this.setState({
             reviews: this.state.reviews.concat(result.results)
@@ -58,7 +58,6 @@ class Reviews extends React.Component {
         this.setState({
           meta: result
         }, () => {
-          // console.log('Meta retrieved and state updated successfully!', this.state.meta);
         })
       })
       .catch((err) => {
@@ -127,13 +126,15 @@ class Reviews extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    this.render();
     if (this.props.productInfo.id !== prevProps.productInfo.id) {
       this.setState({
-        reviews: []
+        reviews: [],
+        meta: {},
+        more: false
       }, () => {
         this.getReviews();
         this.getMeta();
+        this.render();
       })
     }
   }
