@@ -12,7 +12,7 @@
     "start": "live-server ./dist",
     "sass-dev": "sass --watch ./dist/sass-files/style.scss ./dist/sass-compiled/compiled.css",
     "test": "jest spec",
-    "server": "node index.js"
+    "server": "node index.js &"
   },
   "keywords": [],
   "author": "",
